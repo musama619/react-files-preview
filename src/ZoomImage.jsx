@@ -1,33 +1,50 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getNextFile, getPrevFile, storeFileState } from "./redux/fileSlice";
-import { MdClose, MdDownload, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import {
+    MdClose,
+    MdDownload,
+    MdOutlineKeyboardArrowLeft,
+    MdOutlineKeyboardArrowRight,
+} from "react-icons/md";
 
 const ZoomImage = () => {
-
     const dispatcher = useDispatch();
-    const file = useSelector(state => state.file.fileState)
+    const file = useSelector((state) => state.file.fileState);
 
     const hideZoom = () => {
-        dispatcher(storeFileState({ zoom: false, fileSrc: null, index: null, isImage: false, fileName: null }))
-    }
+        dispatcher(
+            storeFileState({
+                zoom: false,
+                fileSrc: null,
+                index: null,
+                isImage: false,
+                fileName: null,
+            })
+        );
+    };
     const nextFile = () => {
-        dispatcher(getNextFile())
-    }
+        dispatcher(getNextFile());
+    };
     const prevFile = () => {
-        dispatcher(getPrevFile())
-    }
+        dispatcher(getPrevFile());
+    };
     if (file.zoom) {
         return (
             <>
                 <div className="flex flex-row  w-full bg-black h-12 shadow-lg shadow-gray-500">
-                    <span className="text-white flex-1 flex items-center z-50 ml-14 ">{file.fileName}</span>
+                    <span className="text-white flex-1 flex items-center z-50 ml-14 ">
+                        {file.fileName}
+                    </span>
                     <button className="text-white text-sm z-50 mr-8 flex justify-center items-center hover:text-blue-400">
                         <span className="mr-1 text-lg mt-1 font-extralight">
                             <MdDownload />
                         </span>
                         Download
                     </button>
-                    <button className="text-white text-sm  z-50 mr-10 flex justify-center items-center hover:text-stone-400" onClick={hideZoom}>
+                    <button
+                        className="text-white text-sm z-50 mr-10 flex justify-center items-center hover:text-stone-400"
+                        onClick={hideZoom}
+                    >
                         <span className="mr-1 text-lg mt-1 font-extralight">
                             <MdClose />
                         </span>
@@ -49,20 +66,26 @@ const ZoomImage = () => {
                         overflow: "auto",
                     }}
                 >
+                    <button
+                        onClick={prevFile}
+                        className="text-white mr-56 rounded-full hover:bg-white hover:text-black text-5xl"
+                    >
+                        <MdOutlineKeyboardArrowLeft />
+                    </button>
 
-                    <button onClick={prevFile} className=" text-white mr-28 rounded-full  hover:bg-white hover:text-black  text-5xl "><MdOutlineKeyboardArrowLeft /></button>
-
-                    <div className=" bg-slate-600 rounded-lg" style={{
-                        position: "relative",
-                        minWidth: "120vh",
-                        minHeight: "80vh",
-                        maxWidth: "60vh",
-                        maxHeight: "70vh",
-                        borderRadius: "5px",
-                        overflow: "hidden",
-                    }}>
-
-                        {file.isImage ?
+                    <div
+                        className=" bg-slate-600 rounded-lg"
+                        style={{
+                            position: "relative",
+                            minWidth: "120vh",
+                            minHeight: "80vh",
+                            maxWidth: "60vh",
+                            maxHeight: "70vh",
+                            borderRadius: "5px",
+                            overflow: "hidden",
+                        }}
+                    >
+                        {file.isImage ? (
                             <img
                                 className="object-fill"
                                 src={file.fileSrc}
@@ -71,16 +94,22 @@ const ZoomImage = () => {
                                     minWidth: "120vh",
                                     minHeight: "80vh",
                                 }}
-                            /> :
+                            />
+                        ) : (
                             <h1>{file.fileName}</h1>
-                        }
+                        )}
                     </div>
-                    <button onClick={nextFile} className=" text-white ml-28  rounded-full hover:bg-white hover:text-black text-5xl" ><MdOutlineKeyboardArrowRight /></button>
-                </div >
+                    <button
+                        onClick={nextFile}
+                        className=" text-white ml-56  rounded-full hover:bg-white hover:text-black text-5xl"
+                    >
+                        <MdOutlineKeyboardArrowRight />
+                    </button>
+                </div>
             </>
         );
     }
-    return <></>
-}
+    return <></>;
+};
 
 export default ZoomImage;
