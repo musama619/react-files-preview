@@ -3,6 +3,7 @@ import { getNextFile, getPrevFile, storeFileState } from "./redux/fileSlice";
 import {
     MdClose,
     MdDownload,
+    MdFilePresent,
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
@@ -33,14 +34,19 @@ const ZoomImage = () => {
         return (
             <>
                 <div className="flex flex-row  w-full bg-black h-12 shadow-lg shadow-gray-500">
-                    <span className="text-white flex-1 flex items-center z-30 ml-14 ">{file.fileName}</span>
+                    <span className="text-white flex-1 flex items-center z-30 ml-14">
+                        {file.fileName}
+                    </span>
                     <button className="text-white text-sm z-30 mr-8 flex justify-center items-center hover:text-blue-400">
                         <span className="mr-1 text-lg mt-1 font-extralight">
                             <MdDownload />
                         </span>
                         Download
                     </button>
-                    <button className="text-white text-sm z-30 mr-10 flex justify-center items-center hover:text-stone-400" onClick={hideZoom}>
+                    <button
+                        className="text-white text-sm z-30 mr-10 flex justify-center items-center hover:text-stone-400"
+                        onClick={hideZoom}
+                    >
                         <span className="mr-1 text-lg mt-1 font-extralight">
                             <MdClose />
                         </span>
@@ -70,7 +76,7 @@ const ZoomImage = () => {
                     </button>
 
                     <div
-                        className=" bg-slate-600 rounded-lg"
+                        className="bg-slate-600 rounded-lg"
                         style={{
                             position: "relative",
                             minWidth: "120vh",
@@ -92,12 +98,20 @@ const ZoomImage = () => {
                                 }}
                             />
                         ) : (
-                            <h1>{file.fileName}</h1>
+                            <span
+                                className="flex mx-auto text-4xl justify-center items-center"
+                                style={{
+                                    minWidth: "120vh",
+                                    minHeight: "80vh",
+                                }}
+                            >
+                                <MdFilePresent />{file.fileName}
+                            </span>
                         )}
                     </div>
                     <button
                         onClick={nextFile}
-                        className="text-white ml-56  rounded-full hover:bg-white hover:text-black text-5xl"
+                        className="text-white ml-56 rounded-full hover:bg-white hover:text-black text-5xl"
                     >
                         <MdOutlineKeyboardArrowRight />
                     </button>

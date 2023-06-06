@@ -16,7 +16,6 @@ function App() {
             try {
                 const response = await fetch("URL");
                 const blob = await response.blob();
-                console.log(blob)
                 const file = new File([blob], "filename", {
                     type: blob.type,
                 });
@@ -47,8 +46,8 @@ function App() {
                         <div className="flex justify-between  bg-gray-200 ">
                             <div className="h-10 text-sm pt-2 font-medium"></div>
                             <div className="h-10 text-sm pt-2 ml-20 font-medium">{`${fileData.length} files`}</div>
-                            <button className="h-10 text-sm pt-2 font-medium flex content-end mr-2 text-blue-500">
-                                <label htmlFor="fileInput" className="mx-auto">
+                            <button className="h-10 text-sm pt-2 font-medium flex content-end mr-2 text-blue-500 hover:text-blue-800 cursor-pointer">
+                                <label htmlFor="fileInput" className="mx-auto cursor-pointer">
                                     + Add more
                                     <input
                                         id="fileInput"
@@ -70,13 +69,13 @@ function App() {
                                 return (
                                     <div
                                         key={idx}
-                                        className="transition ease-in-out delay-150 pb-5 hover:grayscale"
+                                        className="transition ease-in-out delay-150 pb-5 hover:grayscale group"
                                         data-tooltip-target="tooltip-default"
                                     >
                                         <div className="ml-9">
                                             <button
                                                 onClick={() => removeFile(file)}
-                                                className="float-right text-gray-500"
+                                                className="absolute -top-1 right-0 z-10 text-black opacity-0 group-hover:opacity-100 transition-opacity"
                                             >
                                                 <MdCancel />
                                             </button>
