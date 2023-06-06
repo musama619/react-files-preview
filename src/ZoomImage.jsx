@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getNextFile, getPrevFile, storeFileState } from "./redux/fileSlice";
 import { MdClose, MdDownload, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import SlideCount from "./SlideCount";
 
 const ZoomImage = () => {
 
@@ -19,15 +20,16 @@ const ZoomImage = () => {
     if (file.zoom) {
         return (
             <>
+
                 <div className="flex flex-row  w-full bg-black h-12 shadow-lg shadow-gray-500">
-                    <span className="text-white flex-1 flex items-center z-50 ml-14 ">{file.fileName}</span>
-                    <button className="text-white text-sm z-50 mr-8 flex justify-center items-center hover:text-blue-400">
+                    <span className="text-white flex-1 flex items-center z-30 ml-14 ">{file.fileName}</span>
+                    <button className="text-white text-sm z-30 mr-8 flex justify-center items-center hover:text-blue-400">
                         <span className="mr-1 text-lg mt-1 font-extralight">
                             <MdDownload />
                         </span>
                         Download
                     </button>
-                    <button className="text-white text-sm  z-50 mr-10 flex justify-center items-center hover:text-stone-400" onClick={hideZoom}>
+                    <button className="text-white text-sm  z-30 mr-10 flex justify-center items-center hover:text-stone-400" onClick={hideZoom}>
                         <span className="mr-1 text-lg mt-1 font-extralight">
                             <MdClose />
                         </span>
@@ -45,7 +47,7 @@ const ZoomImage = () => {
                         alignItems: "center",
                         justifyContent: "center",
                         background: "rgba(0, 0, 0, 0.8)",
-                        zIndex: 10,
+                        zIndex: 20,
                         overflow: "auto",
                     }}
                 >
@@ -77,6 +79,7 @@ const ZoomImage = () => {
                     </div>
                     <button onClick={nextFile} className=" text-white ml-28  rounded-full hover:bg-white hover:text-black text-5xl" ><MdOutlineKeyboardArrowRight /></button>
                 </div >
+                <SlideCount />
             </>
         );
     }
