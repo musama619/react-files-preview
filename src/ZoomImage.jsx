@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getNextFile, getPrevFile, storeFileState } from "./redux/fileSlice";
+import { MdClose, MdDownload, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const ZoomImage = () => {
 
@@ -18,6 +19,21 @@ const ZoomImage = () => {
     if (file.zoom) {
         return (
             <>
+                <div className="flex flex-row  w-full bg-black h-12 shadow-lg shadow-gray-500">
+                    <span className="text-white flex-1 flex items-center z-50 ml-14 ">{file.fileName}</span>
+                    <button className="text-white text-sm z-50 mr-8 flex justify-center items-center hover:text-blue-400">
+                        <span className="mr-1 text-lg mt-1 font-extralight">
+                            <MdDownload />
+                        </span>
+                        Download
+                    </button>
+                    <button className="text-white text-sm  z-50 mr-10 flex justify-center items-center hover:text-stone-400" onClick={hideZoom}>
+                        <span className="mr-1 text-lg mt-1 font-extralight">
+                            <MdClose />
+                        </span>
+                        Close
+                    </button>
+                </div>
                 <div
                     style={{
                         position: "fixed",
@@ -29,42 +45,37 @@ const ZoomImage = () => {
                         alignItems: "center",
                         justifyContent: "center",
                         background: "rgba(0, 0, 0, 0.8)",
-                        zIndex: 999,
+                        zIndex: 10,
                         overflow: "auto",
                     }}
                 >
-                    <button onClick={prevFile}>prev</button>
-                    <div style={{
+
+                    <button onClick={prevFile} className=" text-white mr-28 rounded-full  hover:bg-white hover:text-black  text-5xl "><MdOutlineKeyboardArrowLeft /></button>
+
+                    <div className=" bg-slate-600 rounded-lg" style={{
                         position: "relative",
-                        minWidth: "auto",
-                        minHeight: "auto",
-                        maxWidth: "700px",
-                        maxHeight: "900px",
-                        border: "12px solid black",
-                        borderRadius: "5px"
+                        minWidth: "120vh",
+                        minHeight: "80vh",
+                        maxWidth: "60vh",
+                        maxHeight: "70vh",
+                        borderRadius: "5px",
+                        overflow: "hidden",
                     }}>
-                        <button
-                            onClick={hideZoom}
-                            style={{
-                                position: "absolute",
-                                top: -20,
-                                right: -15,
-                                zIndex: 1,
-                            }}
-                        >
-                            X
-                        </button>
 
                         {file.isImage ?
                             <img
+                                className="object-fill"
                                 src={file.fileSrc}
                                 alt="Zoomed Image"
-                                style={{ maxWidth: "100%", maxHeight: "100%" }}
+                                style={{
+                                    minWidth: "120vh",
+                                    minHeight: "80vh",
+                                }}
                             /> :
                             <h1>{file.fileName}</h1>
                         }
                     </div>
-                    <button onClick={nextFile} >next</button>
+                    <button onClick={nextFile} className=" text-white ml-28  rounded-full hover:bg-white hover:text-black text-5xl" ><MdOutlineKeyboardArrowRight /></button>
                 </div >
             </>
         );

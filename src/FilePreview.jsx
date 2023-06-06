@@ -30,13 +30,13 @@ const FilePreview = ({ file, index }) => {
         <>
             <div
                 onClick={() => setZoom()}
-                className="border border-solid border-slate-400 rounded  "
+                className="border-solid border-slate-200 rounded-lg hover:shadow-lg  shadow-md hover:cursor-pointer"
             >
                 {imageFileTypes.includes(file.type) ? (
-                    <img src={fileSrc} className="object-fill h-32 w-44"></img>
+                    <img src={fileSrc} className="object-fill h-32 w-44 scale-[0.9]"></img>
                 ) : (
-                    <div className="h-32 w-44">
-                        <h6>{file.name}</h6>
+                    <div className="h-32 w-44 flex flex-col content-center items-center">
+                        <span className="font-medium flex items-center h-full break-all p-2 text-xs">{file.name}</span>
                     </div>
                 )}
             </div>

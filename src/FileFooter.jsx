@@ -15,15 +15,15 @@ const FileFooter = ({ file, fileSrc }) => {
     }, []);
     return (
         <div className="relative ">
-            <h5 className="text-sm font-bold">
+            <h5 className="text-[12px] mt-1 font-normal">
                 {file.name.length > 15
                     ? `${file.name.substring(0, 15)}...`
                     : file.name}
             </h5>
-            <h5 className="text-xs">{fileSize}</h5>
+            <h5 className="text-[10px]">{fileSize}</h5>
 
             <a
-                className="float-right absolute top-1 right-0"
+                className="float-right absolute top-1 right-0 text-gray-500"
                 href={fileSrc}
                 target="_blank"
             >
