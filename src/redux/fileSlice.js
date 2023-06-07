@@ -4,7 +4,7 @@ const file = createSlice({
     name: 'file',
     initialState: {
         fileData: [],
-        fileState: { zoom: false, fileSrc: null, index: null, isImage: false, fileName: null, type: null }
+        fileState: { zoom: false, fileSrc: null, index: null, isImage: false, fileName: null, type: null, size: 0 }
     },
     reducers: {
         storeFileData(state, action) {
@@ -41,7 +41,8 @@ const file = createSlice({
                 index: newIndex,
                 isImage: imageFileTypes.includes(state.fileData[newIndex].type),
                 fileName: state.fileData[newIndex].name,
-                type: state.fileData[newIndex].type
+                type: state.fileData[newIndex].type,
+                size: state.fileData[newIndex].size
             };
         },
         getPrevFile(state, action) {
@@ -66,7 +67,8 @@ const file = createSlice({
                 index: newIndex,
                 isImage: imageFileTypes.includes(state.fileData[newIndex].type),
                 fileName: state.fileData[newIndex].name,
-                type: state.fileData[newIndex].type
+                type: state.fileData[newIndex].type,
+                size: state.fileData[newIndex].size
             };
         }
     }

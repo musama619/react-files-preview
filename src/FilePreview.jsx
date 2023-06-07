@@ -23,7 +23,8 @@ const FilePreview = ({ file, index }) => {
                 index: index,
                 isImage: imageFileTypes.includes(file.type),
                 fileName: file.name,
-                type: file.type
+                type: file.type,
+                size: file.size
             })
         );
     };

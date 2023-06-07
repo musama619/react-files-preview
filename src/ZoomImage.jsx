@@ -16,7 +16,8 @@ const ZoomImage = () => {
             index: null,
             isImage: false,
             fileName: null,
-            type: null
+            type: null,
+            size: 0
         }));
     };
 
@@ -51,11 +52,9 @@ const ZoomImage = () => {
                             <img className="object-fit w-full h-full" src={file.fileSrc} alt="Zoomed Image" />
                         ) : (
                             <span className="flex w-full h-full items-center justify-center text-4xl">
-                                {/* <MdFilePresent />
-                                {file.fileName} */}
                                 <span className={`${file.type == "application/pdf" ? "bg-red-500" : "bg-slate-500"} 
                         rounded flex justify-center  w-48 h-48 items-center`}>
-                                    {file.type == "application/pdf" ? <BsFilePdfFill className="text-white text-4xl" /> : <BsFileEarmarkText className="text-white text-4xl" />}
+                                    {file.type == "application/pdf" ? <BsFilePdfFill className="text-white text-9xl" /> : <BsFileEarmarkText className="text-white text-9xl" />}
                                 </span>
                             </span>
                         )}

@@ -13,12 +13,19 @@ const FileFooter = ({ file, fileSrc }) => {
             setFileSize(size);
         }
     }, []);
+
+    const nameArray = file.name.split(".")
+    let fileName = nameArray[0]
+    let extension = nameArray.pop();
+    if (fileName.length > 20) {
+        fileName = fileName.substring(0, 5) + ".." + fileName.substring(fileName.length - 3, fileName.length);
+    }
+    const result = fileName + '.' + extension;
+
     return (
         <div className="relative ">
-            <h5 className="text-[12px] mt-1 font-normal">
-                {file.name.length > 15
-                    ? `${file.name.substring(0, 15)}...`
-                    : file.name}
+            <h5 className="text-[12px] mt-1 font-normal break-words">
+                {result}
             </h5>
             <h5 className="text-[10px]">{fileSize}</h5>
 
