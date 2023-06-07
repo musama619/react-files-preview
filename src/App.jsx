@@ -11,21 +11,21 @@ import { MdCancel } from "react-icons/md";
 function App() {
 	const dispatcher = useDispatch();
 
-	useEffect(() => {
-		// async function fetchData() {
-		//     try {
-		//         const response = await fetch("URL");
-		//         const blob = await response.blob();
-		//         const file = new File([blob], "filename", {
-		//             type: blob.type,
-		//         });
-		//         dispatcher(storeFileData({ files: [file] }));
-		//     } catch (err) {
-		//         console.log(err.message);
-		//     }
-		// }
-		// fetchData();
-	}, []);
+	// useEffect(() => {
+	// 	async function fetchData() {
+	// 		try {
+	// 			const response = await fetch("URL");
+	// 			const blob = await response.blob();
+	// 			const file = new File([blob], "filename", {
+	// 				type: blob.type,
+	// 			});
+	// 			dispatcher(storeFileData({ files: [file] }));
+	// 		} catch (err) {
+	// 			console.log(err.message);
+	// 		}
+	// 	}
+	// 	fetchData();
+	// }, []);
 
 	const handleImage = (e) => {
 		const files = Array.from(e.target.files);
@@ -69,8 +69,7 @@ function App() {
 								return (
 									<div
 										key={idx}
-										className="transition ease-in-out delay-150 pb-5 hover:grayscale group"
-										data-tooltip-target="tooltip-default"
+										className="relative pb-5 group "
 									>
 										<div className="ml-9">
 											<button
