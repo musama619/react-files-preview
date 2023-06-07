@@ -4,12 +4,29 @@ const file = createSlice({
     name: 'file',
     initialState: {
         fileData: [],
-        fileState: { zoom: false, fileSrc: null, index: null, isImage: false, fileName: null, type: null, size: 0 }
+        fileState: {
+            zoom: false, 
+            fileSrc: null, 
+            index: null, 
+            isImage: false, 
+            fileName: null, 
+            type: null, 
+            size: 0
+        },
+        componentState: {
+            showFileSize: false,
+            showSliderCount: true,
+            downloadFile: true,
+            removeFile: true
+        }
     },
     reducers: {
         storeFileData(state, action) {
             const { files } = action.payload
             state.fileData = files
+        },
+        setComponentState(state, action) {
+            state.componentState = action.payload
         },
         appendFileData: (state, action) => {
             state.fileData = [...state.fileData, ...action.payload.files];
@@ -74,6 +91,6 @@ const file = createSlice({
     }
 })
 
-export const { storeFileState, storeFileData, removeFileData, getNextFile, getPrevFile, appendFileData } = file.actions
+export const { storeFileState, storeFileData, removeFileData, getNextFile, getPrevFile, appendFileData, setComponentState } = file.actions
 
 export default file.reducer

@@ -18,9 +18,7 @@ const FileFooter = ({ file, fileSrc }) => {
 	let extension = nameArray.pop();
 	if (fileName.length > 20) {
 		fileName =
-			fileName.substring(0, 5) +
-			".." +
-			fileName.substring(fileName.length - 3, fileName.length);
+			fileName.substring(0, 5) + ".." + fileName.substring(fileName.length - 3, fileName.length);
 	}
 	const result = fileName + "." + extension;
 

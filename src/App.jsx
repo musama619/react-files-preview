@@ -87,10 +87,7 @@ function App() {
 								);
 							})
 						) : (
-							<label
-								htmlFor="fileInput"
-								className="mx-auto cursor-pointer hover:underline "
-							>
+							<label htmlFor="fileInput" className="mx-auto cursor-pointer hover:underline ">
 								Browse files
 								<input
 									id="fileInput"
