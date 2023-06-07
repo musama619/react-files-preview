@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { storeFileState } from "./redux/fileSlice";
 import FileFooter from "./FileFooter";
+import { BsFileEarmarkText, BsFilePdfFill } from "react-icons/bs";
 
 const imageFileTypes = ["image/jpeg", "image/jpg", "image/png"];
 
@@ -22,6 +23,7 @@ const FilePreview = ({ file, index }) => {
                 index: index,
                 isImage: imageFileTypes.includes(file.type),
                 fileName: file.name,
+                type: file.type
             })
         );
     };
@@ -35,8 +37,11 @@ const FilePreview = ({ file, index }) => {
                 {imageFileTypes.includes(file.type) ? (
                     <img src={fileSrc} className="object-fill h-32 w-44 scale-[0.9]"></img>
                 ) : (
-                    <div className="h-32 w-44 flex flex-col content-center items-center">
-                        <span className="font-medium flex items-center h-full break-all p-2 text-xs">{file.name}</span>
+                    <div className="h-32 w-44 flex flex-col justify-center content-center items-center">
+                        <span className={`${file.type == "application/pdf" ? "bg-red-500" : "bg-slate-500"} 
+                        rounded flex w-16 justify-center h-20 items-center`}>
+                            {file.type == "application/pdf" ? <BsFilePdfFill className="text-white text-4xl" /> : <BsFileEarmarkText className="text-white text-4xl" />}
+                        </span>
                     </div>
                 )}
             </div>
