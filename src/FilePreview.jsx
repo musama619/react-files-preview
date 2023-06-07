@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 const imageFileTypes = ["image/jpeg", "image/jpg", "image/png"];
 
 const FilePreview = ({ file, index }) => {
-	const [fileSrc, setFileSrc] = useState([]);
+	const [fileSrc, setFileSrc] = useState(null);
 	useEffect(() => {
 		const fileUrl = URL.createObjectURL(file);
 		setFileSrc(fileUrl);
