@@ -21,7 +21,7 @@ const file = createSlice({
             const file = action.payload
             state.fileData = state.fileData.filter(i => i.name != file.name)
         },
-        getNextFile(state, action) {
+        getNextFile(state) {
             const imageFileTypes = [
                 "image/jpeg",
                 "image/jpg",
@@ -45,7 +45,7 @@ const file = createSlice({
                 size: state.fileData[newIndex].size
             };
         },
-        getPrevFile(state, action) {
+        getPrevFile(state) {
             const imageFileTypes = [
                 "image/jpeg",
                 "image/jpg",

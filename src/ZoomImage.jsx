@@ -1,7 +1,6 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNextFile, getPrevFile, storeFileState } from "./redux/fileSlice";
-import { MdClose, MdDownload, MdFilePresent, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { MdClose, MdDownload, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import SlideCount from "./SlideCount";
 import { BsFileEarmarkText, BsFilePdfFill } from "react-icons/bs";
 

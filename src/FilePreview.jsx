@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { storeFileState } from "./redux/fileSlice";
 import FileFooter from "./FileFooter";
 import { BsFileEarmarkText, BsFilePdfFill } from "react-icons/bs";
+import PropTypes from "prop-types";
 
 const imageFileTypes = ["image/jpeg", "image/jpg", "image/png"];
 
@@ -54,3 +55,8 @@ const FilePreview = ({ file, index }) => {
 };
 
 export default FilePreview;
+
+FilePreview.propTypes = {
+    file:  PropTypes.instanceOf(File),
+    index: PropTypes.number,
+};

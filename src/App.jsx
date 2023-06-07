@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     appendFileData,
     removeFileData,
-    storeFileData,
+    // storeFileData,
 } from "./redux/fileSlice";
 import FilePreview from "./FilePreview";
 import { MdCancel } from "react-icons/md";
@@ -12,18 +12,18 @@ function App() {
     const dispatcher = useDispatch();
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await fetch("URL");
-                const blob = await response.blob();
-                const file = new File([blob], "filename", {
-                    type: blob.type,
-                });
-                dispatcher(storeFileData({ files: [file] }));
-            } catch (err) {
-                console.log(err.message);
-            }
-        }
+        // async function fetchData() {
+        //     try {
+        //         const response = await fetch("URL");
+        //         const blob = await response.blob();
+        //         const file = new File([blob], "filename", {
+        //             type: blob.type,
+        //         });
+        //         dispatcher(storeFileData({ files: [file] }));
+        //     } catch (err) {
+        //         console.log(err.message);
+        //     }
+        // }
         // fetchData();
     }, []);
 
@@ -63,7 +63,7 @@ function App() {
                         <></>
                     )}
 
-                    <div class="flex flex-row flex-wrap gap-4 p-6 bg-stone-100 border border-gray-100 rounded-lg shadow dark:bg-gray-800  ">
+                    <div className="flex flex-row flex-wrap gap-4 p-6 bg-stone-100 border border-gray-100 rounded-lg shadow dark:bg-gray-800  ">
                         {fileData.length > 0 ? (
                             fileData.map((file, idx) => {
                                 return (

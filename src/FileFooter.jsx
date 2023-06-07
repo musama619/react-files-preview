@@ -1,18 +1,17 @@
 import { MdDownload } from "react-icons/md";
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 const FileFooter = ({ file, fileSrc }) => {
     const [fileSize, setFileSize] = useState(null);
 
     useEffect(() => {
         if (file.size < 1000000) {
-            var size = Math.floor(file.size / 1000) + " KB";
-            setFileSize(size);
+            setFileSize(Math.floor(file.size / 1000) + " KB")
         } else {
-            var size = Math.floor(file.size / 1000000) + " MB";
-            setFileSize(size);
+            setFileSize(Math.floor(file.size / 1000000) + " MB")
         }
-    }, []);
+    }, [file.size]);
 
     const nameArray = file.name.split(".")
     let fileName = nameArray[0]
@@ -33,6 +32,7 @@ const FileFooter = ({ file, fileSrc }) => {
                 className="float-right absolute top-1 right-0 text-gray-500"
                 href={fileSrc}
                 target="_blank"
+                rel="noreferrer"
             >
                 <MdDownload />
             </a>
@@ -41,3 +41,8 @@ const FileFooter = ({ file, fileSrc }) => {
 };
 
 export default FileFooter;
+
+FileFooter.propTypes = {
+    file:  PropTypes.instanceOf(File),
+    fileSrc: PropTypes.string,
+};
