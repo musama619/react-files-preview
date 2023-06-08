@@ -10,7 +10,6 @@ import { filePreviewStyle } from "./FilePreviewStyle";
 
 const imageFileTypes = ["image/jpeg", "image/jpg", "image/png"];
 
-
 const FilePreview: React.FC<FilePreviewProps>=({ file, index }) => {
 	const [fileSrc, setFileSrc] = useState<string | null>(null);
 	useEffect(() => {

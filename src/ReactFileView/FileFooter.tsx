@@ -1,9 +1,10 @@
 import { MdDownload } from "react-icons/md";
 import { useEffect, useState } from "react";
-// import PropTypes from "prop-types";
 import { FileFooterProps } from "./types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
-const FileFooter: React.FC<FileFooterProps>=({ file, fileSrc }) => {
+const FileFooter: React.FC<FileFooterProps> = ({ file, fileSrc }) => {
 	const [fileSize, setFileSize] = useState<string | null>(null);
 
 	useEffect(() => {
@@ -23,25 +24,26 @@ const FileFooter: React.FC<FileFooterProps>=({ file, fileSrc }) => {
 	}
 	const result = fileName + "." + extension;
 
+	const componentState = useSelector((state: RootState) => state.file.componentState);
+
 	return (
 		<div className="relative ">
 			<h5 className="text-[12px] mt-1 font-normal break-words">{result}</h5>
-			<h5 className="text-[10px]">{fileSize}</h5>
-			<a
-				className="float-right absolute top-1 right-0 text-gray-500"
-				href={fileSrc!}
-				target="_blank"
-				rel="noreferrer"
-			>
-				<MdDownload />
-			</a>
+			{componentState.showFileSize ? <h5 className="text-[10px]">{fileSize}</h5> : <></>}
+			{componentState.downloadFile ? (
+				<a
+					className="float-right absolute top-1 right-0 text-gray-500"
+					href={fileSrc!}
+					target="_blank"
+					rel="noreferrer"
+				>
+					<MdDownload />
+				</a>
+			) : (
+				<></>
+			)}
 		</div>
 	);
 };
 
 export default FileFooter;
-
-// FileFooter.propTypes = {
-// 	file: PropTypes.instanceOf(File),
-// 	fileSrc: PropTypes.string,
-// };

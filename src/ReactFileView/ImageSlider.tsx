@@ -14,6 +14,7 @@ import { filePreviewStyle } from "./FilePreviewStyle";
 const ImageSlider = () => {
 	const dispatch = useDispatch();
 	const file = useSelector((state: RootState) => state.file.fileState);
+	const componentState = useSelector((state: RootState) => state.file.componentState);
 	const previewStyle = filePreviewStyle.filter((item) => item.type == file.type);
 
 	const hideZoom = () => {
@@ -88,7 +89,7 @@ const ImageSlider = () => {
 						<MdOutlineKeyboardArrowRight />
 					</button>
 				</div>
-				<SlideCount />
+				{componentState.showSliderCount ?  <SlideCount /> : <></>}
 			</div>
 		);
 	}

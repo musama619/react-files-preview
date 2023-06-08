@@ -3,19 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	appendFileData,
 	removeFileData,
+	setComponentState,
 	storeFileData,
 } from "../redux/fileSlice";
 import FilePreview from "./FilePreview";
 import { MdCancel } from "react-icons/md";
-import { RootState } from '../../store';
+import { RootState } from "../../store";
+import ImageSlider from "./ImageSlider";
+import { Props } from "./intefaces";
 
-function ReactFileView(props: {url: string | null, files: FileList | File | []}) {
+const ReactFileView: React.FC<Props> = ({
+	files,
+	url,
+	downloadFile,
+	removeFile,
+	showFileSize,
+	showSliderCount,
+}) => {
 	const dispatcher = useDispatch();
 
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const response = await fetch(props.url!);
+				const response = await fetch(url!);
 				const blob = await response.blob();
 				const file = new File([blob], "filename", {
 					type: blob.type,
@@ -25,21 +35,46 @@ function ReactFileView(props: {url: string | null, files: FileList | File | []})
 				console.log(err.message);
 			}
 		}
-		if(props.url){
+		if (url) {
 			fetchData();
 		}
+
+		if (files) {
+			dispatcher(appendFileData({ files: files }));
+		}
 	}, []);
+
+	useEffect(() => {
+		dispatcher(
+			setComponentState({
+				downloadFile: downloadFile,
+				removeFile: removeFile,
+				showFileSize: showFileSize,
+				showSliderCount: showSliderCount,
+			})
+		);
+	}, [downloadFile, removeFile, showFileSize, showSliderCount]);
 
 	const handleImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const files = Array.from(e.target.files || []);
 		dispatcher(appendFileData({ files: files }));
 	};
 
-	const removeFile = (file: File) => {
+	const remove = (file: File) => {
 		dispatcher(removeFileData(file));
 	};
 
 	const fileData = useSelector((state: RootState) => state.file.fileData);
+	const fileState = useSelector((state: RootState) => state.file.fileState);
+	const componentState = useSelector((state: RootState) => state.file.componentState);
+
+	if (fileState.zoom) {
+		return (
+			<div>
+				<ImageSlider />
+			</div>
+		);
+	}
 
 	return (
 		<div className="w-full mt-3">
@@ -66,21 +101,22 @@ function ReactFileView(props: {url: string | null, files: FileList | File | []})
 						<></>
 					)}
 
-					<div className="flex flex-row flex-wrap gap-4 p-6 bg-stone-100 border border-gray-100 rounded-lg shadow dark:bg-gray-800  ">
+					<div className="flex flex-row flex-wrap gap-4 p-6 bg-stone-100 border border-gray-100 shadow dark:bg-gray-800  ">
 						{fileData.length > 0 ? (
 							fileData.map((file, idx) => {
 								return (
-									<div
-										key={idx}
-										className="relative pb-5 group "
-									>
+									<div key={idx} className="relative pb-5 group ">
 										<div className="ml-9">
-											<button
-												onClick={() => removeFile(file)}
-												className="absolute -top-1 right-0 z-10 text-black opacity-0 group-hover:opacity-100 transition-opacity"
-											>
-												<MdCancel />
-											</button>
+											{componentState.removeFile ? (
+												<button
+													onClick={() => remove(file)}
+													className="absolute -top-1 right-0 z-10 text-black opacity-0 group-hover:opacity-100 transition-opacity"
+												>
+													<MdCancel />
+												</button>
+											) : (
+												<></>
+											)}
 										</div>
 										<div className="clear-right">
 											<FilePreview file={file} index={idx} />
@@ -105,6 +141,6 @@ function ReactFileView(props: {url: string | null, files: FileList | File | []})
 			</div>
 		</div>
 	);
-}
+};
 
 export default ReactFileView;
