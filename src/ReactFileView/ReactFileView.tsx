@@ -3,40 +3,43 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	appendFileData,
 	removeFileData,
-	// storeFileData,
-} from "./redux/fileSlice";
+	storeFileData,
+} from "../redux/fileSlice";
 import FilePreview from "./FilePreview";
 import { MdCancel } from "react-icons/md";
+import { RootState } from '../../store';
 
-function App() {
+function ReactFileView(props: {url: string | null}) {
 	const dispatcher = useDispatch();
 
-	// useEffect(() => {
-	// 	async function fetchData() {
-	// 		try {
-	// 			const response = await fetch("URL");
-	// 			const blob = await response.blob();
-	// 			const file = new File([blob], "filename", {
-	// 				type: blob.type,
-	// 			});
-	// 			dispatcher(storeFileData({ files: [file] }));
-	// 		} catch (err) {
-	// 			console.log(err.message);
-	// 		}
-	// 	}
-	// 	fetchData();
-	// }, []);
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const response = await fetch(props.url!);
+				const blob = await response.blob();
+				const file = new File([blob], "filename", {
+					type: blob.type,
+				});
+				dispatcher(storeFileData({ files: [file] }));
+			} catch (err: any) {
+				console.log(err.message);
+			}
+		}
+		if(props.url){
+			fetchData();
+		}
+	}, []);
 
-	const handleImage = (e) => {
-		const files = Array.from(e.target.files);
+	const handleImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
+		const files = Array.from(e.target.files || []);
 		dispatcher(appendFileData({ files: files }));
 	};
 
-	const removeFile = (file) => {
+	const removeFile = (file: File) => {
 		dispatcher(removeFileData(file));
 	};
 
-	const fileData = useSelector((state) => state.file.fileData);
+	const fileData = useSelector((state: RootState) => state.file.fileData);
 
 	return (
 		<div className="w-full mt-3">
@@ -104,4 +107,4 @@ function App() {
 	);
 }
 
-export default App;
+export default ReactFileView;

@@ -1,9 +1,10 @@
 import { MdDownload } from "react-icons/md";
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+import { FileFooterProps } from "./types";
 
-const FileFooter = ({ file, fileSrc }) => {
-	const [fileSize, setFileSize] = useState(null);
+const FileFooter: React.FC<FileFooterProps>=({ file, fileSrc }) => {
+	const [fileSize, setFileSize] = useState<string | null>(null);
 
 	useEffect(() => {
 		if (file.size < 1000000) {
@@ -15,7 +16,7 @@ const FileFooter = ({ file, fileSrc }) => {
 
 	const nameArray = file.name.split(".");
 	let fileName = nameArray[0];
-	let extension = nameArray.pop();
+	const extension = nameArray.pop();
 	if (fileName.length > 20) {
 		fileName =
 			fileName.substring(0, 5) + ".." + fileName.substring(fileName.length - 3, fileName.length);
@@ -28,7 +29,7 @@ const FileFooter = ({ file, fileSrc }) => {
 			<h5 className="text-[10px]">{fileSize}</h5>
 			<a
 				className="float-right absolute top-1 right-0 text-gray-500"
-				href={fileSrc}
+				href={fileSrc!}
 				target="_blank"
 				rel="noreferrer"
 			>
@@ -40,7 +41,7 @@ const FileFooter = ({ file, fileSrc }) => {
 
 export default FileFooter;
 
-FileFooter.propTypes = {
-	file: PropTypes.instanceOf(File),
-	fileSrc: PropTypes.string,
-};
+// FileFooter.propTypes = {
+// 	file: PropTypes.instanceOf(File),
+// 	fileSrc: PropTypes.string,
+// };
