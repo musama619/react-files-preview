@@ -8,6 +8,6 @@ import ImageSlider from './ReactFileView/ImageSlider.js'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
     <ImageSlider />
-    <ReactFileView url={null} />
+    <ReactFileView url={null} files={[]} />
   </Provider>
 )

@@ -9,7 +9,7 @@ import FilePreview from "./FilePreview";
 import { MdCancel } from "react-icons/md";
 import { RootState } from '../../store';
 
-function ReactFileView(props: {url: string | null}) {
+function ReactFileView(props: {url: string | null, files: FileList | File | []}) {
 	const dispatcher = useDispatch();
 
 	useEffect(() => {
