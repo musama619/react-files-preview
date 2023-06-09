@@ -19,6 +19,8 @@ const ReactFileView: React.FC<Props> = ({
 	removeFile,
 	showFileSize,
 	showSliderCount,
+	onChange,
+	onRemove,
 }) => {
 	const dispatcher = useDispatch();
 
@@ -62,6 +64,9 @@ const ReactFileView: React.FC<Props> = ({
 
 	const remove = (file: File) => {
 		dispatcher(removeFileData(file));
+		if(onRemove){
+			onRemove(file)
+		}
 	};
 
 	const fileData = useSelector((state: RootState) => state.file.fileData);
@@ -131,7 +136,12 @@ const ReactFileView: React.FC<Props> = ({
 								<input
 									id="fileInput"
 									type="file"
-									onChange={handleImage}
+									onChange={(e) => {
+										handleImage(e);
+										if (onChange) {
+											onChange(e);
+										}
+									}}
 									multiple={true}
 									style={{ display: "none" }}
 								/>

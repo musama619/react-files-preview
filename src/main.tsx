@@ -13,6 +13,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 			removeFile={true}
 			showFileSize={true}
 			showSliderCount={true}
+			onChange={(e) => console.log(e.target.files)}
+			onRemove={(removedFile) => console.log(removedFile)}
 		/>
 	</Provider>
 );
