@@ -39,10 +39,10 @@ const ReactFileView: React.FC<Props> = ({
 			fetchData();
 		}
 
-		if (files) {
+		if (files.length > 0) {
 			dispatcher(appendFileData({ files: files }));
 		}
-	}, []);
+	}, [url, files]);
 
 	useEffect(() => {
 		dispatcher(

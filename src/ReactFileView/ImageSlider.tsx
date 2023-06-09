@@ -60,10 +60,14 @@ const ImageSlider = () => {
 					<button
 						className="absolute top-1/2 left-1 transform -translate-y-1/2 text-white rounded-full hover:bg-white hover:text-black text-5xl"
 						onClick={prevFile}
+						data-testid="prev-file"
 					>
 						<MdOutlineKeyboardArrowLeft />
 					</button>
-					<div className="relative w-[130vh] max-sm:w-96 max-md:w-[75vh] h-[78vh] max-sm:h-52 max-md:h-80  rounded-lg bg-slate-400 overflow-hidden transition-all delay-750 ease-in">
+					<div
+						data-testid="image-slider"
+						className="relative w-[130vh] max-sm:w-96 max-md:w-[75vh] h-[78vh] max-sm:h-52 max-md:h-80  rounded-lg bg-slate-400 overflow-hidden transition-all delay-750 ease-in"
+					>
 						{file.isImage ? (
 							<img className="object-fit w-full h-full " src={file.fileSrc!} alt="Zoomed Image" />
 						) : (
@@ -85,11 +89,12 @@ const ImageSlider = () => {
 					<button
 						className="absolute top-1/2 right-1 transform -translate-y-1/2 text-white rounded-full hover:bg-white hover:text-black text-5xl"
 						onClick={nextFile}
+						data-testid="next-file"
 					>
 						<MdOutlineKeyboardArrowRight />
 					</button>
 				</div>
-				{componentState.showSliderCount ?  <SlideCount /> : <></>}
+				{componentState.showSliderCount ? <SlideCount /> : <></>}
 			</div>
 		);
 	}

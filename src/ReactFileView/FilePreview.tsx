@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { storeFileState } from "../redux/fileSlice";
 import FileFooter from "./FileFooter";
-import {
-	BsFileMedical,
-} from "react-icons/bs";
+import { BsFileMedical } from "react-icons/bs";
 import { FilePreviewProps } from "./types";
 import { filePreviewStyle } from "./FilePreviewStyle";
 
 const imageFileTypes = ["image/jpeg", "image/jpg", "image/png"];
 
-const FilePreview: React.FC<FilePreviewProps>=({ file, index }) => {
+const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 	const [fileSrc, setFileSrc] = useState<string | null>(null);
 	useEffect(() => {
 		const fileUrl = URL.createObjectURL(file);
@@ -37,6 +35,7 @@ const FilePreview: React.FC<FilePreviewProps>=({ file, index }) => {
 	return (
 		<>
 			<div
+				data-testid="file-preview"
 				onClick={() => setZoom()}
 				className="border-solid border-slate-200 rounded-lg hover:shadow-lg  shadow-md hover:cursor-pointer"
 			>
@@ -45,9 +44,7 @@ const FilePreview: React.FC<FilePreviewProps>=({ file, index }) => {
 				) : (
 					<div className="h-32 w-44 flex flex-col justify-center content-center items-center">
 						<span
-							className={`${
-								previewStyle.length > 0 ? previewStyle[0].color : "bg-slate-400"
-							} 
+							className={`${previewStyle.length > 0 ? previewStyle[0].color : "bg-slate-400"} 
                         rounded flex w-16 justify-center h-20 items-center`}
 						>
 							{previewStyle.length > 0 ? (
@@ -59,9 +56,7 @@ const FilePreview: React.FC<FilePreviewProps>=({ file, index }) => {
 					</div>
 				)}
 			</div>
-			<div className="h-5 w-44">
-				{fileSrc && <FileFooter file={file} fileSrc={fileSrc} />}
-			</div>
+			<div className="h-5 w-44">{fileSrc && <FileFooter file={file} fileSrc={fileSrc} />}</div>
 		</>
 	);
 };

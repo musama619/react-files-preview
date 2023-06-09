@@ -29,7 +29,7 @@ const FileFooter: React.FC<FileFooterProps> = ({ file, fileSrc }) => {
 	return (
 		<div className="relative ">
 			<h5 className="text-[12px] mt-1 font-normal break-words">{result}</h5>
-			{componentState.showFileSize ? <h5 className="text-[10px]">{fileSize}</h5> : <></>}
+			{componentState.showFileSize ? <span data-testid="file-size" className="text-[10px]">{fileSize}</span> : <></>}
 			{componentState.downloadFile ? (
 				<a
 					className="float-right absolute top-1 right-0 text-gray-500"
