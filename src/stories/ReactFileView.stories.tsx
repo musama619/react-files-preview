@@ -21,8 +21,15 @@ export default {
 				type: "boolean",
 			},
 		},
-    showFileSize: {
+		showFileSize: {
 			description: "When image slider is opened, show slide count under files",
+			defaultValue: true,
+			control: {
+				type: "boolean",
+			},
+		},
+		showSliderCount: {
+			description: "Show slider count under image slide",
 			defaultValue: true,
 			control: {
 				type: "boolean",

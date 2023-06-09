@@ -109,6 +109,7 @@ const ReactFileView: React.FC<Props> = ({
 										<div className="ml-9">
 											{componentState.removeFile ? (
 												<button
+													data-testid="remove-file-button"
 													onClick={() => remove(file)}
 													className="absolute -top-1 right-0 z-10 text-black opacity-0 group-hover:opacity-100 transition-opacity"
 												>
