@@ -57,24 +57,3 @@ export const Default = {
 		url: "https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 	},
 };
-
-// export const Slider = {
-//   args: {
-//   },
-// };
-
-// export const removeFile = {
-//   args: {
-//     removeFile: true,
-//   },
-// };
-// export const showFileSize = {
-//   args: {
-//     showFileSize: true,
-//   },
-// };
-// export const showSliderCount = {
-//   args: {
-//     showSliderCount: true,
-//   },
-// };
