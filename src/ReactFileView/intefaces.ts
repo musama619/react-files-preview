@@ -7,6 +7,12 @@ export interface Props {
 	removeFile: boolean;
 	showFileSize: boolean;
 	showSliderCount: boolean;
+	multiple: boolean;
+	accept?: string;
+	maxFileSize?: number;
+	maxFiles?: number;
+	getFiles?: (files: File[]) => void
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 	onRemove?: (removedFile: File) => void;
+	onError?: (error: Error) => void;
 }

@@ -13,8 +13,14 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 			removeFile={true}
 			showFileSize={true}
 			showSliderCount={true}
+			multiple={true}
+			maxFileSize={1000000}
+			maxFiles={2}
+			accept="image/png, application/pdf"
+			getFiles={(files) => console.log(files)}
 			onChange={(e) => console.log(e.target.files)}
 			onRemove={(removedFile) => console.log(removedFile)}
+			onError={err => console.log(err.message)}
 		/>
 	</Provider>
 );

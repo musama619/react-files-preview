@@ -19,8 +19,14 @@ const ReactFileView: React.FC<Props> = ({
 	removeFile,
 	showFileSize,
 	showSliderCount,
+	multiple,
+	accept,
+	maxFileSize,
+	maxFiles,
 	onChange,
 	onRemove,
+	onError,
+	getFiles,
 }) => {
 	const dispatcher = useDispatch();
 
@@ -57,21 +63,49 @@ const ReactFileView: React.FC<Props> = ({
 		);
 	}, [downloadFile, removeFile, showFileSize, showSliderCount]);
 
+	const fileData = useSelector((state: RootState) => state.file.fileData);
+	const fileState = useSelector((state: RootState) => state.file.fileState);
+	const componentState = useSelector((state: RootState) => state.file.componentState);
+
 	const handleImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const files = Array.from(e.target.files || []);
-		dispatcher(appendFileData({ files: files }));
+
+		let hasError = false;
+		if (maxFiles && (fileData.length + files.length > maxFiles || files.length > maxFiles)) {
+			hasError = true;
+			if (onError) {
+				onError(new Error(`Max ${maxFiles} files are allowed to be selected`));
+			}
+			return;
+		}
+
+		if (maxFileSize) {
+			files.forEach((file) => {
+				if (file.size > maxFileSize) {
+					hasError = true;
+					if (onError) {
+						onError(new Error(`File size limit exceeded: ${file.name}`));
+					}
+					return;
+				}
+			});
+		}
+
+		if (!hasError) {
+			dispatcher(appendFileData({ files: files }));
+		}
 	};
 
 	const remove = (file: File) => {
 		dispatcher(removeFileData(file));
-		if(onRemove){
-			onRemove(file)
+		if (onRemove) {
+			onRemove(file);
 		}
 	};
 
-	const fileData = useSelector((state: RootState) => state.file.fileData);
-	const fileState = useSelector((state: RootState) => state.file.fileState);
-	const componentState = useSelector((state: RootState) => state.file.componentState);
+	if (getFiles) {
+		getFiles(fileData);
+	}
 
 	if (fileState.zoom) {
 		return (
@@ -142,7 +176,8 @@ const ReactFileView: React.FC<Props> = ({
 											onChange(e);
 										}
 									}}
-									multiple={true}
+									multiple={multiple}
+									accept={accept}
 									style={{ display: "none" }}
 								/>
 							</label>
