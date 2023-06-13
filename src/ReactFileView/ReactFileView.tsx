@@ -31,7 +31,7 @@ const ReactFileView: React.FC<Props> = ({
 	rounded,
 	height,
 	fileHeight,
-	fileWidth
+	fileWidth,
 }) => {
 	const dispatcher = useDispatch();
 
@@ -90,10 +90,10 @@ const ReactFileView: React.FC<Props> = ({
 	useEffect(() => {
 		dispatcher(
 			setComponentState({
-				downloadFile: downloadFile,
-				removeFile: removeFile,
-				showFileSize: showFileSize,
-				showSliderCount: showSliderCount,
+				downloadFile: downloadFile != undefined ? downloadFile : true,
+				removeFile: removeFile != undefined ? removeFile : true,
+				showFileSize: showFileSize != undefined ? showFileSize : true,
+				showSliderCount: showSliderCount != undefined ? showSliderCount : true,
 				rounded: rounded != undefined ? rounded : true,
 				fileHeight: fileHeight ?? "h-32",
 				fileWidth: fileWidth ?? "w-44",
