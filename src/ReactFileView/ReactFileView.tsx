@@ -131,13 +131,20 @@ const ReactFileView: React.FC<Props> = ({
 	return (
 		<div className="w-full mt-3">
 			<div className="flex flex-row max-h-2">
-				<div className={`${width ?? `basis-11/12` } mx-auto`}>
+				<div className={`${width ?? `basis-11/12`} mx-auto`}>
 					{fileData.length > 0 ? (
-						<div className="flex justify-between  bg-gray-200 ">
-							<div className="h-10 text-sm pt-2 font-medium"></div>
-							<div className="h-10 text-sm pt-2 ml-20 font-medium">{`${fileData.length} files`}</div>
-							<button className="h-10 text-sm pt-2 font-medium flex content-end mr-2 text-blue-500 hover:text-blue-800 cursor-pointer">
-								<label htmlFor="fileInput" className="mx-auto cursor-pointer">
+						<div>
+							<div className="flex justify-between  bg-gray-200 ">
+								{/* <div className="h-10 text-sm pt-2 font-medium"></div> */}
+								<div className="h-10 text-sm pt-2 ml-2 font-medium">
+									<span className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+										{`Files: ${fileData.length}`}
+									</span>
+								</div>
+								<label
+									htmlFor="fileInput"
+									className="cursor-pointer py-1 px-2 mt-1 mr-2 mb-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+								>
 									+ Add more
 									<input
 										id="fileInput"
@@ -153,7 +160,7 @@ const ReactFileView: React.FC<Props> = ({
 										accept={accept}
 									/>
 								</label>
-							</button>
+							</div>
 						</div>
 					) : (
 						<></>
