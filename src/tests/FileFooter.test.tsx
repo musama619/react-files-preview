@@ -40,6 +40,9 @@ describe("FileFooter component", () => {
 				removeFile: true,
 				showFileSize: true,
 				showSliderCount: true,
+				rounded: true,
+				fileHeight: "h-32",
+				fileWidth: "w-44"
 			})
 		);
 		const file = new File(["test content"], "test.txt", { type: "text/plain" });
@@ -58,6 +61,9 @@ describe("FileFooter component", () => {
 				removeFile: true,
 				showFileSize: true,
 				showSliderCount: true,
+				rounded: true,
+				fileHeight: "h-32",
+				fileWidth: "w-44"
 			})
 		);
 		const file = new File(["test content"], "test.txt", { type: "text/plain" });
@@ -90,6 +96,9 @@ describe("FileFooter component", () => {
 				removeFile: true,
 				showFileSize: true,
 				showSliderCount: true,
+				rounded: true,
+				fileHeight: "h-32",
+				fileWidth: "w-44"
 			})
 		);
 
@@ -107,6 +116,9 @@ describe("FileFooter component", () => {
 				removeFile: true,
 				showFileSize: false,
 				showSliderCount: true,
+				rounded: true,
+				fileHeight: "h-32",
+				fileWidth: "w-44"
 			})
 		);
 

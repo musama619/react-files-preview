@@ -93,6 +93,9 @@ describe("ImageSlider component", () => {
 				removeFile: true,
 				showFileSize: true,
 				showSliderCount: true,
+				rounded: true,
+				fileHeight: "h-32",
+				fileWidth: "w-44"
 			})
 		);
 
@@ -120,6 +123,9 @@ describe("ImageSlider component", () => {
 				removeFile: true,
 				showFileSize: true,
 				showSliderCount: false,
+				rounded: true,
+				fileHeight: "h-32",
+				fileWidth: "w-44"
 			})
 		);
 
