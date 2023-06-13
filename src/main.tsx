@@ -14,12 +14,10 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 			showFileSize={true}
 			showSliderCount={true}
 			multiple={true}
-			accept="image/png, application/pdf"
 			getFiles={(files) => console.log(files)}
 			onChange={(e) => console.log(e.target.files)}
 			onRemove={(removedFile) => console.log(removedFile)}
 			onError={err => console.log(err.message)}
-			width="basis-11/12"
 			rounded={false}
 		/>
 	</Provider>

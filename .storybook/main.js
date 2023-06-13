@@ -1,4 +1,6 @@
 /** @type { import('@storybook/react-vite').StorybookConfig } */
+import remarkGfm from "remark-gfm";
+
 const config = {
 	stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
 	addons: [
@@ -13,6 +15,16 @@ const config = {
 				// For more details on this addon's options.
 			},
 		},
+		{
+			name: "@storybook/addon-docs",
+			options: {
+				mdxPluginOptions: {
+					mdxCompileOptions: {
+						remarkPlugins: [remarkGfm],
+					},
+				},
+			},
+		},
 	],
 	framework: {
 		name: "@storybook/react-vite",
@@ -20,6 +32,7 @@ const config = {
 	},
 	docs: {
 		autodocs: "tag",
+		docsPage: true,
 	},
 };
 export default config;

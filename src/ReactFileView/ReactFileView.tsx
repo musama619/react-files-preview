@@ -131,7 +131,7 @@ const ReactFileView: React.FC<Props> = ({
 	return (
 		<div className="w-full mt-3">
 			<div className="flex flex-row max-h-2">
-				<div className={`${width} mx-auto`}>
+				<div className={`${width ?? `basis-11/12` } mx-auto`}>
 					{fileData.length > 0 ? (
 						<div className="flex justify-between  bg-gray-200 ">
 							<div className="h-10 text-sm pt-2 font-medium"></div>
@@ -203,7 +203,7 @@ const ReactFileView: React.FC<Props> = ({
 										}
 									}}
 									multiple={multiple}
-									accept={accept}
+									accept={accept ?? ""}
 									style={{ display: "none" }}
 								/>
 							</label>
