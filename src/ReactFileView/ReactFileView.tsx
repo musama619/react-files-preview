@@ -27,6 +27,11 @@ const ReactFileView: React.FC<Props> = ({
 	onRemove,
 	onError,
 	getFiles,
+	width,
+	rounded,
+	height,
+	fileHeight,
+	fileWidth
 }) => {
 	const dispatcher = useDispatch();
 
@@ -89,6 +94,9 @@ const ReactFileView: React.FC<Props> = ({
 				removeFile: removeFile,
 				showFileSize: showFileSize,
 				showSliderCount: showSliderCount,
+				rounded: rounded != undefined ? rounded : true,
+				fileHeight: fileHeight ?? "h-32",
+				fileWidth: fileWidth ?? "w-44",
 			})
 		);
 	}, [downloadFile, removeFile, showFileSize, showSliderCount]);
@@ -96,8 +104,7 @@ const ReactFileView: React.FC<Props> = ({
 	const handleImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const files = Array.from(e.target.files || []);
 
-
-		if (!checkErrors(files) ) {
+		if (!checkErrors(files)) {
 			dispatcher(appendFileData({ files: files }));
 		}
 	};
@@ -123,8 +130,8 @@ const ReactFileView: React.FC<Props> = ({
 
 	return (
 		<div className="w-full mt-3">
-			<div className="flex flex-row">
-				<div className="basis-2/3  mx-auto">
+			<div className="flex flex-row max-h-2">
+				<div className={`${width} mx-auto`}>
 					{fileData.length > 0 ? (
 						<div className="flex justify-between  bg-gray-200 ">
 							<div className="h-10 text-sm pt-2 font-medium"></div>
@@ -135,9 +142,15 @@ const ReactFileView: React.FC<Props> = ({
 									<input
 										id="fileInput"
 										type="file"
-										onChange={handleImage}
-										multiple={true}
+										onChange={(e) => {
+											handleImage(e);
+											if (onChange) {
+												onChange(e);
+											}
+										}}
 										style={{ display: "none" }}
+										multiple={multiple}
+										accept={accept}
 									/>
 								</label>
 							</button>
@@ -146,7 +159,11 @@ const ReactFileView: React.FC<Props> = ({
 						<></>
 					)}
 
-					<div className="flex flex-row flex-wrap gap-4 p-6 bg-stone-100 border border-gray-100 shadow dark:bg-gray-800  ">
+					<div
+						className={`${
+							height ? `overflow-auto ${height}` : ""
+						} flex flex-row flex-wrap gap-4 p-6 bg-stone-100 border border-gray-100 shadow dark:bg-gray-800 `}
+					>
 						{fileData.length > 0 ? (
 							fileData.map((file, idx) => {
 								return (
@@ -171,7 +188,10 @@ const ReactFileView: React.FC<Props> = ({
 								);
 							})
 						) : (
-							<label htmlFor="fileInput" className="mx-auto cursor-pointer hover:underline ">
+							<label
+								htmlFor="fileInput"
+								className="mx-auto cursor-pointer hover:underline flex items-center "
+							>
 								Browse files
 								<input
 									id="fileInput"

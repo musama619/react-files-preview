@@ -1,4 +1,4 @@
-import {  ChangeEventHandler  } from "react";
+import { ChangeEventHandler } from "react";
 
 export interface Props {
 	files: File[] | [];
@@ -11,8 +11,14 @@ export interface Props {
 	accept?: string;
 	maxFileSize?: number;
 	maxFiles?: number;
-	getFiles?: (files: File[]) => void
+	getFiles?: (files: File[]) => void;
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 	onRemove?: (removedFile: File) => void;
 	onError?: (error: Error) => void;
+
+	width?: string;
+	height?: string;
+	rounded?: boolean;
+	fileHeight?: string;
+	fileWidth?: string;
 }

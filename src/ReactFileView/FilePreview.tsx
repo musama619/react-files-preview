@@ -5,6 +5,8 @@ import FileFooter from "./FileFooter";
 import { BsFileMedical } from "react-icons/bs";
 import { FilePreviewProps } from "./types";
 import { filePreviewStyle } from "./FilePreviewStyle";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const imageFileTypes = ["image/jpeg", "image/jpg", "image/png"];
 
@@ -16,6 +18,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 	}, [file]);
 
 	const previewStyle = filePreviewStyle.filter((item) => item.type == file.type);
+	const componentState = useSelector((state: RootState) => state.file.componentState);
 	const dispatcher = useDispatch();
 
 	const setZoom = () => {
@@ -37,12 +40,12 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 			<div
 				data-testid="file-preview"
 				onClick={() => setZoom()}
-				className="border-solid border-slate-200 rounded-lg hover:shadow-lg  shadow-md hover:cursor-pointer"
+				className={`${componentState.rounded ? "rounded-lg" : ""} border-solid border-slate-200 hover:shadow-lg  shadow-md hover:cursor-pointer`}
 			>
 				{imageFileTypes.includes(file.type) ? (
-					<img data-testid="image-preview" src={fileSrc!} className="object-fill h-32 w-44 scale-[0.9]"></img>
+					<img data-testid="image-preview" src={fileSrc!} className={`${componentState.fileHeight} ${componentState.fileWidth} object-fill scale-[0.9]`}></img>
 				) : (
-					<div data-testid="file-icon-preview" className="h-32 w-44 flex flex-col justify-center content-center items-center">
+					<div data-testid="file-icon-preview" className={`${componentState.fileHeight} ${componentState.fileWidth} flex flex-col justify-center content-center items-center`}>
 						<span
 							className={`${previewStyle.length > 0 ? previewStyle[0].color : "bg-slate-400"} 
                         rounded flex w-16 justify-center h-20 items-center`}

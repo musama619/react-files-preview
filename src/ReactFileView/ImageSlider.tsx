@@ -66,7 +66,7 @@ const ImageSlider = () => {
 					</button>
 					<div
 						data-testid="image-slider"
-						className="relative w-[130vh] max-sm:w-96 max-md:w-[75vh] h-[78vh] max-sm:h-52 max-md:h-80  rounded-lg bg-slate-400 overflow-hidden transition-all delay-750 ease-in"
+						className={`${componentState.rounded && `rounded-lg`} relative w-[130vh] max-sm:w-96 max-md:w-[75vh] h-[78vh] max-sm:h-52 max-md:h-80   bg-slate-400 overflow-hidden transition-all delay-750 ease-in`}
 					>
 						{file.isImage ? (
 							<img className="object-fit w-full h-full " src={file.fileSrc!} alt="Zoomed Image" />

@@ -15,6 +15,9 @@ interface ComponentState {
 	showSliderCount: boolean;
 	downloadFile: boolean;
 	removeFile: boolean;
+	rounded: boolean;
+	fileHeight: string;
+	fileWidth: string;
 }
 
 interface InitialState {
@@ -43,6 +46,9 @@ const file = createSlice({
 			showSliderCount: true,
 			downloadFile: true,
 			removeFile: true,
+			rounded: true,
+			fileHeight: "h-32",
+			fileWidth: "w-44",
 		},
 	} as InitialState,
 	reducers: {
