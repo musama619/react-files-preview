@@ -14,10 +14,12 @@ describe("Renders main page correctly", async () => {
 				removeFile={true}
 				showFileSize={true}
 				showSliderCount={true}
+				multiple={true}
 			/>
 		);
 	});
 });
+
 describe("Check file", async () => {
 	const files = new File(["test content"], "test.txt", { type: "text/plain" });
 	const url =
@@ -36,6 +38,7 @@ describe("Check file", async () => {
 				removeFile={removeFile}
 				showFileSize={showFileSize}
 				showSliderCount={showSliderCount}
+				multiple={true}
 			/>
 		);
 
@@ -50,6 +53,7 @@ describe("Check file", async () => {
 				removeFile={removeFile}
 				showFileSize={showFileSize}
 				showSliderCount={showSliderCount}
+				multiple={true}
 			/>
 		);
 		expect(screen.queryByText(/Add more/i)).toBeInTheDocument();
@@ -65,6 +69,7 @@ describe("Check file", async () => {
 				removeFile={true}
 				showFileSize={showFileSize}
 				showSliderCount={showSliderCount}
+				multiple={true}
 			/>
 		);
 
@@ -72,7 +77,7 @@ describe("Check file", async () => {
 		waitFor(() => expect(removeButton).toBeInTheDocument());
 	});
 	it("handleImage functions should be called", async () => {
-		const handleImage = vi.spyOn(store, 'dispatch');
+		const handleImage = vi.spyOn(store, "dispatch");
 
 		render(
 			<ReactFileView
@@ -82,6 +87,7 @@ describe("Check file", async () => {
 				removeFile={true}
 				showFileSize={showFileSize}
 				showSliderCount={showSliderCount}
+				multiple={true}
 			/>
 		);
 
@@ -92,9 +98,7 @@ describe("Check file", async () => {
 		expect(handleImage).toBeCalled();
 	});
 
-
 	it("If fileState is zoom, ImageSlider component should render", async () => {
-
 		store.dispatch(
 			storeFileState({
 				zoom: true,
@@ -115,10 +119,10 @@ describe("Check file", async () => {
 				removeFile={true}
 				showFileSize={showFileSize}
 				showSliderCount={showSliderCount}
+				multiple={true}
 			/>
 		);
 
 		expect(screen.queryByText("test.txt")).toBeInTheDocument();
 	});
-
 });

@@ -11,8 +11,8 @@ interface WrapperProps {
 
 expect.extend(matchers);
 afterEach(() => {
-  cleanup();
-  vi.restoreAllMocks()
+	cleanup();
+	vi.restoreAllMocks();
 });
 
 global.fetch = vi.fn();

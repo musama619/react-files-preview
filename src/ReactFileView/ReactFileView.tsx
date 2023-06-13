@@ -30,6 +30,34 @@ const ReactFileView: React.FC<Props> = ({
 }) => {
 	const dispatcher = useDispatch();
 
+	const fileData = useSelector((state: RootState) => state.file.fileData);
+	const fileState = useSelector((state: RootState) => state.file.fileState);
+	const componentState = useSelector((state: RootState) => state.file.componentState);
+
+	const checkErrors = (files: File[]) => {
+		let hasError = false;
+		if (maxFiles && (fileData.length + files.length > maxFiles || files.length > maxFiles)) {
+			hasError = true;
+			if (onError) {
+				onError(new Error(`Max ${maxFiles} files are allowed to be selected`));
+			}
+		}
+
+		if (maxFileSize) {
+			files.forEach((file: File) => {
+				if (file.size > maxFileSize) {
+					hasError = true;
+					if (onError) {
+						onError(new Error(`File size limit exceeded: ${file.name}`));
+					}
+					return;
+				}
+			});
+		}
+
+		return hasError;
+	};
+
 	useEffect(() => {
 		async function fetchData() {
 			try {
@@ -48,7 +76,9 @@ const ReactFileView: React.FC<Props> = ({
 		}
 
 		if (files.length > 0) {
-			dispatcher(appendFileData({ files: files }));
+			if (!checkErrors(files)) {
+				dispatcher(appendFileData({ files: files }));
+			}
 		}
 	}, [url, files]);
 
@@ -63,35 +93,11 @@ const ReactFileView: React.FC<Props> = ({
 		);
 	}, [downloadFile, removeFile, showFileSize, showSliderCount]);
 
-	const fileData = useSelector((state: RootState) => state.file.fileData);
-	const fileState = useSelector((state: RootState) => state.file.fileState);
-	const componentState = useSelector((state: RootState) => state.file.componentState);
-
 	const handleImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const files = Array.from(e.target.files || []);
 
-		let hasError = false;
-		if (maxFiles && (fileData.length + files.length > maxFiles || files.length > maxFiles)) {
-			hasError = true;
-			if (onError) {
-				onError(new Error(`Max ${maxFiles} files are allowed to be selected`));
-			}
-			return;
-		}
 
-		if (maxFileSize) {
-			files.forEach((file) => {
-				if (file.size > maxFileSize) {
-					hasError = true;
-					if (onError) {
-						onError(new Error(`File size limit exceeded: ${file.name}`));
-					}
-					return;
-				}
-			});
-		}
-
-		if (!hasError) {
+		if (!checkErrors(files) ) {
 			dispatcher(appendFileData({ files: files }));
 		}
 	};

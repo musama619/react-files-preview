@@ -1,7 +1,6 @@
 import { fireEvent, render, screen } from "./test-utils";
 import store from "../../store";
 import { describe, it, expect, vi } from "vitest";
-import { storeFileData, storeFileState } from "../redux/fileSlice";
 import FilePreview from "../ReactFileView/FilePreview";
 
 describe("FilePreview component", () => {
