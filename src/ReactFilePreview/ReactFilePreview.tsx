@@ -12,7 +12,7 @@ import { RootState } from "../../store";
 import ImageSlider from "./ImageSlider";
 import { Props } from "./intefaces";
 
-const ReactFileView: React.FC<Props> = ({
+const ReactFilePreview: React.FC<Props> = ({
 	files,
 	url,
 	downloadFile,
@@ -228,4 +228,4 @@ const ReactFileView: React.FC<Props> = ({
 	);
 };
 
-export default ReactFileView;
+export default ReactFilePreview;

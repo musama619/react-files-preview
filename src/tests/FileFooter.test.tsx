@@ -1,5 +1,5 @@
 import { render, screen } from "./test-utils";
-import FileFooter from "../ReactFileView/FileFooter";
+import FileFooter from "../ReactFilePreview/FileFooter";
 import store from "../../store";
 import { describe, it, expect } from "vitest";
 import { setComponentState } from "../redux/fileSlice";

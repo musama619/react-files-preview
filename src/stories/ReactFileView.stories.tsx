@@ -1,13 +1,13 @@
 import { Provider } from "react-redux";
-import ReactFileView from "../ReactFileView/ReactFileView";
+import ReactFilePreview from "../ReactFilePreview/ReactFilePreview";
 import { action } from "@storybook/addon-actions";
 import type { Meta } from '@storybook/react';
 
 import store from "../../store";
 
-const meta: Meta<typeof ReactFileView> = {
-	title: "Example/ReactFileView",
-	component: ReactFileView,
+const meta: Meta<typeof ReactFilePreview> = {
+	title: "Example/ReactFilePreview",
+	component: ReactFilePreview,
 	decorators: [
 		(Story: any) => (
 			<Provider store={store}>

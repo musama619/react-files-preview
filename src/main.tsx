@@ -1,12 +1,12 @@
 import ReactDOM from "react-dom/client";
-import ReactFileView from "./ReactFileView/ReactFileView.tsx";
+import ReactFilePreview from "./ReactFilePreview/ReactFilePreview.tsx";
 import "./css/index.css";
 import { Provider } from "react-redux";
 import store from "../store.ts";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<Provider store={store}>
-		<ReactFileView
+		<ReactFilePreview
 			files={[]}
 			url={null}
 			downloadFile={true}
