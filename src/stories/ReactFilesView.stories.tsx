@@ -1,5 +1,5 @@
 import { Provider } from "react-redux";
-import ReactFilesPreview from "../ReactFilesPreview/ReactFilesPreview";
+import { ReactFilesPreview } from "../component/ReactFilesPreview";
 import { action } from "@storybook/addon-actions";
 import type { Meta } from '@storybook/react';
 

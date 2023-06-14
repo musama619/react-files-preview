@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "./test-utils";
-import ReactFilesPreview from "../ReactFilesPreview/ReactFilesPreview";
+import { ReactFilesPreview } from "../component/ReactFilesPreview";
 import store from "../../store";
 import { setComponentState, storeFileState } from "../redux/fileSlice";
 
