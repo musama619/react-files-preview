@@ -40,10 +40,10 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 			<div
 				data-testid="file-preview"
 				onClick={() => setZoom()}
-				className={`${componentState.rounded ? "rounded-lg" : ""} border-solid border-slate-200 hover:shadow-lg  shadow-md hover:cursor-pointer`}
+				className={`${componentState.rounded && "rounded-lg"} border-solid border-slate-200 hover:shadow-lg  shadow-md hover:cursor-pointer`}
 			>
 				{imageFileTypes.includes(file.type) ? (
-					<img data-testid="image-preview" src={fileSrc!} className={`${componentState.fileHeight} ${componentState.fileWidth} object-fill scale-[0.9]`}></img>
+					fileSrc && <img data-testid="image-preview" src={fileSrc} className={`${componentState.fileHeight} ${componentState.fileWidth} object-fill scale-[0.9]`}></img>
 				) : (
 					<div data-testid="file-icon-preview" className={`${componentState.fileHeight} ${componentState.fileWidth} flex flex-col justify-center content-center items-center`}>
 						<span

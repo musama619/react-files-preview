@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 			onRemove={(removedFile) => console.log(removedFile)}
 			onError={err => console.log(err.message)}
 			onClick={file => console.log(file)}
-			rounded={false}
+			rounded={true}
 		/>
 	</Provider>
 );

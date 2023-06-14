@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface FileState {
 	zoom: boolean;
 	fileSrc: string | null;
-	index: number | null;
+	index: number;
 	isImage: boolean;
 	fileName: string | null;
 	type: string | null;
@@ -35,7 +35,7 @@ const file = createSlice({
 		fileState: {
 			zoom: false,
 			fileSrc: null,
-			index: null,
+			index: 0,
 			isImage: false,
 			fileName: null,
 			type: null,
@@ -70,7 +70,7 @@ const file = createSlice({
 			state.fileData = state.fileData.filter((i) => i.name !== file.name);
 		},
 		getNextFile(state) {
-			const nextIndex = state.fileState.index! + 1;
+			const nextIndex = state.fileState.index + 1;
 			const lastIndex = state.fileData.length - 1;
 
 			let newIndex = nextIndex;
@@ -89,7 +89,7 @@ const file = createSlice({
 			};
 		},
 		getPrevFile(state) {
-			const prevIndex = state.fileState.index! - 1;
+			const prevIndex = state.fileState.index - 1;
 			const lastIndex = state.fileData.length - 1;
 
 			let newIndex = prevIndex;

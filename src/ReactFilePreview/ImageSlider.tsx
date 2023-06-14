@@ -22,7 +22,7 @@ const ImageSlider = () => {
 			storeFileState({
 				zoom: false,
 				fileSrc: null,
-				index: null,
+				index: 0,
 				isImage: false,
 				fileName: null,
 				type: null,
@@ -69,7 +69,7 @@ const ImageSlider = () => {
 						className={`${componentState.rounded && `rounded-lg`} relative w-[130vh] max-sm:w-96 max-md:w-[75vh] h-[78vh] max-sm:h-52 max-md:h-80   bg-slate-400 overflow-hidden transition-all delay-750 ease-in`}
 					>
 						{file.isImage ? (
-							<img className="object-fit w-full h-full " src={file.fileSrc!} alt="Zoomed Image" />
+							file.fileSrc && <img className="object-fit w-full h-full " src={file.fileSrc} alt="Zoomed Image" />
 						) : (
 							<span className="flex w-full h-full items-center justify-center text-4xl">
 								<span

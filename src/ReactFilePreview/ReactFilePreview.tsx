@@ -21,7 +21,7 @@ const ReactFilePreview: React.FC<Props> = ({
 	showSliderCount,
 	multiple,
 	accept,
-	maxFileSize, 
+	maxFileSize,
 	maxFiles,
 	width,
 	rounded,
@@ -67,19 +67,24 @@ const ReactFilePreview: React.FC<Props> = ({
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const response = await fetch(url!);
-				const blob = await response.blob();
-				const file = new File([blob], "filename", {
-					type: blob.type,
-				});
-				dispatcher(storeFileData({ files: [file] }));
-			} catch (err: any) {
-				console.log(err.message);
+				if (url) {
+					const response = await fetch(url);
+					const blob = await response.blob();
+					const file = new File([blob], "filename", {
+						type: blob.type,
+					});
+					dispatcher(storeFileData({ files: [file] }));
+				}
+			} catch (err) {
+				if (err instanceof Error) {
+					if (onError) {
+						onError(err);
+					}
+					throw err;
+				}
 			}
 		}
-		if (url) {
-			fetchData();
-		}
+		fetchData();
 
 		if (files.length > 0) {
 			if (!checkErrors(files)) {
@@ -100,7 +105,7 @@ const ReactFilePreview: React.FC<Props> = ({
 				fileWidth: fileWidth ?? "w-44",
 			})
 		);
-	}, [downloadFile, removeFile, showFileSize, showSliderCount]);
+	}, [downloadFile, removeFile, showFileSize, showSliderCount, fileHeight, fileWidth, rounded]);
 
 	const handleImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const files = Array.from(e.target.files || []);
@@ -174,7 +179,7 @@ const ReactFilePreview: React.FC<Props> = ({
 
 					<div
 						className={`${
-							height ? `overflow-auto ${height}` : ""
+							height && `overflow-auto ${height}`
 						} flex flex-row flex-wrap gap-4 p-6 bg-stone-100 border border-gray-100 shadow dark:bg-gray-800 `}
 					>
 						{fileData.length > 0 ? (

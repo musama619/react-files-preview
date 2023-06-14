@@ -29,18 +29,20 @@ const FileFooter: React.FC<FileFooterProps> = ({ file, fileSrc }) => {
 	return (
 		<div className="relative ">
 			<h5 className="text-[12px] mt-1 font-normal break-words dark:text-white">{result}</h5>
-			{componentState.showFileSize ? <span data-testid="file-size" className="text-[10px] dark:text-white">{fileSize}</span> : <></>}
-			{componentState.downloadFile ? (
+			{componentState.showFileSize && (
+				<span data-testid="file-size" className="text-[10px] dark:text-white">
+					{fileSize}
+				</span>
+			)}
+			{componentState.downloadFile && fileSrc && (
 				<a
 					className="float-right absolute top-1 right-0 text-gray-500 dark:text-white"
-					href={fileSrc!}
+					href={fileSrc}
 					target="_blank"
 					rel="noreferrer"
 				>
 					<MdDownload />
 				</a>
-			) : (
-				<></>
 			)}
 		</div>
 	);
