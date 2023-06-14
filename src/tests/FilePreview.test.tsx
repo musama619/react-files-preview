@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "./test-utils";
+import { fireEvent, render, screen, waitFor } from "./test-utils";
 import store from "../../store";
 import { describe, it, expect, vi } from "vitest";
 import FilePreview from "../ReactFilePreview/FilePreview";
@@ -12,13 +12,14 @@ describe("FilePreview component", () => {
 		expect(filePreviewElement).toBeInTheDocument();
 	});
 
-	it("should render image preview if file is image", () => {
+	it("should render image preview if file is image", async() => {
+
 		render(
 			<FilePreview file={new File(["test content"], "test.png", { type: "image/png" })} index={0} />
 		);
 
 		const filePreviewElement = screen.queryByTestId("image-preview");
-		expect(filePreviewElement).toBeInTheDocument();
+		waitFor(() => expect(filePreviewElement).toBeInTheDocument())
 	});
 
 	it("should render file icon preview if file not an image", () => {

@@ -34,6 +34,18 @@ describe("ImageSlider component", () => {
 	);
 
 	it("should render the image slider with zoomed image", () => {
+
+		store.dispatch(
+			storeFileState({
+				zoom: true,
+				fileSrc: "127.0.0.1/img/png",
+				index: 1,
+				isImage: true,
+				fileName: "test.txt",
+				type: "text/plain",
+				size: 500000,
+			})
+		);
 		render(<ImageSlider />);
 
 		const zoomedImgElement = screen.getByAltText("Zoomed Image");
