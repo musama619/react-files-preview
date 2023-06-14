@@ -22,4 +22,5 @@ A file view component for react.
 |  `getFile` | func  |   |  returns all current files  |
 | `onChange`  | func  |   | returns selected file(s)  |
 | `onRemove`  | func  |   | returns the removed file  |
-|  `onError` | func  |   | return error message as string  |
+|  `onError` | func  |   | returns error message as string  |
+|  `onClick` | func  |   | returns file on click  |

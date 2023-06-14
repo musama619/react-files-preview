@@ -20,5 +20,5 @@ export interface Props {
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 	onRemove?: (removedFile: File) => void;
 	onError?: (error: Error) => void;
-
+	onClick?: (file: File) => void;
 }

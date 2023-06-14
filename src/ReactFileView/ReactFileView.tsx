@@ -23,15 +23,16 @@ const ReactFileView: React.FC<Props> = ({
 	accept,
 	maxFileSize,
 	maxFiles,
-	onChange,
-	onRemove,
-	onError,
-	getFiles,
 	width,
 	rounded,
 	height,
 	fileHeight,
 	fileWidth,
+	onChange,
+	onRemove,
+	onError,
+	getFiles,
+	onClick,
 }) => {
 	const dispatcher = useDispatch();
 
@@ -116,6 +117,11 @@ const ReactFileView: React.FC<Props> = ({
 		}
 	};
 
+	const handleClick = (file: File) => {
+		if (onClick) {
+			onClick(file);
+		}
+	};
 	if (getFiles) {
 		getFiles(fileData);
 	}
@@ -174,7 +180,7 @@ const ReactFileView: React.FC<Props> = ({
 						{fileData.length > 0 ? (
 							fileData.map((file, idx) => {
 								return (
-									<div key={idx} className="relative pb-5 group ">
+									<div key={idx} className="relative pb-5 group " onClick={() => handleClick(file)}>
 										<div className="ml-9">
 											{componentState.removeFile ? (
 												<button

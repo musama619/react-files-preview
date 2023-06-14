@@ -22,8 +22,6 @@ describe("Renders main page correctly", async () => {
 
 describe("Check file", async () => {
 	const files = new File(["test content"], "test.txt", { type: "text/plain" });
-	const url =
-		"https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 	const downloadFile = true;
 	const removeFile = true;
 	const showFileSize = true;
