@@ -80,7 +80,7 @@ const ImageSlider = () => {
 									{previewStyle.length > 0 ? (
 										previewStyle[0].icon
 									) : (
-										<BsFileMedical className="text-white text-4xl" />
+										<BsFileMedical data-testid="default-icon" className="text-white text-4xl" />
 									)}
 								</span>
 							</span>

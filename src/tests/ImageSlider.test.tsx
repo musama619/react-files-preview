@@ -1,7 +1,13 @@
 import { fireEvent, render, screen } from "./test-utils";
 import store from "../../store";
 import { describe, it, expect, vi } from "vitest";
-import { getNextFile, getPrevFile, setComponentState, storeFileData, storeFileState } from "../redux/fileSlice";
+import {
+	getNextFile,
+	getPrevFile,
+	setComponentState,
+	storeFileData,
+	storeFileState,
+} from "../redux/fileSlice";
 import ImageSlider from "../ReactFileView/ImageSlider";
 
 describe("ImageSlider component", () => {
@@ -95,7 +101,7 @@ describe("ImageSlider component", () => {
 				showSliderCount: true,
 				rounded: true,
 				fileHeight: "h-32",
-				fileWidth: "w-44"
+				fileWidth: "w-44",
 			})
 		);
 
@@ -125,7 +131,7 @@ describe("ImageSlider component", () => {
 				showSliderCount: false,
 				rounded: true,
 				fileHeight: "h-32",
-				fileWidth: "w-44"
+				fileWidth: "w-44",
 			})
 		);
 
@@ -136,7 +142,7 @@ describe("ImageSlider component", () => {
 	});
 
 	it("should call the nextFile function when the next button is clicked", () => {
-		const nextFileMock = vi.spyOn(store, 'dispatch');
+		const nextFileMock = vi.spyOn(store, "dispatch");
 		store.dispatch(
 			storeFileState({
 				zoom: true,
@@ -152,10 +158,10 @@ describe("ImageSlider component", () => {
 		render(<ImageSlider />);
 
 		fireEvent.click(screen.getByTestId("next-file"));
-		expect(nextFileMock).toHaveBeenCalledWith(getNextFile());		
+		expect(nextFileMock).toHaveBeenCalledWith(getNextFile());
 	});
 	it("should call the prevFile function when the previous button is clicked", () => {
-		const nextFileMock = vi.spyOn(store, 'dispatch');
+		const nextFileMock = vi.spyOn(store, "dispatch");
 		store.dispatch(
 			storeFileState({
 				zoom: true,
@@ -171,6 +177,43 @@ describe("ImageSlider component", () => {
 		render(<ImageSlider />);
 
 		fireEvent.click(screen.getByTestId("prev-file"));
-		expect(nextFileMock).toHaveBeenCalledWith(getPrevFile());		
+		expect(nextFileMock).toHaveBeenCalledWith(getPrevFile());
+	});
+
+	it("should have the correct Tailwind CSS class", () => {
+		store.dispatch(
+			storeFileState({
+				zoom: true,
+				fileSrc:
+					"https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+				index: 1,
+				isImage: false,
+				fileName: "test.txt",
+				type: "text/plain",
+				size: 50000,
+			})
+		);
+		render(<ImageSlider />);
+
+		const previewIcon = screen.getByTestId("preview-icon");
+		expect(previewIcon).toHaveClass("text-4xl");
+	});
+	it("should render default preview icon", async() => {
+		store.dispatch(
+			storeFileState({
+				zoom: true,
+				fileSrc:
+					"https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+				index: 1,
+				isImage: false,
+				fileName: "test.txt",
+				type: "text/xml",
+				size: 50000,
+			})
+		);
+		render(<ImageSlider />);
+
+		const previewIcon = screen.getByTestId("default-icon");
+		expect(previewIcon).toBeInTheDocument();
 	});
 });

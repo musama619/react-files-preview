@@ -24,7 +24,7 @@ export const filePreviewStyle: FileIcon[] = [
 	},
 	{
 		type: "text/plain",
-		icon: <BsFileEarmarkText className="text-white text-4xl" />,
+		icon: <BsFileEarmarkText data-testid="preview-icon" className="text-white text-4xl" />,
 		color: "bg-slate-500",
 	},
 	{

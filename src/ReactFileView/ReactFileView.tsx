@@ -21,7 +21,7 @@ const ReactFileView: React.FC<Props> = ({
 	showSliderCount,
 	multiple,
 	accept,
-	maxFileSize,
+	maxFileSize, 
 	maxFiles,
 	width,
 	rounded,
