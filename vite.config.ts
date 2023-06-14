@@ -13,8 +13,8 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: path.resolve(__dirname, "src/index.tsx"),
-			name: "ReactFilePreview",
-			fileName: (format) => `react-file-preview.${format}.js`,
+			name: "ReactFilesPreview",
+			fileName: (format) => `react-files-preview.${format}.js`,
 		},
 		rollupOptions: {
 			external: ["react", "react-dom"],

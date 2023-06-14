@@ -1,5 +1,5 @@
 {
-	"name": "react-file-preview",
+	"name": "react-files-preview",
 	"private": false,
 	"version": "1.0.0",
 	"author": "Usama Chouhan (musama619)",
@@ -7,15 +7,15 @@
 	"type": "module",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/musama619/react-file-preview.git"
+		"url": "https://github.com/musama619/react-files-preview.git"
 	},
-	"main": "./dist/react-file-preview.umd.js",
-	"module": "./dist/react-file-preview.es.js",
-	"types": "./dist/react-file-preview.d.ts",
+	"main": "./dist/react-files-preview.umd.js",
+	"module": "./dist/react-files-preview.es.js",
+	"types": "./dist/react-files-preview.d.ts",
 	"exports": {
 		".": {
-			"import": "./dist/react-file-preview.es.js",
-			"require": "./dist/react-file-preview.umd.js"
+			"import": "./dist/react-files-preview.es.js",
+			"require": "./dist/react-files-preview.umd.js"
 		}
 	},
 	"keywords": [
@@ -23,8 +23,8 @@
 		"reactjs",
 		"file previewer",
 		"file preview",
-		"react-file-preview",
-		"react-file-previewer",
+		"react-files-preview",
+		"react-files-previewer",
 		"react file preview",
 		"react file previewer",
 		"file",

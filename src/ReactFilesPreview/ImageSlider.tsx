@@ -45,10 +45,16 @@ const ImageSlider = () => {
 				<div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-80 z-20">
 					<div className="absolute top-0 left-0 right-0 flex justify-between items-center p-2 shadow-md shadow-gray-950 bg-black bg-opacity-80">
 						<span className="text-white flex-1 ml-14">{file.fileName}</span>
-						<button className="text-white text-sm flex items-center mr-4 hover:bg-white hover:text-black rounded-lg  pl-2 pr-2 pt-1 pb-1">
-							<MdDownload className="text-lg mt-1 font-extralight" />
-							Download
-						</button>
+						{file.fileSrc &&
+							<a
+								href={file.fileSrc}
+								target="_blank"
+								download
+								className="text-white text-sm flex items-center mr-4 hover:bg-white hover:text-black rounded-lg  pl-2 pr-2 pt-1 pb-1">
+								<MdDownload className="text-lg mt-1 font-extralight" />
+								Download
+							</a>
+						}
 						<button
 							className="text-white text-sm flex items-center mr-2 hover:bg-white hover:text-black rounded-lg pl-2 pr-2 pt-1 pb-1"
 							onClick={hideZoom}
@@ -73,9 +79,8 @@ const ImageSlider = () => {
 						) : (
 							<span className="flex w-full h-full items-center justify-center text-4xl">
 								<span
-									className={`${
-										previewStyle.length > 0 ? previewStyle[0].color : "bg-slate-400"
-									} rounded flex justify-center  w-48 h-48 items-center`}
+									className={`${previewStyle.length > 0 ? previewStyle[0].color : "bg-slate-400"
+										} rounded flex justify-center  w-48 h-48 items-center`}
 								>
 									{previewStyle.length > 0 ? (
 										previewStyle[0].icon

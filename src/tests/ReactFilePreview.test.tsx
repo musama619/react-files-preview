@@ -1,13 +1,13 @@
 import { describe, it, expect, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "./test-utils";
-import ReactFilePreview from "../ReactFilePreview/ReactFilePreview";
+import ReactFilesPreview from "../ReactFilesPreview/ReactFilesPreview";
 import store from "../../store";
 import { setComponentState, storeFileState } from "../redux/fileSlice";
 
 describe("Renders main page correctly", async () => {
 	it("Should render the page correctly", async () => {
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[]}
 				url={null}
 				downloadFile={true}
@@ -29,7 +29,7 @@ describe("Check file", async () => {
 
 	it("renders browse files input when fileData is empty", () => {
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -44,7 +44,7 @@ describe("Check file", async () => {
 	});
 	it("renders file preview when fileData is not empty", async () => {
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[files]}
 				url={null}
 				downloadFile={downloadFile}
@@ -60,7 +60,7 @@ describe("Check file", async () => {
 
 	it("remove button should render", async () => {
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[files]}
 				url={null}
 				downloadFile={downloadFile}
@@ -79,7 +79,7 @@ describe("Check file", async () => {
 		const handleImage = vi.spyOn(store, "dispatch");
 
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -103,7 +103,7 @@ describe("Check file", async () => {
 		const onChange = vi.spyOn(store, "dispatch");
 
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -126,7 +126,7 @@ describe("Check file", async () => {
 		const remove = vi.spyOn(store, "dispatch");
 
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -156,7 +156,7 @@ describe("Check file", async () => {
 		);
 
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -183,7 +183,7 @@ describe("Check file", async () => {
 		);
 
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -199,7 +199,7 @@ describe("Check file", async () => {
 	it("Expect getFiles to be called if passed", async () => {
 		const getFiles = vi.fn();
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -217,7 +217,7 @@ describe("Check file", async () => {
 	it("Expect getFiles to be called if passed", async () => {
 		const getFiles = vi.fn();
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -249,7 +249,7 @@ describe("Check file", async () => {
 		);
 
 		render(
-			<ReactFilePreview
+			<ReactFilesPreview
 				files={[files]}
 				url={null}
 				downloadFile={downloadFile}

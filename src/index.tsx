@@ -1,1 +1,1 @@
-export { default as ReactFilePreview } from "./ReactFilePreview/ReactFilePreview";
+export { default as ReactFilesPreview } from "./ReactFilesPreview/ReactFilesPreview";

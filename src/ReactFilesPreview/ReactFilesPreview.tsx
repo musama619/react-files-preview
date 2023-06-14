@@ -12,7 +12,7 @@ import { RootState } from "../../store";
 import ImageSlider from "./ImageSlider";
 import { Props } from "./intefaces";
 
-const ReactFilePreview: React.FC<Props> = ({
+const ReactFilesPreview: React.FC<Props> = ({
 	files,
 	url,
 	downloadFile,
@@ -220,7 +220,7 @@ const ReactFilePreview: React.FC<Props> = ({
 											onChange(e);
 										}
 									}}
-									multiple={multiple}
+									multiple={multiple ?? true}
 									accept={accept ?? ""}
 									style={{ display: "none" }}
 								/>
@@ -233,4 +233,4 @@ const ReactFilePreview: React.FC<Props> = ({
 	);
 };
 
-export default ReactFilePreview;
+export default ReactFilesPreview;

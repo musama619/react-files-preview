@@ -39,6 +39,7 @@ const FileFooter: React.FC<FileFooterProps> = ({ file, fileSrc }) => {
 					className="float-right absolute top-1 right-0 text-gray-500 dark:text-white"
 					href={fileSrc}
 					target="_blank"
+					download
 					rel="noreferrer"
 				>
 					<MdDownload />
