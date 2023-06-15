@@ -8,7 +8,7 @@ import {
 	storeFileData,
 	storeFileState,
 } from "../redux/fileSlice";
-import ImageSlider from "../component/ImageSlider";
+import ImageSlider from "../components/ImageSlider";
 
 describe("ImageSlider component", () => {
 	store.dispatch(

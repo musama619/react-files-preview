@@ -1,3 +1,2 @@
-export { ReactFilesPreview } from "./component/ReactFilesPreview";
-export type { Props } from "./component/intefaces";
-import './component/style.css' 
+export { ReactFilesPreview } from "./components/ReactFilesPreview";
+export type { Props } from "./components/interface";

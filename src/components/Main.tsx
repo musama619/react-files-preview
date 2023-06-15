@@ -10,7 +10,7 @@ import FilePreview from "./FilePreview";
 import { MdCancel } from "react-icons/md";
 import { RootState } from "../../store";
 import ImageSlider from "./ImageSlider";
-import { Props } from "./intefaces";
+import { Props } from "./interface";
 
 export const Main: React.FC<Props> = ({
 	files,

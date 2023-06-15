@@ -2,7 +2,7 @@ import { render, screen } from "./test-utils";
 import store from "../../store";
 import { describe, it, expect } from "vitest";
 import { storeFileData, storeFileState } from "../redux/fileSlice";
-import SlideCount from "../component/SlideCount";
+import SlideCount from "../components/SlideCount";
 
 describe("SlideCount component", () => {
 	store.dispatch(

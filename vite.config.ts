@@ -2,7 +2,7 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import dts from "vite-plugin-dts";
-import * as packageJson from "./package.json";
+import tailwindcss from "tailwindcss";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,6 +12,11 @@ export default defineConfig({
 			insertTypesEntry: true,
 		}),
 	],
+	css: {
+		postcss: {
+			plugins: [tailwindcss],
+		},
+	},
 	test: {
 		globals: true,
 		environment: "jsdom",
@@ -21,7 +26,6 @@ export default defineConfig({
 		lib: {
 			entry: path.resolve(__dirname, "src/index.ts"),
 			name: "ReactFilesPreview",
-			formats: ["es", "umd"],
 			fileName: (format) => `react-files-preview.${format}.js`,
 		},
 		rollupOptions: {
@@ -31,6 +35,6 @@ export default defineConfig({
 					react: "React",
 				},
 			},
-		},
+		}
 	},
 });
