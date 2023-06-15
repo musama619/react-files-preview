@@ -16,7 +16,7 @@ npm i react-files-preview
  ###### (skip this step if you have tailwindcss already installed)
 
 ### Step: 3
-Beacuse `react-files-preview` uses Tailwindcss, you need to add `"./node_modules/react-files-preview/**/*.{html,ts,js}"` in  `tailwind.config.js` file:
+Because `react-files-preview` uses [Tailwindcss](https://tailwindcss.com), you need to add `"./node_modules/react-files-preview/**/*.{html,ts,js}"` in  `tailwind.config.js` file:
 
 
 ```js
@@ -51,22 +51,22 @@ export default App
 
 | Name | Type  |  Default  | Description |
 | ------------ | --------- | ------------ | --------- |
-| `files` |  File[] | [] | array of file objects   |
-|  `url` | string  | null  |  image url |
-|  `downloadFile` | boolean  | true  | enables file download |
-| `removeFile ` | boolean  | true  | shows file remove icon on file hover  |
-|  `showFileSize` | boolean  | true  | shows file size under files  |
-|  `showSliderCount` | boolean  | true  | shows slides count under file slider  |
-|  `multiple` | boolean  | true |  accepts one or more files |
-|  `accept` | string  |   | comma-separated lists of file types. See [MIME Types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)  |
-| `maxFileSize`  | number  |   |  maximum allowed file size in bytes *e.g. 1024  x 1024 x 5 == 5MB*  |
-|  `maxFiles` | number  |   |maximum files allowed to be added   |
-|  `width` | string  | basis-11/12   | tailwind css **flex-basis** class https://tailwindcss.com/docs/flex-basis   |
-| `height`  | string  |  | tailwind css **height** class https://tailwindcss.com/docs/height  |
-| `fileWidth`  |  string  |  w-44 |  tailwind css **width** class https://tailwindcss.com/docs/width |
-| `fileHeight`  | string  | h-32 |  tailwind css **height** class https://tailwindcss.com/docs/height |
-|  `getFile` | func  |   |  returns all current files  |
-| `onChange`  | func  |   | returns selected file(s)  |
-| `onRemove`  | func  |   | returns the removed file  |
-|  `onError` | func  |   | returns error message as string  |
-|  `onClick` | func  |   | returns file on click  |
+| **`files`** |  File[] | [] | array of file objects   |
+|  **`url`** | string  | null  |  image url |
+|  **`downloadFile`** | boolean  | true  | enables file download |
+| **`removeFile`** | boolean  | true  | shows file remove icon on file hover  |
+|  **`showFileSize`** | boolean  | true  | shows file size under files  |
+|  **`showSliderCount`** | boolean  | true  | shows slides count under file slider  |
+|  **`multiple`** | boolean  | true |  accepts one or more files |
+|  **`accept`** | string  |   | comma-separated lists of file types. See [MIME Types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)  |
+| **`maxFileSize`**  | number  |   |  maximum allowed file size in bytes *e.g. 1024  x 1024 x 5 == 5MB*  |
+|  **`maxFiles`** | number  |   |maximum files allowed to be added   |
+|  **`width`** | string  | basis-11/12   | tailwind css **flex-basis** class https://tailwindcss.com/docs/flex-basis   |
+| **`height`**  | string  |  | tailwind css **height** class https://tailwindcss.com/docs/height  |
+| **`fileWidth`**  |  string  |  w-44 |  tailwind css **width** class https://tailwindcss.com/docs/width |
+| **`fileHeight`**  | string  | h-32 |  tailwind css **height** class https://tailwindcss.com/docs/height |
+|  **`getFile`** | func  |   |  returns all current files  |
+| **`onChange`**  | func  |   | returns selected file(s)  |
+| **`onRemove`**  | func  |   | returns the removed file  |
+|  **`onError`** | func  |   | returns error message as string  |
+|  **`onClick`** | func  |   | returns file on click  |
