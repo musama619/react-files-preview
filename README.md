@@ -1,7 +1,53 @@
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f1c6d960-e969-4396-bdaa-33e245a72bf6/deploy-status)](https://app.netlify.com/sites/react-file-view/deploys)&nbsp;[![codecov](https://codecov.io/github/musama619/react-file-view/branch/main/graph/badge.svg?token=iBQkSenXLe)](https://codecov.io/github/musama619/react-file-view)
 
-# react-file-view
+# react-files-preview
 A file view component for react.
+
+## Installation 
+
+### Step: 1
+```js 
+npm i react-files-preview
+```
+
+### Step: 2
+[Install Tailwindcss](https://tailwindcss.com/docs/installation)
+ ###### (skip this step if you have tailwindcss already installed)
+
+### Step: 3
+Beacuse `react-files-preview` uses Tailwindcss, you need to add `"./node_modules/react-files-preview/**/*.{html,ts,js}"` in  `tailwind.config.js` file:
+
+
+```js
+    /** @type {import('tailwindcss').Config} */
+    export default {
+      content: [
+        .....
+        + "./node_modules/react-files-preview/**/*.{html,ts,js}" 
+      ],
+      theme: {
+        extend: {},
+      },
+      plugins: [],
+    }
+```
+## Usage
+
+```js
+import { ReactFilesPreview } from 'react-files-preview'
+function App() {
+  return (
+    <>
+      <ReactFilesPreview files={[]} />
+    </>
+  )
+}
+
+export default App
+```
+
+[View Demo](https://react-files-preview.netlify.app/)
 
 | Name | Type  |  Default  | Description |
 | ------------ | --------- | ------------ | --------- |

@@ -1,7 +1,23 @@
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f1c6d960-e969-4396-bdaa-33e245a72bf6/deploy-status)](https://app.netlify.com/sites/react-file-view/deploys)&nbsp;[![codecov](https://codecov.io/github/musama619/react-file-view/branch/main/graph/badge.svg?token=iBQkSenXLe)](https://codecov.io/github/musama619/react-file-view)
 
-# react-file-view
+# react-files-preview
 A file view component for react.
+
+## Usage
+
+```js
+import { ReactFilesPreview } from 'react-files-preview'
+function App() {
+  return (
+    <>
+      <ReactFilesPreview files={[]} />
+    </>
+  )
+}
+
+export default App
+```
 
 | Name | Type  |  Default  | Description |
 | ------------ | --------- | ------------ | --------- |
@@ -22,5 +38,5 @@ A file view component for react.
 |  `getFile` | func  |   |  returns all current files  |
 | `onChange`  | func  |   | returns selected file(s)  |
 | `onRemove`  | func  |   | returns the removed file  |
-|  `onError` | func  |   | return error message as string  |
+|  `onError` | func  |   | returns error message as string  |
 |  `onClick` | func  |   | returns file on click  |
