@@ -7,36 +7,18 @@ A file view component for react.
 
 ## Installation 
 
-### Step: 1
+
 ```js 
 npm i react-files-preview
 ```
-
-### Step: 2
-[Install Tailwindcss](https://tailwindcss.com/docs/installation)
- ###### (skip this step if you have tailwindcss already installed)
-
-### Step: 3
-Because `react-files-preview` uses [Tailwindcss](https://tailwindcss.com), you need to add `"./node_modules/react-files-preview/**/*.{html,ts,js}"` in  `tailwind.config.js` file:
-
-
-```js
-    /** @type {import('tailwindcss').Config} */
-    export default {
-      content: [
-        .....
-        + "./node_modules/react-files-preview/**/*.{html,ts,js}" 
-      ],
-      theme: {
-        extend: {},
-      },
-      plugins: [],
-    }
-```
+## Demo
+[View Demo](react-files-preview.netlify.app/)
 ## Usage
 
 ```js
 import { ReactFilesPreview } from 'react-files-preview'
+import 'react-files-preview/dist/style.css'  /* import css file*/
+
 function App() {
   return (
     <>
