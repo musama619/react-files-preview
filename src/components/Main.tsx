@@ -140,7 +140,6 @@ export const Main: React.FC<Props> = ({
 	}
 
 	return (
-		// <Provider store={store}>
 			<div className="w-full mt-3">
 				<div className="flex flex-row max-h-2">
 					<div className={`${width ?? `basis-11/12`} mx-auto`}>
@@ -168,8 +167,8 @@ export const Main: React.FC<Props> = ({
 												}
 											}}
 											style={{ display: "none" }}
-											multiple={multiple}
-											accept={accept}
+											multiple={multiple ?? true}
+											accept={accept ?? ""}
 										/>
 									</label>
 								</div>
@@ -230,7 +229,6 @@ export const Main: React.FC<Props> = ({
 					</div>
 				</div>
 			</div>
-		// </Provider>
 	);
 };
 
