@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { ReactFilesPreview } from "../components/ReactFilesPreview";
 import { action } from "@storybook/addon-actions";
-import type { Meta } from '@storybook/react';
+import type { Meta } from "@storybook/react";
 
 import store from "../../store";
 
@@ -11,7 +11,9 @@ const meta: Meta<typeof ReactFilesPreview> = {
 	decorators: [
 		(Story: any) => (
 			<Provider store={store}>
-				<Story />
+				<div style={{ height: "50vh" }}>
+					<Story />
+				</div>
 			</Provider>
 		),
 	],
@@ -126,4 +128,3 @@ export const ShowSliderCount = {
 		files: [],
 	},
 };
-
