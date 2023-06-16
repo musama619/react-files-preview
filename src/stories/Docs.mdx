@@ -22,32 +22,33 @@ import 'react-files-preview/dist/style.css'  /* import css file*/
 function App() {
   return (
     <>
-      <ReactFilesPreview files={[]} />
+      <ReactFilesPreview />
     </>
   )
 }
 
 export default App
 ```
+## Props
 
 | Name | Type  |  Default  | Description |
 | ------------ | --------- | ------------ | --------- |
-| **`files`** |  File[] | [] | array of file objects   |
-|  **`url`** | string  | null  |  image url |
-|  **`downloadFile`** | boolean  | true  | enables file download |
-| **`removeFile`** | boolean  | true  | shows file remove icon on file hover  |
-|  **`showFileSize`** | boolean  | true  | shows file size under files  |
-|  **`showSliderCount`** | boolean  | true  | shows slides count under file slider  |
-|  **`multiple`** | boolean  | true |  accepts one or more files |
-|  **`accept`** | string  |   | comma-separated lists of file types. See [MIME Types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)  |
-| **`maxFileSize`**  | number  |   |  maximum allowed file size in bytes *e.g. 1024  x 1024 x 5 == 5MB*  |
-|  **`maxFiles`** | number  |   |maximum files allowed to be added   |
-|  **`width`** | string  | basis-11/12   | tailwind css **flex-basis** class https://tailwindcss.com/docs/flex-basis   |
-| **`height`**  | string  |  | tailwind css **height** class https://tailwindcss.com/docs/height  |
-| **`fileWidth`**  |  string  |  w-44 |  tailwind css **width** class https://tailwindcss.com/docs/width |
-| **`fileHeight`**  | string  | h-32 |  tailwind css **height** class https://tailwindcss.com/docs/height |
-|  **`getFile`** | func  |   |  returns all current files  |
-| **`onChange`**  | func  |   | returns selected file(s)  |
-| **`onRemove`**  | func  |   | returns the removed file  |
-|  **`onError`** | func  |   | returns error message as string  |
-|  **`onClick`** | func  |   | returns file on click  |
+| **`files`** |  File[] | [] | Pass array of file objects for default files   |
+|  **`url`** | string  | null  |  Set image by passing image URL |
+|  **`downloadFile`** | boolean  | true  | Enables file download |
+| **`removeFile`** | boolean  | true  | Show file remove icon on file hover  |
+|  **`showFileSize`** | boolean  | true  | Show file size under files  |
+|  **`showSliderCount`** | boolean  | true  | Show slides count under file slider  |
+|  **`multiple`** | boolean  | true |  Accepts one or more files |
+|  **`accept`** | string  |   | Comma-separated lists of file types. See [MIME Types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)  |
+| **`maxFileSize`**  | number  |   |  Maximum allowed file size in bytes *e.g. 1024  x 1024 x 5 == 5MB*  |
+|  **`maxFiles`** | number  |   | Maximum files allowed to be added   |
+|  **`width`** | string  | basis-11/12   | Tailwind CSS **flex-basis** class https://tailwindcss.com/docs/flex-basis   |
+| **`height`**  | string  |  | Tailwind CSS **height** class https://tailwindcss.com/docs/height  |
+| **`fileWidth`**  |  string  |  w-44 |  Tailwind CSS **width** class https://tailwindcss.com/docs/width |
+| **`fileHeight`**  | string  | h-32 |  Tailwind CSS **height** class https://tailwindcss.com/docs/height |
+|  **`getFile`** | func  |   |  Returns all current files  |
+| **`onChange`**  | func  |   | Returns selected file(s)  |
+| **`onRemove`**  | func  |   | Returns the removed file  |
+|  **`onError`** | func  |   | Returns error message as string  |
+|  **`onClick`** | func  |   | Returns file on click  |

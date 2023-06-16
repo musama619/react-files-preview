@@ -1,13 +1,13 @@
 import { describe, it, expect, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "./test-utils";
-import { ReactFilesPreview } from "../components/ReactFilesPreview";
+import { Main } from "../components/Main";
 import store from "../../store";
 import { setComponentState, storeFileState } from "../redux/fileSlice";
 
 describe("Renders main page correctly", async () => {
 	it("Should render the page correctly", async () => {
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[]}
 				url={null}
 				downloadFile={true}
@@ -29,7 +29,7 @@ describe("Check file", async () => {
 
 	it("renders browse files input when fileData is empty", () => {
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -40,11 +40,11 @@ describe("Check file", async () => {
 			/>
 		);
 
-		expect(screen.queryByText(/Browse files/i)).toBeInTheDocument();
+		expect(screen.queryByText(/Drop files here, or click to browse files/i)).toBeInTheDocument();
 	});
 	it("renders file preview when fileData is not empty", async () => {
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[files]}
 				url={null}
 				downloadFile={downloadFile}
@@ -55,12 +55,12 @@ describe("Check file", async () => {
 			/>
 		);
 		expect(screen.queryByText(/Add more/i)).toBeInTheDocument();
-		expect(screen.queryByText(/Browse files/i)).not.toBeInTheDocument();
+		expect(screen.queryByText(/Drop files here, or click to browse files/i)).not.toBeInTheDocument();
 	});
 
 	it("remove button should render", async () => {
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[files]}
 				url={null}
 				downloadFile={downloadFile}
@@ -79,7 +79,7 @@ describe("Check file", async () => {
 		const handleImage = vi.spyOn(store, "dispatch");
 
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -91,7 +91,7 @@ describe("Check file", async () => {
 		);
 
 		waitFor(() =>
-			fireEvent.change(screen.getByText(/Browse files/i), {
+			fireEvent.change(screen.getByText(/Drop files here, or click to browse files/i), {
 				target: { files: [new File([], "filename")] },
 			})
 		);
@@ -103,7 +103,7 @@ describe("Check file", async () => {
 		const onChange = vi.spyOn(store, "dispatch");
 
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -115,7 +115,7 @@ describe("Check file", async () => {
 		);
 
 		waitFor(() =>
-			fireEvent.change(screen.getByText(/Browse files/i), {
+			fireEvent.change(screen.getByText(/Drop files here, or click to browse files/i), {
 				target: { files: [new File([], "filename")] },
 			})
 		);
@@ -126,7 +126,7 @@ describe("Check file", async () => {
 		const remove = vi.spyOn(store, "dispatch");
 
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -156,7 +156,7 @@ describe("Check file", async () => {
 		);
 
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -183,7 +183,7 @@ describe("Check file", async () => {
 		);
 
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -199,7 +199,7 @@ describe("Check file", async () => {
 	it("Expect getFiles to be called if passed", async () => {
 		const getFiles = vi.fn();
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -217,7 +217,7 @@ describe("Check file", async () => {
 	it("Expect getFiles to be called if passed", async () => {
 		const getFiles = vi.fn();
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[]}
 				url={null}
 				downloadFile={downloadFile}
@@ -249,7 +249,7 @@ describe("Check file", async () => {
 		);
 
 		render(
-			<ReactFilesPreview
+			<Main
 				files={[files]}
 				url={null}
 				downloadFile={downloadFile}

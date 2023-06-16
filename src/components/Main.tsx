@@ -129,6 +129,26 @@ export const Main: React.FC<Props> = ({
 		getFiles(fileData);
 	}
 
+	const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+		event.preventDefault();
+		event.dataTransfer.dropEffect = 'copy';
+	};
+
+	const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
+		event.preventDefault();
+	};
+
+	const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+		event.preventDefault();
+		const files = Array.from(event.dataTransfer.files);
+
+		if (files && files.length > 0) {
+			if (!checkErrors(files)) {
+				dispatcher(appendFileData({ files: files }));
+			}
+		}
+	}
+
 	if (fileState.zoom) {
 		return (
 			<div>
@@ -176,7 +196,11 @@ export const Main: React.FC<Props> = ({
 
 					<div
 						className={`${height && `overflow-auto ${height}`
-							} flex flex-row flex-wrap gap-4 p-6 bg-stone-100 border border-gray-100 shadow dark:bg-gray-800 `}
+							} ${fileData.length == 0 && `border-2 border-dashed border-gray-300 hover:bg-stone-200`} flex flex-row flex-wrap gap-4 p-6 bg-stone-100  shadow dark:bg-gray-800 `}
+
+						onDragOver={handleDragOver}
+						onDragLeave={handleDragLeave}
+						onDrop={handleDrop}
 					>
 						{fileData.length > 0 ? (
 							fileData.map((file, idx) => {
@@ -199,27 +223,28 @@ export const Main: React.FC<Props> = ({
 									</div>
 								);
 							})
-						) : (
-							<label
-								htmlFor="fileInput"
-								className="mx-auto cursor-pointer hover:underline flex items-center "
-							>
-								Browse files
-								<input
-									id="fileInput"
-									type="file"
-									onChange={(e) => {
-										handleImage(e);
-										if (onChange) {
-											onChange(e);
-										}
-									}}
-									multiple={multiple ?? true}
-									accept={accept ?? ""}
-									style={{ display: "none" }}
-								/>
-							</label>
-						)}
+						)
+							: (
+								<label
+									htmlFor="fileInput"
+									className="mx-auto cursor-pointer  flex items-center "
+								>
+									Drop files here, or click to browse files
+									<input
+										id="fileInput"
+										type="file"
+										onChange={(e) => {
+											handleImage(e);
+											if (onChange) {
+												onChange(e);
+											}
+										}}
+										multiple={multiple ?? true}
+										accept={accept ?? ""}
+										style={{ display: "none" }}
+									/>
+								</label>
+							)}
 					</div>
 				</div>
 			</div>
