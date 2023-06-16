@@ -7,11 +7,9 @@ import {
 	storeFileData,
 } from "../redux/fileSlice";
 import FilePreview from "./FilePreview";
-import { MdCancel } from "react-icons/md";
 import { RootState } from "../../store";
 import ImageSlider from "./ImageSlider";
 import { Props } from "./interface";
-
 export const Main: React.FC<Props> = ({
 	files,
 	url,
@@ -86,7 +84,7 @@ export const Main: React.FC<Props> = ({
 		}
 		fetchData();
 
-		if (files.length > 0) {
+		if (files && files.length > 0) {
 			if (!checkErrors(files)) {
 				dispatcher(appendFileData({ files: files }));
 			}
@@ -140,76 +138,22 @@ export const Main: React.FC<Props> = ({
 	}
 
 	return (
-			<div className="w-full mt-3">
-				<div className="flex flex-row max-h-2">
-					<div className={`${width ?? `basis-11/12`} mx-auto`}>
-						{fileData.length > 0 ? (
-							<div>
-								<div className="flex justify-between  bg-gray-200 ">
-									{/* <div className="h-10 text-sm pt-2 font-medium"></div> */}
-									<div className="h-10 text-sm pt-2 ml-2 font-medium">
-										<span className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-											{`Files: ${fileData.length}`}
-										</span>
-									</div>
-									<label
-										htmlFor="fileInput"
-										className="cursor-pointer py-1 px-2 mt-1 mr-2 mb-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-									>
-										+ Add more
-										<input
-											id="fileInput"
-											type="file"
-											onChange={(e) => {
-												handleImage(e);
-												if (onChange) {
-													onChange(e);
-												}
-											}}
-											style={{ display: "none" }}
-											multiple={multiple ?? true}
-											accept={accept ?? ""}
-										/>
-									</label>
+		<div className="w-full">
+			<div className="flex flex-row max-h-2">
+				<div className={`${width ?? `basis-11/12`} mx-auto`}>
+					{fileData.length > 0 ? (
+						<div>
+							<div className="flex justify-between  bg-gray-200 ">
+								<div className="h-10 text-sm pt-2 ml-2 font-medium">
+									<span className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+										{`Files: ${fileData.length}`}
+									</span>
 								</div>
-							</div>
-						) : (
-							<></>
-						)}
-
-						<div
-							className={`${height && `overflow-auto ${height}`
-								} flex flex-row flex-wrap gap-4 p-6 bg-stone-100 border border-gray-100 shadow dark:bg-gray-800 `}
-						>
-							{fileData.length > 0 ? (
-								fileData.map((file, idx) => {
-									return (
-										<div key={idx} className="relative pb-5 group " onClick={() => handleClick(file)}>
-											<div className="ml-9">
-												{componentState.removeFile ? (
-													<button
-														data-testid="remove-file-button"
-														onClick={() => remove(file)}
-														className="absolute -top-1 right-0 z-10 text-black opacity-0 group-hover:opacity-100 transition-opacity"
-													>
-														<MdCancel />
-													</button>
-												) : (
-													<></>
-												)}
-											</div>
-											<div className="clear-right">
-												<FilePreview file={file} index={idx} />
-											</div>
-										</div>
-									);
-								})
-							) : (
 								<label
 									htmlFor="fileInput"
-									className="mx-auto cursor-pointer hover:underline flex items-center "
+									className="cursor-pointer py-1 px-2 mt-1 mr-2 mb-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
 								>
-									Browse files
+									+ Add more
 									<input
 										id="fileInput"
 										type="file"
@@ -219,16 +163,67 @@ export const Main: React.FC<Props> = ({
 												onChange(e);
 											}
 										}}
+										style={{ display: "none" }}
 										multiple={multiple ?? true}
 										accept={accept ?? ""}
-										style={{ display: "none" }}
 									/>
 								</label>
-							)}
+							</div>
 						</div>
+					) : (
+						<></>
+					)}
+
+					<div
+						className={`${height && `overflow-auto ${height}`
+							} flex flex-row flex-wrap gap-4 p-6 bg-stone-100 border border-gray-100 shadow dark:bg-gray-800 `}
+					>
+						{fileData.length > 0 ? (
+							fileData.map((file, idx) => {
+								return (
+									<div key={idx} className="relative pb-5 group " onClick={() => handleClick(file)}>
+										<div className="ml-9">
+											{componentState.removeFile ? (
+												<svg xmlns="http://www.w3.org/2000/svg" data-testid="remove-file-button"
+													onClick={() => remove(file)}
+													className="absolute -top-2 right-0 z-10 text-black opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer h-5 w-5" fill="currentColor" viewBox="0 0 16 16">
+													<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+												</svg>
+											) : (
+												<></>
+											)}
+										</div>
+										<div className="clear-right">
+											<FilePreview file={file} index={idx} />
+										</div>
+									</div>
+								);
+							})
+						) : (
+							<label
+								htmlFor="fileInput"
+								className="mx-auto cursor-pointer hover:underline flex items-center "
+							>
+								Browse files
+								<input
+									id="fileInput"
+									type="file"
+									onChange={(e) => {
+										handleImage(e);
+										if (onChange) {
+											onChange(e);
+										}
+									}}
+									multiple={multiple ?? true}
+									accept={accept ?? ""}
+									style={{ display: "none" }}
+								/>
+							</label>
+						)}
 					</div>
 				</div>
 			</div>
+		</div>
 	);
 };
 

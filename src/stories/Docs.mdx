@@ -30,8 +30,6 @@ function App() {
 export default App
 ```
 
-[View Demo](https://react-files-preview.netlify.app/)
-
 | Name | Type  |  Default  | Description |
 | ------------ | --------- | ------------ | --------- |
 | **`files`** |  File[] | [] | array of file objects   |

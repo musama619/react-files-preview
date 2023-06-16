@@ -4,7 +4,7 @@ function App() {
 
     return (
         <div className="App">
-            <ReactFilesPreview files={[]} rounded={false} showFileSize={false} />
+            <ReactFilesPreview />
         </div>
     );
 }

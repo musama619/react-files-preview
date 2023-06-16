@@ -1,7 +1,7 @@
 import { ChangeEventHandler } from "react";
 
 export interface Props {
-	files: File[] | [];
+	files?: File[] | [];
 	url?: string | null;
 	downloadFile?: boolean;
 	removeFile?: boolean;

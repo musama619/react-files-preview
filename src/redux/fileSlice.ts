@@ -26,7 +26,7 @@ interface InitialState {
 	componentState: ComponentState;
 }
 
-const imageFileTypes: string[] = ["image/jpeg", "image/jpg", "image/png"];
+const imageFileTypes: string[] = ["image/jpeg", "image/jpg", "image/png", "image/gif", "image/tiff"];
 
 const file = createSlice({
 	name: "file",
@@ -42,7 +42,7 @@ const file = createSlice({
 			size: 0,
 		},
 		componentState: {
-			showFileSize: false,
+			showFileSize: true,
 			showSliderCount: true,
 			downloadFile: true,
 			removeFile: true,
