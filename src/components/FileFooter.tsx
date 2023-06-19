@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FileFooterProps } from "./types";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { FileContext } from "../context/FileContext";
 const FileFooter: React.FC<FileFooterProps> = ({ file, fileSrc }) => {
 	const [fileSize, setFileSize] = useState<string | null>(null);
 
@@ -22,8 +21,7 @@ const FileFooter: React.FC<FileFooterProps> = ({ file, fileSrc }) => {
 	}
 	const result = fileName + "." + extension;
 
-	const componentState = useSelector((state: RootState) => state.file.componentState);
-
+	const componentState = useContext(FileContext).state.componentState;
 	return (
 		<div className="relative ">
 			<h5 className="text-[12px] mt-1 font-normal break-words dark:text-white">{result}</h5>

@@ -1,20 +1,19 @@
-import { Provider } from "react-redux";
 import { ReactFilesPreview } from "../components/ReactFilesPreview";
 import { action } from "@storybook/addon-actions";
 import type { Meta } from "@storybook/react";
+import { FileProvider } from "../context/FileContext";
 
-import store from "../../store";
 
 const meta: Meta<typeof ReactFilesPreview> = {
 	title: "Example/ReactFilesPreview",
 	component: ReactFilesPreview,
 	decorators: [
 		(Story: any) => (
-			<Provider store={store}>
+			<FileProvider>
 				<div style={{ height: "50vh" }}>
 					<Story />
 				</div>
-			</Provider>
+			</FileProvider>
 		),
 	],
 	argTypes: {

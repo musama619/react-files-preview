@@ -1,14 +1,12 @@
-import { Provider } from "react-redux";
-import store from "../../store";
 import { Props } from "./interface";
 import { Main } from "./Main";
-import './style.css'
-export const ReactFilesPreview: React.FC<Props> = (props) => {
+import "./style.css";
+import { FileProvider } from "../context/FileContext";
 
+export const ReactFilesPreview: React.FC<Props> = (props) => {
 	return (
-		<Provider store={store}>
-			<Main {...props}  />
-		</Provider>
+		<FileProvider>
+			<Main {...props} />
+		</FileProvider>
 	);
 };
-

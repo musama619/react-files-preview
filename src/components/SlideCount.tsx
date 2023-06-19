@@ -1,8 +1,10 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { useContext } from "react";
+import { FileContext } from "../context/FileContext";
 const SlideCount = () => {
-	const fileData = useSelector((state: RootState) => state.file.fileData);
-	const fileState = useSelector((state: RootState) => state.file.fileState);
+
+	const fileData = useContext(FileContext).state.fileData;
+	const fileState = useContext(FileContext).state.fileState;
+
 	return (
 		<div className="h-24 absolute bottom-5 right-0 left-0 flex items-center justify-center z-40">
 			{fileState?.index !== null && (

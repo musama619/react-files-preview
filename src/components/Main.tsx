@@ -1,15 +1,8 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-	appendFileData,
-	removeFileData,
-	setComponentState,
-	storeFileData,
-} from "../redux/fileSlice";
+import { useContext, useEffect } from "react";
 import FilePreview from "./FilePreview";
-import { RootState } from "../../store";
 import ImageSlider from "./ImageSlider";
 import { Props } from "./interface";
+import { FileContext } from "../context/FileContext";
 export const Main: React.FC<Props> = ({
 	files,
 	url,
@@ -32,11 +25,13 @@ export const Main: React.FC<Props> = ({
 	getFiles,
 	onClick,
 }) => {
-	const dispatcher = useDispatch();
+	const fileData = useContext(FileContext).state.fileData;
+	const fileState = useContext(FileContext).state.fileState;
+	const componentState = useContext(FileContext).state.componentState;
 
-	const fileData = useSelector((state: RootState) => state.file.fileData);
-	const fileState = useSelector((state: RootState) => state.file.fileState);
-	const componentState = useSelector((state: RootState) => state.file.componentState);
+	const { dispatch } = useContext(FileContext);
+
+	console.log(fileData, fileState, componentState);
 
 	const checkErrors = (files: File[]) => {
 		let hasError = false;
@@ -71,7 +66,7 @@ export const Main: React.FC<Props> = ({
 					const file = new File([blob], "filename", {
 						type: blob.type,
 					});
-					dispatcher(storeFileData({ files: [file] }));
+					dispatch({ type: "STORE_FILE_DATA", payload: { files: [file] } });
 				}
 			} catch (err) {
 				if (err instanceof Error) {
@@ -86,14 +81,15 @@ export const Main: React.FC<Props> = ({
 
 		if (files && files.length > 0) {
 			if (!checkErrors(files)) {
-				dispatcher(appendFileData({ files: files }));
+				dispatch({ type: "APPEND_FILE_DATA", payload: { files: files } });
 			}
 		}
 	}, [url, files]);
 
 	useEffect(() => {
-		dispatcher(
-			setComponentState({
+		dispatch({
+			type: "SET_COMPONENT_STATE",
+			payload: {
 				downloadFile: downloadFile != undefined ? downloadFile : true,
 				removeFile: removeFile != undefined ? removeFile : true,
 				showFileSize: showFileSize != undefined ? showFileSize : true,
@@ -101,20 +97,20 @@ export const Main: React.FC<Props> = ({
 				rounded: rounded != undefined ? rounded : true,
 				fileHeight: fileHeight ?? "h-32",
 				fileWidth: fileWidth ?? "w-44",
-			})
-		);
+			},
+		});
 	}, [downloadFile, removeFile, showFileSize, showSliderCount, fileHeight, fileWidth, rounded]);
 
 	const handleImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const files = Array.from(e.target.files || []);
 
 		if (!checkErrors(files)) {
-			dispatcher(appendFileData({ files: files }));
+			dispatch({ type: "APPEND_FILE_DATA", payload: { files: files } })
 		}
 	};
 
 	const remove = (file: File) => {
-		dispatcher(removeFileData(file));
+		dispatch({ type: "REMOVE_FILE_DATA", payload: file });
 		if (onRemove) {
 			onRemove(file);
 		}
@@ -131,7 +127,7 @@ export const Main: React.FC<Props> = ({
 
 	const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
 		event.preventDefault();
-		event.dataTransfer.dropEffect = 'copy';
+		event.dataTransfer.dropEffect = "copy";
 	};
 
 	const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
@@ -144,17 +140,13 @@ export const Main: React.FC<Props> = ({
 
 		if (files && files.length > 0) {
 			if (!checkErrors(files)) {
-				dispatcher(appendFileData({ files: files }));
+				dispatch({ type: "APPEND_FILE_DATA", payload: { files: files } })
 			}
 		}
-	}
+	};
 
 	if (fileState.zoom) {
-		return (
-			<div>
-				<ImageSlider />
-			</div>
-		);
+		return <div><ImageSlider /></div>;
 	}
 
 	return (
@@ -195,9 +187,9 @@ export const Main: React.FC<Props> = ({
 					)}
 
 					<div
-						className={`${height && `overflow-auto ${height}`
-							} ${fileData.length == 0 && `border-2 border-dashed border-gray-300 hover:bg-stone-200`} flex flex-row flex-wrap gap-4 p-6 bg-stone-100  shadow dark:bg-gray-800 `}
-
+						className={`${height && `overflow-auto ${height}`} ${
+							fileData.length == 0 && `border-2 border-dashed border-gray-300 hover:bg-stone-200`
+						} flex flex-row flex-wrap gap-4 p-6 bg-stone-100  shadow dark:bg-gray-800 `}
 						onDragOver={handleDragOver}
 						onDragLeave={handleDragLeave}
 						onDrop={handleDrop}
@@ -208,9 +200,14 @@ export const Main: React.FC<Props> = ({
 									<div key={idx} className="relative pb-5 group " onClick={() => handleClick(file)}>
 										<div className="ml-9">
 											{componentState.removeFile ? (
-												<svg xmlns="http://www.w3.org/2000/svg" data-testid="remove-file-button"
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													data-testid="remove-file-button"
 													onClick={() => remove(file)}
-													className="absolute -top-2 right-0 z-10 text-black opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer h-5 w-5" fill="currentColor" viewBox="0 0 16 16">
+													className="absolute -top-2 right-0 z-10 text-black opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer h-5 w-5"
+													fill="currentColor"
+													viewBox="0 0 16 16"
+												>
 													<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
 												</svg>
 											) : (
@@ -223,32 +220,27 @@ export const Main: React.FC<Props> = ({
 									</div>
 								);
 							})
-						)
-							: (
-								<label
-									htmlFor="fileInput"
-									className="mx-auto cursor-pointer  flex items-center "
-								>
-									Drop files here, or click to browse files
-									<input
-										id="fileInput"
-										type="file"
-										onChange={(e) => {
-											handleImage(e);
-											if (onChange) {
-												onChange(e);
-											}
-										}}
-										multiple={multiple ?? true}
-										accept={accept ?? ""}
-										style={{ display: "none" }}
-									/>
-								</label>
-							)}
+						) : (
+							<label htmlFor="fileInput" className="mx-auto cursor-pointer  flex items-center ">
+								Drop files here, or click to browse files
+								<input
+									id="fileInput"
+									type="file"
+									onChange={(e) => {
+										handleImage(e);
+										if (onChange) {
+											onChange(e);
+										}
+									}}
+									multiple={multiple ?? true}
+									accept={accept ?? ""}
+									style={{ display: "none" }}
+								/>
+							</label>
+						)}
 					</div>
 				</div>
 			</div>
 		</div>
 	);
 };
-
