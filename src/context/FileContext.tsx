@@ -26,7 +26,7 @@ export interface InitialState {
 	componentState: ComponentState;
 }
 
-type FileAction =
+export type FileAction =
 	| { type: "STORE_FILE_DATA"; payload: { files: File[] } }
 	| { type: "SET_COMPONENT_STATE"; payload: ComponentState }
 	| { type: "APPEND_FILE_DATA"; payload: { files: File[] } }
