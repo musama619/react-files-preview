@@ -212,6 +212,7 @@ export const Main: React.FC<Props> = ({
 						onDragOver={handleDragOver}
 						onDragLeave={handleDragLeave}
 						onDrop={handleDrop}
+						data-testid="dropzone"
 					>
 						{fileData.length > 0 ? (
 							fileData.map((file, idx) => {

@@ -140,4 +140,21 @@ describe("ImageSlider", () => {
 		const previewIcon = screen.getByTestId("default-icon");
 		expect(previewIcon).toBeInTheDocument();
 	});
+
+	test('toggleFullScreen when clicked', () => {
+		render(
+			<FileContext.Provider value={mockFileContext}>
+				<ImageSlider />
+			</FileContext.Provider>
+		);
+
+		const fullscreenButton = screen.getByRole('button', { name: 'toggle-fullscreen' });
+		fireEvent.click(fullscreenButton);
+
+		expect(document.fullscreenElement).not.toBeNull();
+
+		fireEvent.click(fullscreenButton);
+		expect(document.fullscreenElement).toBeUndefined();
+	});
+
 });
