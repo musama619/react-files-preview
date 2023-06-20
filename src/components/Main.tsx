@@ -59,11 +59,27 @@ export const Main: React.FC<Props> = ({
 		async function fetchData() {
 			try {
 				if (url) {
+					const imageFileTypes = [
+						{ type: "image/jpeg", ext: ".jpg" },
+						{ type: "image/jpg", ext: ".jpg" },
+						{ type: "image/png", ext: ".png" },
+						{ type: "image/gif", ext: "gif" },
+						{ type: "image/tiff", ext: ".tiff" },
+					];
+
 					const response = await fetch(url);
 					const blob = await response.blob();
-					const file = new File([blob], "filename", {
+
+					var fileExt = null;
+					const filteredName = imageFileTypes.filter((fileType) => fileType.type === blob.type);
+					if (filteredName.length > 0) {
+						fileExt = filteredName[0].ext;
+					}
+
+					const file = new File([blob], "file" + fileExt ?? ".img", {
 						type: blob.type,
 					});
+
 					dispatch({ type: "STORE_FILE_DATA", payload: { files: [file] } });
 				}
 			} catch (err) {
@@ -103,7 +119,7 @@ export const Main: React.FC<Props> = ({
 		const files = Array.from(e.target.files || []);
 
 		if (!checkErrors(files)) {
-			dispatch({ type: "APPEND_FILE_DATA", payload: { files: files } })
+			dispatch({ type: "APPEND_FILE_DATA", payload: { files: files } });
 		}
 	};
 
@@ -138,13 +154,17 @@ export const Main: React.FC<Props> = ({
 
 		if (files && files.length > 0) {
 			if (!checkErrors(files)) {
-				dispatch({ type: "APPEND_FILE_DATA", payload: { files: files } })
+				dispatch({ type: "APPEND_FILE_DATA", payload: { files: files } });
 			}
 		}
 	};
 
 	if (fileState.zoom) {
-		return <div><ImageSlider /></div>;
+		return (
+			<div>
+				<ImageSlider />
+			</div>
+		);
 	}
 
 	return (

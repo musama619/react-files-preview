@@ -12,14 +12,7 @@ export default defineConfig({
 		react(),
 		dts({
 			insertTypesEntry: true,
-		}),
-		visualizer({
-			template: "treemap", // or sunburst
-			open: true,
-			gzipSize: true,
-			brotliSize: true,
-			filename: "analyse.html", // will be saved in project's root
-		}) as PluginOption,
+		})
 	],
 	css: {
 		postcss: {
