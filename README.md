@@ -11,8 +11,8 @@ A file view component for react.
 ```js 
 npm i react-files-preview
 ```
-## Demo
-[View Demo](react-files-preview.netlify.app/)
+## 🚀 Demo
+https://react-files-preview.netlify.app/
 
 ## Usage
 
