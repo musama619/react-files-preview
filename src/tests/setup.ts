@@ -11,3 +11,4 @@ afterEach(() => {
 
 global.fetch = vi.fn();
 global.URL.createObjectURL = vi.fn();
+global.URL.revokeObjectURL = vi.fn();

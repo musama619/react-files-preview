@@ -11,6 +11,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 	useEffect(() => {
 		const fileUrl = URL.createObjectURL(file);
 		setFileSrc(fileUrl);
+		return(() => URL.revokeObjectURL(fileUrl))
 	}, [file]);
 
 	const previewStyle = filePreviewStyle.filter((item) => item.type == file.type);

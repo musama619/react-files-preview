@@ -31,8 +31,6 @@ export const Main: React.FC<Props> = ({
 
 	const { dispatch } = useContext(FileContext);
 
-	console.log(fileData, fileState, componentState);
-
 	const checkErrors = (files: File[]) => {
 		let hasError = false;
 		if (maxFiles && (fileData.length + files.length > maxFiles || files.length > maxFiles)) {
