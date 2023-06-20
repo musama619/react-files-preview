@@ -38,6 +38,7 @@ export const Main: React.FC<Props> = ({
 			if (onError) {
 				onError(new Error(`Max ${maxFiles} files are allowed to be selected`));
 			}
+			throw new Error(`Max ${maxFiles} files are allowed to be selected`);
 		}
 
 		if (maxFileSize) {
@@ -47,7 +48,7 @@ export const Main: React.FC<Props> = ({
 					if (onError) {
 						onError(new Error(`File size limit exceeded: ${file.name}`));
 					}
-					return;
+					throw new Error(`File size limit exceeded: ${file.name}`);
 				}
 			});
 		}
