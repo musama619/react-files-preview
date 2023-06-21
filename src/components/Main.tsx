@@ -93,13 +93,15 @@ export const Main: React.FC<Props> = ({
 			}
 		}
 		fetchData();
+	}, []);
 
+	useEffect(() => {
 		if (files && files.length > 0) {
 			if (!checkErrors(files)) {
 				dispatch({ type: "STORE_FILE_DATA", payload: { files: files } });
 			}
 		}
-	}, []);
+	}, [files])
 
 	useEffect(() => {
 		dispatch({

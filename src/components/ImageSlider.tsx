@@ -74,8 +74,9 @@ const ImageSlider = () => {
 							<a
 								href={file.fileSrc}
 								target="_blank"
+								rel="noreferrer"
 								download
-								className="text-white text-sm flex items-center mr-4  max-sm:mr-1 hover:bg-white hover:text-black rounded-lg pl-2 pr-2 pt-1 pb-1"
+								className="text-white text-sm flex items-center mr-4 max-sm:mr-1 hover:bg-white hover:text-black rounded-lg pl-2 pr-2 pt-1 pb-1"
 							>
 								<svg
 									fill="none"
