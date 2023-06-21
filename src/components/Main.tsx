@@ -96,10 +96,10 @@ export const Main: React.FC<Props> = ({
 
 		if (files && files.length > 0) {
 			if (!checkErrors(files)) {
-				dispatch({ type: "APPEND_FILE_DATA", payload: { files: files } });
+				dispatch({ type: "STORE_FILE_DATA", payload: { files: files } });
 			}
 		}
-	}, [url, files]);
+	}, []);
 
 	useEffect(() => {
 		dispatch({
@@ -136,9 +136,12 @@ export const Main: React.FC<Props> = ({
 			onClick(file);
 		}
 	};
-	if (getFiles) {
-		getFiles(fileData);
-	}
+
+	useEffect(() => {
+		if (getFiles) {
+			getFiles(fileData);
+		}
+	}, [fileData]);
 
 	const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
 		event.preventDefault();
