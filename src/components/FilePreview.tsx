@@ -9,8 +9,10 @@ const imageFileTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif", "im
 const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 	const [fileSrc, setFileSrc] = useState<string | null>(null);
 	useEffect(() => {
-		const fileUrl = URL.createObjectURL(file);
-		setFileSrc(fileUrl);
+		if(file){
+			const fileUrl = URL.createObjectURL(file);
+			setFileSrc(fileUrl);
+		}
 	}, [file]);
 
 	const previewStyle = filePreviewStyle.filter((item) => item.type == file.type);
