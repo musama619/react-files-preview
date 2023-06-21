@@ -47,15 +47,26 @@ const ImageSlider = () => {
 	if (file.zoom) {
 		return (
 			<div>
-				<div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-80 z-20">
-					<div className="absolute top-0 left-0 right-0 flex justify-between items-center p-2 shadow-md shadow-gray-950 bg-black bg-opacity-80">
+				<div
+					id="slider"
+					className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-80 z-20"
+				>
+					<div
+						id="slider-header"
+						className="absolute top-0 left-0 right-0 flex justify-between items-center p-2 shadow-md shadow-gray-950 bg-black bg-opacity-80"
+					>
 						<span className="text-white flex-1 ml-14 max-sm:ml-1">{file.fileName}</span>
 						<button
 							className="text-white text-sm flex items-center mr-4  max-sm:mr-1 hover:bg-white hover:text-black rounded-lg pl-2 pr-2 pt-1 pb-1"
 							onClick={toggleFullScreen}
 							aria-label="toggle-fullscreen"
 						>
-							<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="mr-1 h-4 stroke-2" viewBox="0 0 16 16">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor"
+								className="mr-1 h-4 stroke-2"
+								viewBox="0 0 16 16"
+							>
 								<path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z" />
 							</svg>
 						</button>
@@ -101,6 +112,7 @@ const ImageSlider = () => {
 						</button>
 					</div>
 					<button
+						id="slider-prev-button"
 						className="absolute top-1/2 left-1 ml-2 p-1 max-sm:top-3/4 transform -translate-y-1/2 z-20 text-white rounded-full hover:bg-white hover:text-black"
 						onClick={prevFile}
 						data-testid="prev-file"
@@ -120,9 +132,11 @@ const ImageSlider = () => {
 						</svg>
 					</button>
 					<div
+						id="file-slider"
 						data-testid="image-slider"
-						className={`${componentState.rounded && `rounded-lg`
-							} relative w-[130vh] max-sm:w-96 max-md:w-[75vh] h-[78vh] max-sm:h-52 max-md:h-80   bg-slate-400 overflow-hidden transition-all delay-750 ease-in`}
+						className={`${
+							componentState.rounded && `rounded-lg`
+						} relative w-[130vh] max-sm:w-96 max-md:w-[75vh] h-[78vh] max-sm:h-52 max-md:h-80   bg-slate-400 overflow-hidden transition-all delay-750 ease-in`}
 					>
 						{file.isImage ? (
 							file.fileSrc && (
@@ -131,8 +145,9 @@ const ImageSlider = () => {
 						) : (
 							<span className="flex w-full h-full items-center justify-center text-4xl">
 								<span
-									className={`${previewStyle.length > 0 ? previewStyle[0].color : "bg-slate-400"
-										} rounded flex justify-center  w-48 h-48 items-center`}
+									className={`${
+										previewStyle.length > 0 ? previewStyle[0].color : "bg-slate-400"
+									} rounded flex justify-center  w-48 h-48 items-center`}
 								>
 									{previewStyle.length > 0 ? (
 										previewStyle[0].icon
@@ -152,6 +167,7 @@ const ImageSlider = () => {
 						)}
 					</div>
 					<button
+						id="slider-next-button"
 						className="absolute top-1/2 mr-2 p-1 right-1 max-sm:top-3/4  transform -translate-y-1/2 text-white rounded-full hover:bg-white hover:text-black"
 						onClick={nextFile}
 						data-testid="next-file"
@@ -170,8 +186,8 @@ const ImageSlider = () => {
 							></path>
 						</svg>
 					</button>
+					{componentState.showSliderCount ? <SlideCount /> : <></>}
 				</div>
-				{componentState.showSliderCount ? <SlideCount /> : <></>}
 			</div>
 		);
 	}
