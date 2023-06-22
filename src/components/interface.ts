@@ -16,6 +16,7 @@ export interface Props {
 	rounded?: boolean;
 	fileHeight?: string;
 	fileWidth?: string;
+	disabled?: boolean;
 	getFiles?: (files: File[]) => void;
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 	onRemove?: (removedFile: File) => void;

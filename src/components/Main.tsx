@@ -19,6 +19,7 @@ export const Main: React.FC<Props> = ({
 	height,
 	fileHeight,
 	fileWidth,
+	disabled,
 	onChange,
 	onRemove,
 	onError,
@@ -101,7 +102,7 @@ export const Main: React.FC<Props> = ({
 				dispatch({ type: "STORE_FILE_DATA", payload: { files: files } });
 			}
 		}
-	}, [files])
+	}, [files]);
 
 	useEffect(() => {
 		dispatch({
@@ -114,9 +115,19 @@ export const Main: React.FC<Props> = ({
 				rounded: rounded != undefined ? rounded : true,
 				fileHeight: fileHeight ?? "h-32",
 				fileWidth: fileWidth ?? "w-44",
+				disabled: disabled ?? false,
 			},
 		});
-	}, [downloadFile, removeFile, showFileSize, showSliderCount, fileHeight, fileWidth, rounded]);
+	}, [
+		downloadFile,
+		removeFile,
+		showFileSize,
+		showSliderCount,
+		fileHeight,
+		fileWidth,
+		rounded,
+		disabled,
+	]);
 
 	const handleImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const files = Array.from(e.target.files || []);
@@ -187,11 +198,16 @@ export const Main: React.FC<Props> = ({
 								</div>
 								<label
 									htmlFor="fileInput"
-									className="cursor-pointer py-1 px-2 mt-1 mr-2 mb-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+									className={`${
+										disabled
+											? `cursor-not-allowed opacity-50  py-1 px-2 mt-1 mr-2 mb-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700`
+											: "cursor-pointer py-1 px-2 mt-1 mr-2 mb-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+									} `}
 								>
 									+ Add more
 									<input
 										id="fileInput"
+										disabled={disabled}
 										type="file"
 										onChange={(e) => {
 											handleImage(e);
@@ -212,7 +228,8 @@ export const Main: React.FC<Props> = ({
 
 					<div
 						className={`${height && `overflow-auto ${height}`} ${
-							fileData.length == 0 && `border-2 border-dashed border-gray-300 hover:bg-stone-200`
+							fileData.length == 0 &&
+							`border-2 border-dashed border-gray-300 ${disabled ? "" : `hover:bg-stone-200`} `
 						} flex flex-row flex-wrap gap-4 p-6 bg-stone-100  shadow dark:bg-gray-800 `}
 						onDragOver={handleDragOver}
 						onDragLeave={handleDragLeave}
@@ -246,10 +263,18 @@ export const Main: React.FC<Props> = ({
 								);
 							})
 						) : (
-							<label htmlFor="fileInput" className="mx-auto cursor-pointer  flex items-center ">
+							<label
+								htmlFor="fileInput"
+								className={`${
+									disabled
+										? `mx-auto cursor-not-allowed  flex items-center`
+										: "mx-auto cursor-pointer  flex items-center"
+								}`}
+							>
 								Drop files here, or click to browse files
 								<input
 									id="fileInput"
+									disabled={disabled}
 									type="file"
 									onChange={(e) => {
 										handleImage(e);
