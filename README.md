@@ -40,6 +40,7 @@ export default App
 | **`removeFile`** | boolean  | true  | Show file remove icon on file hover  |
 |  **`showFileSize`** | boolean  | true  | Show file size under files  |
 |  **`showSliderCount`** | boolean  | true  | Show slides count under file slider  |
+|  **`disabled`** | boolean  | false  | If true, prevents user to add files by disabling the component  |
 |  **`multiple`** | boolean  | true |  Accepts one or more files |
 |  **`accept`** | string  |   | Comma-separated lists of file types. See [MIME Types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)  |
 | **`maxFileSize`**  | number  |   |  Maximum allowed file size in bytes *e.g. 1024  x 1024 x 5 == 5MB*  |
