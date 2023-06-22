@@ -13,6 +13,7 @@ describe("FileFooter component", () => {
         rounded: true,
         fileHeight: "h-32",
         fileWidth: "w-44",
+        disabled: false
     };
 
     const mockFileState = {
