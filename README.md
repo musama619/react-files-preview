@@ -1,6 +1,12 @@
+![react-files-preview](https://github.com/musama619/react-files-preview/blob/main/react-files-preview.png?raw=true)
+
+<div align='center'>
+
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f1c6d960-e969-4396-bdaa-33e245a72bf6/deploy-status)](https://app.netlify.com/sites/react-file-view/deploys)&nbsp;![codeql](https://github.com/musama619/react-files-preview/workflows/CodeQL/badge.svg)&nbsp;[![codecov](https://codecov.io/github/musama619/react-file-view/branch/main/graph/badge.svg?token=iBQkSenXLe)](https://codecov.io/github/musama619/react-file-view)&nbsp;[![npm](https://img.shields.io/npm/v/react-files-preview)](https://www.npmjs.com/package/react-files-preview)
 
+
+</div>
 
 # react-files-preview
 A file view component for react.
