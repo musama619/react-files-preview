@@ -74,6 +74,7 @@ export const Default = {
 export const CustomHeightAndWidth = {
 	args: {
 		height: "h-44",
+		url: "https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 		width: "basis-full",
 		files: [],
 	},
@@ -81,6 +82,7 @@ export const CustomHeightAndWidth = {
 export const MaxFiles = {
 	args: {
 		maxFiles: 1,
+		url: "https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 		width: "basis-11/12",
 		files: [],
 	},
@@ -102,6 +104,7 @@ export const FileTypes = {
 export const DownloadFile = {
 	args: {
 		downloadFile: false,
+		url: "https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 		width: "basis-11/12",
 		files: [],
 	},
@@ -109,6 +112,7 @@ export const DownloadFile = {
 export const ShowFileSize = {
 	args: {
 		showFileSize: false,
+		url: "https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 		width: "basis-11/12",
 		files: [],
 	},
@@ -116,6 +120,7 @@ export const ShowFileSize = {
 export const RemoveFile = {
 	args: {
 		removeFile: false,
+		url: "https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 		width: "basis-11/12",
 		files: [],
 	},
@@ -123,7 +128,15 @@ export const RemoveFile = {
 export const ShowSliderCount = {
 	args: {
 		showSliderCount: true,
+		url: "https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 		width: "basis-11/12",
-		files: [],
+	},
+};
+export const Disabled = {
+	args: {
+		disabled: true,
+		removeFile: false,
+		url: "https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+		width: "basis-11/12",
 	},
 };
