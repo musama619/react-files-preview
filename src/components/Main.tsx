@@ -239,7 +239,7 @@ export const Main: React.FC<Props> = ({
 						{fileData.length > 0 ? (
 							fileData.map((file, idx) => {
 								return (
-									<div key={idx} className="relative pb-5 group " onClick={() => handleClick(file)}>
+									<div key={idx} className="relative pb-5 group" onClick={() => handleClick(file)}>
 										<div className="ml-9">
 											{componentState.removeFile ? (
 												<svg

@@ -27,7 +27,7 @@ describe("Main Component", () => {
 		rounded: true,
 		fileHeight: "h-32",
 		fileWidth: "w-44",
-		disabled: false
+		disabled: false,
 	};
 
 	const mockDispatch = vi.fn();
@@ -48,6 +48,7 @@ describe("Main Component", () => {
 		showFileSize: true,
 		showSliderCount: true,
 		multiple: true,
+		disabled: true,
 	};
 
 	it("renders file previews", () => {
@@ -330,9 +331,11 @@ describe("Main Component", () => {
 			preventDefault: vi.fn(),
 			dataTransfer: {
 				dropEffect: "",
-				files: [new File(["test file content"], "test-file.txt", {
-					type: "text/plain",
-				})],
+				files: [
+					new File(["test file content"], "test-file.txt", {
+						type: "text/plain",
+					}),
+				],
 			},
 		};
 
@@ -367,9 +370,11 @@ describe("Main Component", () => {
 			preventDefault: vi.fn(),
 			dataTransfer: {
 				dropEffect: "",
-				files: [new File(["test file content"], "test-file.txt", {
-					type: "text/plain",
-				})],
+				files: [
+					new File(["test file content"], "test-file.txt", {
+						type: "text/plain",
+					}),
+				],
 			},
 		};
 
@@ -377,8 +382,12 @@ describe("Main Component", () => {
 		expect(dragEventMock.dataTransfer.dropEffect).toBe("");
 	});
 
-	test('throw error and call onError when maxfiles limit exceeds', () => {
-		const files = [new File(['file1'], 'file1.txt'), new File(['file2'], 'file2.txt'), new File(['file3'], 'file3.txt')];
+	test("throw error and call onError when maxfiles limit exceeds", () => {
+		const files = [
+			new File(["file1"], "file1.txt"),
+			new File(["file2"], "file2.txt"),
+			new File(["file3"], "file3.txt"),
+		];
 		const mockOnError = vi.fn();
 
 		const mockFileContext = {
@@ -392,26 +401,22 @@ describe("Main Component", () => {
 		const renderMainComponent = () => {
 			return render(
 				<FileContext.Provider value={mockFileContext}>
-					<Main
-						files={files}
-						onError={mockOnError}
-						maxFiles={2}
-					/>
+					<Main files={files} onError={mockOnError} maxFiles={2} />
 				</FileContext.Provider>
 			);
 		};
 
 		expect(() => {
-			renderMainComponent()
-		}).toThrow('Max 2 files are allowed to be selected');
-		expect(mockOnError).toHaveBeenCalledWith(new Error('Max 2 files are allowed to be selected'));
+			renderMainComponent();
+		}).toThrow("Max 2 files are allowed to be selected");
+		expect(mockOnError).toHaveBeenCalledWith(new Error("Max 2 files are allowed to be selected"));
 	});
 
-	test('throw error and call onError when a maxfileSize exceeds', () => {
-		const file1 = new File(['file1'], 'file1.txt')
+	test("throw error and call onError when a maxfileSize exceeds", () => {
+		const file1 = new File(["file1"], "file1.txt");
 		Object.defineProperty(file1, "size", { value: 100 });
-		
-		const file2 = new File(['file2'], 'file2.txt')
+
+		const file2 = new File(["file2"], "file2.txt");
 		Object.defineProperty(file2, "size", { value: 5000000 });
 		const mockOnError = vi.fn();
 
@@ -426,18 +431,90 @@ describe("Main Component", () => {
 		const renderMainComponent = () => {
 			return render(
 				<FileContext.Provider value={mockFileContext}>
-					<Main
-						files={[file1, file2]}
-						onError={mockOnError}
-						maxFileSize={1000}
-					/>
+					<Main files={[file1, file2]} onError={mockOnError} maxFileSize={1000} />
 				</FileContext.Provider>
 			);
 		};
 
 		expect(() => {
 			renderMainComponent();
-		}).toThrow('File size limit exceeded: file2.txt');
-		expect(mockOnError).toHaveBeenCalledWith(new Error('File size limit exceeded: file2.txt'));
+		}).toThrow("File size limit exceeded: file2.txt");
+		expect(mockOnError).toHaveBeenCalledWith(new Error("File size limit exceeded: file2.txt"));
+	});
+
+	it("should have disabled cursor class if disabled is true", () => {
+		const { container } = render(
+			<FileContext.Provider value={mockFileContext}>
+				<Main
+					files={[]}
+					url={null}
+					downloadFile={true}
+					removeFile={true}
+					showFileSize={true}
+					showSliderCount={true}
+					multiple={true}
+					disabled={true}
+				/>
+			</FileContext.Provider>
+		);
+		expect(container.getElementsByClassName("cursor-not-allowed").length).toBe(1);
+	});
+
+	it("should have disabled cursor class if files not empty and disabled is true", async () => {
+		const mockFileContext = {
+			state: {
+				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
+				fileState: mockFileState,
+				componentState: { ...mockComponentState, removeFile: true, disabled: true },
+			},
+			dispatch: mockDispatch,
+		};
+		const { container } = render(
+			<FileContext.Provider value={mockFileContext}>
+				<Main {...mockProps} />
+			</FileContext.Provider>
+		);
+
+		expect(container.getElementsByClassName("cursor-not-allowed").length).toBe(1);
+	});
+	it("should class onClick function", async () => {
+		const onClick = vi.fn();
+		const mockFileContext = {
+			state: {
+				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
+				fileState: mockFileState,
+				componentState: { ...mockComponentState, removeFile: true, disabled: true },
+			},
+			dispatch: mockDispatch,
+		};
+		const { container } = render(
+			<FileContext.Provider value={mockFileContext}>
+				<Main {...mockProps} onClick={onClick} />
+			</FileContext.Provider>
+		);
+
+		fireEvent.click(container.getElementsByClassName("relative")[0]);
+
+		expect(onClick).toHaveBeenCalledTimes(1);
+	});
+	it("should class onRemove function if click on remove button", async () => {
+		const remove = vi.fn();
+		const mockFileContext = {
+			state: {
+				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
+				fileState: mockFileState,
+				componentState: { ...mockComponentState, removeFile: true, disabled: true },
+			},
+			dispatch: mockDispatch,
+		};
+		render(
+			<FileContext.Provider value={mockFileContext}>
+				<Main {...mockProps} onRemove={remove} />
+			</FileContext.Provider>
+		);
+
+		fireEvent.click(screen.getByTestId("remove-file-button"));
+
+		expect(remove).toHaveBeenCalledTimes(1);
 	});
 });
