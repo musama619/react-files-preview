@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import FilePreview from "./FilePreview";
 import ImageSlider from "./ImageSlider";
+import Header from "./Header";
 import { Props } from "./interface";
 import { FileContext } from "../context/FileContext";
 export const Main: React.FC<Props> = ({
@@ -188,49 +189,21 @@ export const Main: React.FC<Props> = ({
 		<div className="w-full">
 			<div className="flex flex-row max-h-2">
 				<div className={`${width ?? `basis-11/12`} mx-auto`}>
-					{fileData.length > 0 ? (
-						<div>
-							<div className="flex justify-between  bg-gray-200 ">
-								<div className="h-10 text-sm pt-2 ml-2 font-medium">
-									<span className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-										{`Files: ${fileData.length}`}
-									</span>
-								</div>
-								<label
-									htmlFor="fileInput"
-									className={`${
-										disabled
-											? `cursor-not-allowed opacity-50  py-1 px-2 mt-1 mr-2 mb-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700`
-											: "cursor-pointer py-1 px-2 mt-1 mr-2 mb-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-									} `}
-								>
-									+ Add more
-									<input
-										id="fileInput"
-										disabled={disabled}
-										type="file"
-										onChange={(e) => {
-											handleImage(e);
-											if (onChange) {
-												onChange(e);
-											}
-										}}
-										style={{ display: "none" }}
-										multiple={multiple ?? true}
-										accept={accept ?? ""}
-									/>
-								</label>
-							</div>
-						</div>
-					) : (
-						<></>
+					{fileData.length > 0 && (
+						<Header
+							fileData={fileData}
+							multiple={multiple}
+							disabled={disabled}
+							accept={accept}
+							onChange={onChange}
+							handleImage={handleImage}
+						/>
 					)}
 
 					<div
-						className={`${height && `overflow-auto ${height}`} ${
-							fileData.length == 0 &&
+						className={`${height && `overflow-auto ${height}`} ${fileData.length == 0 &&
 							`border-2 border-dashed border-gray-300 ${disabled ? "" : `hover:bg-stone-200`} `
-						} flex flex-row flex-wrap gap-4 p-6 bg-stone-100  shadow dark:bg-gray-800 `}
+							} flex flex-row flex-wrap gap-4 p-6 bg-stone-100  shadow dark:bg-gray-800 `}
 						onDragOver={handleDragOver}
 						onDragLeave={handleDragLeave}
 						onDrop={handleDrop}
@@ -265,11 +238,10 @@ export const Main: React.FC<Props> = ({
 						) : (
 							<label
 								htmlFor="fileInput"
-								className={`${
-									disabled
-										? `mx-auto cursor-not-allowed  flex items-center`
-										: "mx-auto cursor-pointer  flex items-center"
-								}`}
+								className={`${disabled
+									? `mx-auto cursor-not-allowed  flex items-center`
+									: "mx-auto cursor-pointer  flex items-center"
+									}`}
 							>
 								Drop files here, or click to browse files
 								<input
