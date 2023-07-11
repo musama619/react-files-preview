@@ -43,7 +43,7 @@ describe("FileFooter component", () => {
 
     const mockFileSrc = "https://example.com/test.txt";
 
-    test("renders file name correctly", () => {
+    it("renders file name correctly", () => {
 
         render(
             <FileContext.Provider value={mockFileContext}>
@@ -54,7 +54,7 @@ describe("FileFooter component", () => {
         expect(fileNameElement).toBeInTheDocument();
     });
 
-    test("displays file size in KB if less than 1 MB", () => {
+    it("displays file size in KB if less than 1 MB", () => {
 
         const mockFile = new File(["test content"], "test.txt", { type: "text/plain" });
         Object.defineProperty(mockFile, "size", { value: 500000 });
@@ -68,7 +68,7 @@ describe("FileFooter component", () => {
         expect(fileSizeElement).toHaveTextContent("500 KB");
     });
 
-    test("displays file size in MB if 1 MB or greater", () => {
+    it("displays file size in MB if 1 MB or greater", () => {
 
         const mockFile = new File(["test content"], "test.txt", { type: "text/plain" });
         Object.defineProperty(mockFile, "size", { value: 15000000 });
@@ -82,7 +82,7 @@ describe("FileFooter component", () => {
         expect(fileSizeElement).toHaveTextContent("15 MB");
     });
 
-    test("truncates long file names", () => {
+    it("truncates long file names", () => {
 
         const nameArray = "test123456789101112134516.txt".split(".");
 		let fileName = nameArray[0];
@@ -106,7 +106,7 @@ describe("FileFooter component", () => {
         expect(fileNameElement).toBeInTheDocument();
     });
 
-    test("displays download link when downloadFile is true", () => {
+    it("displays download link when downloadFile is true", () => {
 
         const mockIsDownloadTrue = {
             state: {
@@ -128,7 +128,7 @@ describe("FileFooter component", () => {
 		expect(downloadLinkElement).toHaveAttribute("rel", "noreferrer");
     });
 
-    test("does not display download link when downloadFile is false", () => {
+    it("does not display download link when downloadFile is false", () => {
 
         const mockIsDownloadFalse = {
             state: {

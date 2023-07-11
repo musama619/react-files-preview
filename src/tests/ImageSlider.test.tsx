@@ -142,7 +142,7 @@ describe("ImageSlider", () => {
 		expect(previewIcon).toBeInTheDocument();
 	});
 
-	test('toggleFullScreen when clicked', () => {
+	it('toggleFullScreen when clicked', () => {
 		render(
 			<FileContext.Provider value={mockFileContext}>
 				<ImageSlider />

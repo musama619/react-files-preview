@@ -304,7 +304,7 @@ describe("Main Component", () => {
 		expect(getFiles).toBeCalled();
 	});
 
-	test("handleDragOver should set dropEffect to 'copy'", async () => {
+	it("handleDragOver should set dropEffect to 'copy'", async () => {
 		const mockFileContext = {
 			state: {
 				fileData: [],
@@ -343,7 +343,7 @@ describe("Main Component", () => {
 		expect(dragEventMock.dataTransfer.dropEffect).toBe("copy");
 	});
 
-	test("handleDragLeave should set dropEffect to ''", async () => {
+	it("handleDragLeave should set dropEffect to ''", async () => {
 		const mockFileContext = {
 			state: {
 				fileData: [],
@@ -382,7 +382,7 @@ describe("Main Component", () => {
 		expect(dragEventMock.dataTransfer.dropEffect).toBe("");
 	});
 
-	test("throw error and call onError when maxfiles limit exceeds", () => {
+	it("throw error and call onError when maxfiles limit exceeds", () => {
 		const files = [
 			new File(["file1"], "file1.txt"),
 			new File(["file2"], "file2.txt"),
@@ -412,7 +412,7 @@ describe("Main Component", () => {
 		expect(mockOnError).toHaveBeenCalledWith(new Error("Max 2 files are allowed to be selected"));
 	});
 
-	test("throw error and call onError when a maxfileSize exceeds", () => {
+	it("throw error and call onError when a maxfileSize exceeds", () => {
 		const file1 = new File(["file1"], "file1.txt");
 		Object.defineProperty(file1, "size", { value: 100 });
 

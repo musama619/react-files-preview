@@ -39,7 +39,7 @@ describe("SlideCount component", () => {
     };
 
 
-    test("displays the current slide count", () => {
+    it("displays the current slide count", () => {
 
         const mockFileContext = {
             state: {
@@ -66,7 +66,7 @@ describe("SlideCount component", () => {
         expect(slideCountElement).toBeInTheDocument();
     });
 
-    test("does not display slide count if fileState index is null", () => {
+    it("does not display slide count if fileState index is null", () => {
         const mockFileContext = {
             state: {
                 fileData: [
