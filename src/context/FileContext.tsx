@@ -45,6 +45,28 @@ const imageFileTypes: string[] = [
 ];
 export const fileReducer = (state: any, action: any) => {
 	const lastIndex = state.fileData.length - 1;
+
+	const updateFileState = (index: number) => {
+		const file = state.fileData[index];
+		return {
+			zoom: true,
+			fileSrc: URL.createObjectURL(file),
+			index,
+			isImage: imageFileTypes.includes(file.type),
+			fileName: file.name,
+			type: file.type,
+			size: file.size,
+		};
+	};
+
+	const revokeObjectURL = (fileState: FileState) => {
+		if (fileState && fileState.fileSrc) {
+			if (fileState.fileSrc.startsWith("blob:")) {
+				URL.revokeObjectURL(fileState.fileSrc);
+			}
+		}
+	};
+
 	switch (action.type) {
 		case "STORE_FILE_DATA":
 			return { ...state, fileData: action.payload.files };
@@ -61,39 +83,19 @@ export const fileReducer = (state: any, action: any) => {
 			};
 		case "GET_NEXT_FILE":
 			const nextIndex = state.fileState.index + 1;
-			let newIndex = nextIndex;
-			if (nextIndex > lastIndex) {
-				newIndex = 0;
-			}
+			const newIndex = nextIndex > lastIndex ? 0 : nextIndex;
+			revokeObjectURL(state.fileState);
 			return {
 				...state,
-				fileState: {
-					zoom: true,
-					fileSrc: URL.createObjectURL(state.fileData[newIndex]),
-					index: newIndex,
-					isImage: imageFileTypes.includes(state.fileData[newIndex].type),
-					fileName: state.fileData[newIndex].name,
-					type: state.fileData[newIndex].type,
-					size: state.fileData[newIndex].size,
-				},
+				fileState: updateFileState(newIndex),
 			};
 		case "GET_PREV_FILE":
 			const prevIndex = state.fileState.index - 1;
-			let newIdx = prevIndex;
-			if (prevIndex < 0) {
-				newIdx = lastIndex;
-			}
+			const newIdx = prevIndex < 0 ? lastIndex : prevIndex;
+			revokeObjectURL(state.fileState);
 			return {
 				...state,
-				fileState: {
-					zoom: true,
-					fileSrc: URL.createObjectURL(state.fileData[newIdx]),
-					index: newIdx,
-					isImage: imageFileTypes.includes(state.fileData[newIdx].type),
-					fileName: state.fileData[newIdx].name,
-					type: state.fileData[newIdx].type,
-					size: state.fileData[newIdx].size,
-				},
+				fileState: updateFileState(newIdx),
 			};
 		default:
 			return state;
@@ -128,7 +130,7 @@ export const FileContext = createContext<FileContext>({
 			disabled: false
 		},
 	},
-	dispatch: () => {},
+	dispatch: () => { },
 });
 
 export const FileProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

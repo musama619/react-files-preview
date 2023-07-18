@@ -12,6 +12,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 		if(file){
 			const fileUrl = URL.createObjectURL(file);
 			setFileSrc(fileUrl);
+			return(() => URL.revokeObjectURL(fileUrl))
 		}
 	}, [file]);
 
@@ -25,7 +26,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 			type: "STORE_FILE_STATE",
 			payload: {
 				zoom: true,
-				fileSrc: fileSrc,
+				fileSrc: URL.createObjectURL(file),
 				index: index,
 				isImage: imageFileTypes.includes(file.type),
 				fileName: file.name,

@@ -9,6 +9,9 @@ const ImageSlider = () => {
 	const previewStyle = filePreviewStyle.filter((item) => item.type === file.type);
 	const { dispatch } = useContext(FileContext);
 	const hideZoom = () => {
+		if(file.fileSrc){
+			URL.revokeObjectURL(file.fileSrc);
+		}
 		dispatch({
 			type: "STORE_FILE_STATE",
 			payload: {
