@@ -1,7 +1,8 @@
 {
 	"name": "react-files-preview",
+	"description": "A file view component for React app.",
 	"private": false,
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"author": "Usama Chouhan (musama619)",
 	"license": "MIT",
 	"type": "module",
