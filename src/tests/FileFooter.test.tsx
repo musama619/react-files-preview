@@ -13,7 +13,8 @@ describe("FileFooter component", () => {
         rounded: true,
         fileHeight: "h-32",
         fileWidth: "w-44",
-        disabled: false
+        disabled: false,
+        allowEditing: false
     };
 
     const mockFileState = {
@@ -25,7 +26,11 @@ describe("FileFooter component", () => {
         type: "image/jpeg",
         size: 1000,
     };
-
+    const mockImageEditorState = {
+		isEditing: false,
+		file: null,
+		index: null
+	};
     const mockDispatch = vi.fn();
 
     const mockFileContext = {
@@ -33,6 +38,7 @@ describe("FileFooter component", () => {
             fileData: [],
             fileState: mockFileState,
             componentState: mockComponentState,
+            imageEditorState: mockImageEditorState
         },
         dispatch: mockDispatch,
     };
@@ -47,7 +53,7 @@ describe("FileFooter component", () => {
 
         render(
             <FileContext.Provider value={mockFileContext}>
-                <FileFooter file={mockFile} fileSrc={mockFileSrc} />
+                <FileFooter file={mockFile} fileSrc={mockFileSrc} index={0} isImage={false} />
             </FileContext.Provider>
         );
         const fileNameElement = screen.getByText("test.txt");
@@ -61,7 +67,7 @@ describe("FileFooter component", () => {
 
         render(
             <FileContext.Provider value={mockFileContext}>
-                <FileFooter file={mockFile} fileSrc={mockFileSrc} />
+                <FileFooter file={mockFile} fileSrc={mockFileSrc} index={0} isImage={false} />
             </FileContext.Provider>
         );
         const fileSizeElement = screen.getByTestId("file-size");
@@ -75,7 +81,7 @@ describe("FileFooter component", () => {
 
         render(
             <FileContext.Provider value={mockFileContext}>
-                <FileFooter file={mockFile} fileSrc={mockFileSrc} />
+                <FileFooter file={mockFile} fileSrc={mockFileSrc} index={0} isImage={false} />
             </FileContext.Provider>
         );
         const fileSizeElement = screen.getByTestId("file-size");
@@ -99,7 +105,7 @@ describe("FileFooter component", () => {
 
         render(
             <FileContext.Provider value={mockFileContext}>
-                <FileFooter file={mockFile} fileSrc={mockFileSrc} />
+                <FileFooter file={mockFile} fileSrc={mockFileSrc} index={0} isImage={false} />
             </FileContext.Provider>
         );
         const fileNameElement = screen.getByText(result);
@@ -113,13 +119,14 @@ describe("FileFooter component", () => {
                 fileData: [],
                 fileState: mockFileState,
                 componentState: { ...mockComponentState, downloadFile: true },
+                imageEditorState: mockImageEditorState
             },
             dispatch: mockDispatch,
         };
 
         render(
             <FileContext.Provider value={mockIsDownloadTrue}>
-                <FileFooter file={mockFile} fileSrc={mockFileSrc} />
+                <FileFooter file={mockFile} fileSrc={mockFileSrc} index={0} isImage={true} />
             </FileContext.Provider>
         );
         const downloadLinkElement = screen.getByRole("link");
@@ -135,12 +142,13 @@ describe("FileFooter component", () => {
                 fileData: [],
                 fileState: mockFileState,
                 componentState: { ...mockComponentState, downloadFile: false },
+                imageEditorState: mockImageEditorState
             },
             dispatch: mockDispatch,
         };
         render(
             <FileContext.Provider value={mockIsDownloadFalse}>
-                <FileFooter file={mockFile} fileSrc={mockFileSrc} />
+                <FileFooter file={mockFile} fileSrc={mockFileSrc} index={0} isImage={true} />
             </FileContext.Provider>
         );
         const downloadLinkElement = screen.queryByText("Download");

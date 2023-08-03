@@ -14,7 +14,8 @@ describe("SlideCount component", () => {
         rounded: true,
         fileHeight: "h-32",
         fileWidth: "w-44",
-        disabled: false
+        disabled: false,
+        allowEditing: false
     };
 
     const mockFileState = {
@@ -26,18 +27,13 @@ describe("SlideCount component", () => {
         type: "image/jpeg",
         size: 1000,
     };
+    const mockImageEditorState = {
+		isEditing: false,
+		file: null,
+		index: null
+	};
 
     const mockDispatch = vi.fn();
-
-    const mockFileContext = {
-        state: {
-            fileData: [],
-            fileState: mockFileState,
-            componentState: mockComponentState,
-        },
-        dispatch: mockDispatch,
-    };
-
 
     it("displays the current slide count", () => {
 
@@ -50,6 +46,7 @@ describe("SlideCount component", () => {
                 ],
                 fileState: mockFileState,
                 componentState: mockComponentState,
+                imageEditorState: mockImageEditorState
             },
             dispatch: mockDispatch,
         };
@@ -76,6 +73,7 @@ describe("SlideCount component", () => {
                 ],
                 fileState: { ...mockFileState, index: 1 },
                 componentState: mockComponentState,
+                imageEditorState: mockImageEditorState
             },
             dispatch: mockDispatch,
         };

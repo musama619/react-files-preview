@@ -1,9 +1,16 @@
-import { useContext, useEffect } from "react";
+import React, { Suspense, useContext, useEffect } from "react";
 import FilePreview from "./FilePreview";
 import ImageSlider from "./ImageSlider";
 import Header from "./Header";
 import { Props } from "./interface";
 import { FileContext } from "../context/FileContext";
+
+const ReactPhotoEditor = React.lazy(async () => {
+	const { ReactPhotoEditor } = await import("react-photo-editor");
+	await import('react-photo-editor/dist/style.css')
+	return { default: ReactPhotoEditor };
+});
+
 export const Main: React.FC<Props> = ({
 	files,
 	url,
@@ -11,6 +18,7 @@ export const Main: React.FC<Props> = ({
 	removeFile,
 	showFileSize,
 	showSliderCount,
+	allowEditing,
 	multiple,
 	accept,
 	maxFileSize,
@@ -30,6 +38,7 @@ export const Main: React.FC<Props> = ({
 	const fileData = useContext(FileContext).state.fileData;
 	const fileState = useContext(FileContext).state.fileState;
 	const componentState = useContext(FileContext).state.componentState;
+	const imageEditorState = useContext(FileContext).state.imageEditorState;
 
 	const { dispatch } = useContext(FileContext);
 
@@ -73,7 +82,7 @@ export const Main: React.FC<Props> = ({
 					const response = await fetch(url);
 					const blob = await response.blob();
 
-					var fileExt = null;
+					let fileExt = null;
 					const filteredName = imageFileTypes.filter((fileType) => fileType.type === blob.type);
 					if (filteredName.length > 0) {
 						fileExt = filteredName[0].ext;
@@ -117,6 +126,7 @@ export const Main: React.FC<Props> = ({
 				fileHeight: fileHeight ?? "h-32",
 				fileWidth: fileWidth ?? "w-44",
 				disabled: disabled ?? false,
+				allowEditing: allowEditing ?? false,
 			},
 		});
 	}, [
@@ -128,6 +138,7 @@ export const Main: React.FC<Props> = ({
 		fileWidth,
 		rounded,
 		disabled,
+		allowEditing
 	]);
 
 	const handleImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -177,11 +188,50 @@ export const Main: React.FC<Props> = ({
 		}
 	};
 
+	const saveEditedImage = (image: File) => {
+		if (image && imageEditorState.index != null) {
+			const fileList = Array.from(fileData);
+			fileList[imageEditorState.index] = image;
+			dispatch({
+				type: "STORE_FILE_DATA",
+				payload: {
+					files: fileList
+				},
+			});
+		}
+	}
+
+	const closeImageEditor = () => {
+		dispatch({
+			type: "SET_IMAGE_EDITOR_DATA",
+			payload: {
+				isEditing: false,
+				file: null,
+				index: null
+			},
+		});
+	}
+
 	if (fileState.zoom) {
 		return (
 			<div>
 				<ImageSlider />
 			</div>
+		);
+	}
+
+
+	if (imageEditorState.isEditing && imageEditorState.file) {
+		return (
+			<Suspense fallback={<></>}>
+				<ReactPhotoEditor
+					open={imageEditorState.isEditing}
+					file={imageEditorState.file}
+					onSaveImage={saveEditedImage}
+					onClose={closeImageEditor}
+					downloadOnSave={false}
+				/>
+			</Suspense>
 		);
 	}
 

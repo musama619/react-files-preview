@@ -1,9 +1,11 @@
+import { ChangeEventHandler } from "react";
+
 const Header = (
     props: {
         fileData: File[],
         disabled: boolean | undefined,
-        onChange: Function | undefined,
-        handleImage: Function,
+        onChange?: ChangeEventHandler<HTMLInputElement>,
+        handleImage: ChangeEventHandler<HTMLInputElement>,
         multiple: boolean | undefined,
         accept: string | undefined
     }

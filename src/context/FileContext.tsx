@@ -1,4 +1,4 @@
-import { Dispatch, createContext, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 
 interface FileState {
 	zoom: boolean;
@@ -19,12 +19,20 @@ interface ComponentState {
 	fileHeight: string;
 	fileWidth: string;
 	disabled: boolean;
+	allowEditing: boolean;
+}
+
+interface ImageEditorState {
+	isEditing: boolean;
+	index: number | null;
+	file: File | null;
 }
 
 export interface InitialState {
 	fileData: File[];
 	fileState: FileState;
 	componentState: ComponentState;
+	imageEditorState: ImageEditorState;
 }
 
 export type FileAction =
@@ -32,6 +40,7 @@ export type FileAction =
 	| { type: "SET_COMPONENT_STATE"; payload: ComponentState }
 	| { type: "APPEND_FILE_DATA"; payload: { files: File[] } }
 	| { type: "STORE_FILE_STATE"; payload: FileState }
+	| { type: "SET_IMAGE_EDITOR_DATA"; payload: ImageEditorState }
 	| { type: "REMOVE_FILE_DATA"; payload: File }
 	| { type: "GET_NEXT_FILE" }
 	| { type: "GET_PREV_FILE" };
@@ -43,7 +52,7 @@ const imageFileTypes: string[] = [
 	"image/gif",
 	"image/tiff",
 ];
-export const fileReducer = (state: any, action: any) => {
+export const fileReducer = (state: InitialState, action: any) => {
 	const lastIndex = state.fileData.length - 1;
 
 	const updateFileState = (index: number) => {
@@ -76,12 +85,14 @@ export const fileReducer = (state: any, action: any) => {
 			return { ...state, fileData: [...state.fileData, ...action.payload.files] };
 		case "STORE_FILE_STATE":
 			return { ...state, fileState: action.payload };
+		case "SET_IMAGE_EDITOR_DATA":
+			return { ...state, imageEditorState: action.payload };
 		case "REMOVE_FILE_DATA":
 			return {
 				...state,
 				fileData: state.fileData.filter((i: File) => i.name !== action.payload.name),
 			};
-		case "GET_NEXT_FILE":
+		case "GET_NEXT_FILE": {
 			const nextIndex = state.fileState.index + 1;
 			const newIndex = nextIndex > lastIndex ? 0 : nextIndex;
 			revokeObjectURL(state.fileState);
@@ -89,7 +100,8 @@ export const fileReducer = (state: any, action: any) => {
 				...state,
 				fileState: updateFileState(newIndex),
 			};
-		case "GET_PREV_FILE":
+		}
+		case "GET_PREV_FILE": {
 			const prevIndex = state.fileState.index - 1;
 			const newIdx = prevIndex < 0 ? lastIndex : prevIndex;
 			revokeObjectURL(state.fileState);
@@ -97,6 +109,7 @@ export const fileReducer = (state: any, action: any) => {
 				...state,
 				fileState: updateFileState(newIdx),
 			};
+		}
 		default:
 			return state;
 	}
@@ -127,7 +140,13 @@ export const FileContext = createContext<FileContext>({
 			rounded: true,
 			fileHeight: "h-32",
 			fileWidth: "w-44",
-			disabled: false
+			disabled: false,
+			allowEditing: false,
+		},
+		imageEditorState: {
+			isEditing: false,
+			index: null,
+			file: null,
 		},
 	},
 	dispatch: () => { },
@@ -153,6 +172,11 @@ export const FileProvider: React.FC<{ children: React.ReactNode }> = ({ children
 			rounded: true,
 			fileHeight: "h-32",
 			fileWidth: "w-44",
+		},
+		imageEditorState: {
+			isEditing: false,
+			index: null,
+			file: null,
 		},
 	});
 

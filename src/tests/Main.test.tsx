@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { FileContext } from "../context/FileContext";
 import { Main } from "../components/Main";
 import { describe, it, vi } from "vitest";
@@ -28,6 +28,12 @@ describe("Main Component", () => {
 		fileHeight: "h-32",
 		fileWidth: "w-44",
 		disabled: false,
+		allowEditing: false
+	};
+	const mockImageEditorState = {
+		isEditing: false,
+		file: null,
+		index: null
 	};
 
 	const mockDispatch = vi.fn();
@@ -37,6 +43,7 @@ describe("Main Component", () => {
 			fileData: [],
 			fileState: mockFileState,
 			componentState: mockComponentState,
+			imageEditorState: mockImageEditorState
 		},
 		dispatch: mockDispatch,
 	};
@@ -57,6 +64,7 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
@@ -76,6 +84,7 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
@@ -95,6 +104,7 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
@@ -140,6 +150,7 @@ describe("Main Component", () => {
 				fileData: mockFiles,
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: false },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
@@ -160,6 +171,7 @@ describe("Main Component", () => {
 				fileData: [],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: false, zoom: false },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
@@ -196,6 +208,7 @@ describe("Main Component", () => {
 				fileData: [],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: false, zoom: false },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
@@ -231,6 +244,7 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
@@ -262,6 +276,7 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: { ...mockFileState, zoom: true, fileName: "test.txt" },
 				componentState: { ...mockComponentState, removeFile: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: vi.fn(),
 		};
@@ -310,6 +325,7 @@ describe("Main Component", () => {
 				fileData: [],
 				fileState: { ...mockFileState, zoom: false, fileName: "test.txt" },
 				componentState: { ...mockComponentState, removeFile: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: vi.fn(),
 		};
@@ -349,6 +365,7 @@ describe("Main Component", () => {
 				fileData: [],
 				fileState: { ...mockFileState, zoom: false, fileName: "test.txt" },
 				componentState: { ...mockComponentState, removeFile: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: vi.fn(),
 		};
@@ -395,6 +412,7 @@ describe("Main Component", () => {
 				fileData: files,
 				fileState: { ...mockFileState, zoom: false, fileName: "test.txt" },
 				componentState: { ...mockComponentState, removeFile: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: vi.fn(),
 		};
@@ -425,6 +443,7 @@ describe("Main Component", () => {
 				fileData: [file1, file2],
 				fileState: { ...mockFileState, zoom: false, fileName: "test.txt" },
 				componentState: { ...mockComponentState, removeFile: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: vi.fn(),
 		};
@@ -466,6 +485,7 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true, disabled: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
@@ -484,6 +504,7 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true, disabled: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
@@ -504,6 +525,7 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true, disabled: true },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};

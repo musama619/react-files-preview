@@ -4,7 +4,7 @@ function App() {
 
     return (
         <div className="App">
-            <ReactFilesPreview />
+            <ReactFilesPreview allowEditing={true} />
         </div>
     );
 }

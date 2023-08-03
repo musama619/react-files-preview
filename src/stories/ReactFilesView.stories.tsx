@@ -1,6 +1,6 @@
 import { ReactFilesPreview } from "../components/ReactFilesPreview";
 import { action } from "@storybook/addon-actions";
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react";
 import { FileProvider } from "../context/FileContext";
 
 
@@ -8,7 +8,7 @@ const meta: Meta<typeof ReactFilesPreview> = {
 	title: "Example/ReactFilesPreview",
 	component: ReactFilesPreview,
 	decorators: [
-		(Story: any) => (
+		(Story: StoryFn) => (
 			<FileProvider>
 				<div style={{ height: "50vh" }}>
 					<Story />
@@ -71,6 +71,15 @@ export const Default = {
 		onChange: action("onChange"),
 	},
 };
+
+export const AllowEditing = {
+	args: {
+		allowEditing: true,
+		url: "https://images.pexels.com/photos/13658554/pexels-photo-13658554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+		width: "basis-11/12",
+	},
+};
+
 export const CustomHeightAndWidth = {
 	args: {
 		height: "h-44",

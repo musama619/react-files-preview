@@ -22,9 +22,14 @@ describe("ImageSlider", () => {
 		rounded: true,
 		fileHeight: "h-32",
 		fileWidth: "w-44",
-		disabled: false
+		disabled: false,
+		allowEditing: false
 	};
-
+	const mockImageEditorState = {
+		isEditing: false,
+		file: null,
+		index: null
+	};
 	const mockDispatch = vi.fn();
 
 	const mockFileContext = {
@@ -32,6 +37,7 @@ describe("ImageSlider", () => {
 			fileData: [],
 			fileState: mockFile,
 			componentState: mockComponentState,
+			imageEditorState: mockImageEditorState
 		},
 		dispatch: mockDispatch,
 	};
@@ -53,6 +59,7 @@ describe("ImageSlider", () => {
 				fileData: [],
 				fileState: { ...mockFile, zoom: false },
 				componentState: mockComponentState,
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
@@ -128,6 +135,7 @@ describe("ImageSlider", () => {
 					isImage: false,
 				},
 				componentState: { ...mockComponentState, zoom: false },
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};

@@ -79,7 +79,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 					</div>
 				)}
 			</div>
-			<div className="h-5 w-44">{fileSrc && <FileFooter file={file} fileSrc={fileSrc} />}</div>
+			<div className="h-5 w-44">{fileSrc && <FileFooter file={file} fileSrc={fileSrc} index={index} isImage={imageFileTypes.includes(file.type)} />}</div>
 		</>
 	);
 };

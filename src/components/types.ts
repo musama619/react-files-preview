@@ -11,4 +11,6 @@ export type FileIcon = {
 export type FileFooterProps = {
 	file: File;
 	fileSrc: string | null;
+	index: number;
+	isImage: boolean;
 };

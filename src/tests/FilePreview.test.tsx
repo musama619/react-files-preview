@@ -22,9 +22,14 @@ describe("FilePreview component", () => {
 		rounded: true,
 		fileHeight: "h-32",
 		fileWidth: "w-44",
-		disabled: false
+		disabled: false,
+		allowEditing: false
 	};
-
+	const mockImageEditorState = {
+		isEditing: false,
+		file: null,
+		index: null
+	};
 	const mockDispatch = vi.fn();
 
 	const mockFileContext = {
@@ -32,6 +37,7 @@ describe("FilePreview component", () => {
 			fileData: [],
 			fileState: mockFileState,
 			componentState: mockComponentState,
+			imageEditorState: mockImageEditorState
 		},
 		dispatch: mockDispatch,
 	};
@@ -42,6 +48,7 @@ describe("FilePreview component", () => {
 				fileData: [],
 				fileState: { ...mockFileState, isImage: false },
 				componentState: mockComponentState,
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
@@ -102,6 +109,7 @@ describe("FilePreview component", () => {
 				fileData: [],
 				fileState: { ...mockFileState, isImage: false },
 				componentState: mockComponentState,
+				imageEditorState: mockImageEditorState
 			},
 			dispatch: mockDispatch,
 		};
