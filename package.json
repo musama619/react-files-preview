@@ -1,6 +1,6 @@
 {
 	"name": "react-files-preview",
-	"description": "A file view component for React app.",
+	"description": "A file view component for React apps with file preview, image editing, slider, and download option.",
 	"private": false,
 	"version": "2.0.0",
 	"author": "Usama Chouhan (musama619)",
