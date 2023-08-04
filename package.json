@@ -14,8 +14,7 @@
 	"types": "dist/index.d.ts",
 	"exports": {
 		".": {
-			"import": "./dist/react-files-preview.es.js",
-			"types": "./dist/index.d.ts"
+			"import": "./dist/react-files-preview.es.js"
 		},
 		"./dist/style.css": {
 			"import": "./dist/style.css"
@@ -42,9 +41,7 @@
 		"react file viewer"
 	],
 	"files": [
-		"dist",
-		"README.md",
-		"style.css"
+		"dist"
 	],
 	"scripts": {
 		"dev": "vite",
