@@ -13,7 +13,7 @@ export default defineConfig({
 	],
 	build: {
 		lib: {
-			entry: path.resolve(__dirname, "src/index.ts"),
+			entry: path.resolve(__dirname, "src/index.tsx"),
 			name: "ReactFilesPreview",
 			fileName: (format) => `react-files-preview.${format}.js`,
 			formats: ["es"]
@@ -26,5 +26,6 @@ export default defineConfig({
 				},
 			},
 		},
+		minify: true,
 	},
 });
