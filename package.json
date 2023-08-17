@@ -2,7 +2,7 @@
 	"name": "react-files-preview",
 	"description": "A file view component for React apps with images preview, image editing, slider, download option and more.",
 	"private": false,
-	"version": "2.1.0",
+	"version": "2.2.0",
 	"author": "Usama Chouhan (musama619)",
 	"license": "MIT",
 	"type": "module",
@@ -23,19 +23,20 @@
 	},
 	"keywords": [
 		"react",
-		"reactjs",
-		"file previewer",
 		"file preview",
-		"react-files-preview",
-		"react-files-previewer",
-		"react file preview",
 		"react file previewer",
-		"file",
+		"react images",
+		"react image viewer",
+		"image viewer",
+		"react image editor",
+		"image editor",
+		"react image carousel",
+		"image carousel",
+		"carousel",
+		"react image slider",
+		"image slider",
 		"file viewer",
-		"file view",
 		"react-file-view",
-		"react-file-viewer",
-		"react file view",
 		"react file viewer"
 	],
 	"files": [
@@ -99,6 +100,6 @@
 		"vitest": "^0.34.1"
 	},
 	"dependencies": {
-		"react-photo-editor": "^1.0.1"
+		"react-photo-editor": "^1.2.0"
 	}
 }
