@@ -288,7 +288,7 @@ export const Main: React.FC<Props> = ({
 						) : (
 							<label
 								htmlFor="fileInput"
-								className={`${disabled
+								className={`text-black dark:text-slate-100 ${disabled
 									? `mx-auto cursor-not-allowed  flex items-center`
 									: "mx-auto cursor-pointer  flex items-center"
 									}`}

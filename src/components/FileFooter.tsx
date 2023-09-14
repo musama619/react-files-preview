@@ -35,9 +35,9 @@ const FileFooter: React.FC<FileFooterProps> = ({ file, fileSrc, index, isImage }
 	}
 	return (
 		<div className="relative ">
-			<h5 className="text-[12px] mt-1 font-normal break-words dark:text-white">{result}</h5>
+			<h5 className="text-[12px] mt-1 font-normal break-words text-black dark:text-slate-100">{result}</h5>
 			{componentState.showFileSize && (
-				<span data-testid="file-size" className="text-[10px] dark:text-white">
+				<span data-testid="file-size" className="text-[10px] text-black dark:text-slate-100">
 					{fileSize}
 				</span>
 			)}
