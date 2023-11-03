@@ -101,6 +101,11 @@ export interface Props {
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 
 	/**
+	 * Callback function invoked when a file is dropped.
+	*/
+	onDrop?: (event: React.DragEvent<HTMLDivElement>) => void;
+
+	/**
 	* Callback function invoked when a file is clicked.
 	* @param file - The clicked file.
 	*/

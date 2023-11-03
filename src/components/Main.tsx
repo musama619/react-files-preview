@@ -34,6 +34,7 @@ export const Main: React.FC<Props> = ({
 	onError,
 	getFiles,
 	onClick,
+	onDrop
 }) => {
 	const fileData = useContext(FileContext).state.fileData;
 	const fileState = useContext(FileContext).state.fileState;
@@ -184,6 +185,7 @@ export const Main: React.FC<Props> = ({
 		if (files && files.length > 0) {
 			if (!checkErrors(files)) {
 				dispatch({ type: "APPEND_FILE_DATA", payload: { files: files } });
+				onDrop && onDrop(event);
 			}
 		}
 	};
