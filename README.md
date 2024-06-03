@@ -17,8 +17,7 @@ A file view component for react.
 ```js 
 npm i react-files-preview
 ```
-## 🚀 Demo
-https://react-files-preview.netlify.app/
+## [Stackblitz - Check It Live](https://stackblitz.com/edit/react-flcdhq?file=src%2FApp.js,package.json)
 
 ## Usage
 
