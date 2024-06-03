@@ -9,7 +9,7 @@ const ImageSlider = () => {
 	const previewStyle = filePreviewStyle.filter((item) => item.type === file.type);
 	const { dispatch } = useContext(FileContext);
 	const hideZoom = () => {
-		if(file.fileSrc){
+		if (file.fileSrc) {
 			URL.revokeObjectURL(file.fileSrc);
 		}
 		dispatch({
@@ -78,7 +78,7 @@ const ImageSlider = () => {
 								href={file.fileSrc}
 								target="_blank"
 								rel="noreferrer"
-								download
+								download={file?.fileName}
 								className="text-white text-sm flex items-center mr-4 max-sm:mr-1 hover:bg-white hover:text-black rounded-lg pl-2 pr-2 pt-1 pb-1"
 							>
 								<svg
@@ -138,9 +138,8 @@ const ImageSlider = () => {
 					<div
 						id="file-slider"
 						data-testid="image-slider"
-						className={`${
-							componentState.rounded && `rounded-lg`
-						} relative w-[130vh] max-sm:w-96 max-md:w-[75vh] h-[78vh] max-sm:h-52 max-md:h-80   bg-slate-400 overflow-hidden transition-all delay-750 ease-in`}
+						className={`${componentState.rounded && `rounded-lg`
+							} relative w-[130vh] max-sm:w-96 max-md:w-[75vh] h-[78vh] max-sm:h-52 max-md:h-80   bg-slate-400 overflow-hidden transition-all delay-750 ease-in`}
 					>
 						{file.isImage ? (
 							file.fileSrc && (
@@ -149,9 +148,8 @@ const ImageSlider = () => {
 						) : (
 							<span className="flex w-full h-full items-center justify-center text-4xl">
 								<span
-									className={`${
-										previewStyle.length > 0 ? previewStyle[0].color : "bg-slate-400"
-									} rounded flex justify-center  w-48 h-48 items-center`}
+									className={`${previewStyle.length > 0 ? previewStyle[0].color : "bg-slate-400"
+										} rounded flex justify-center  w-48 h-48 items-center`}
 								>
 									{previewStyle.length > 0 ? (
 										previewStyle[0].icon
