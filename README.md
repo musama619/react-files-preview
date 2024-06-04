@@ -17,7 +17,7 @@ A file view component for react.
 ```js 
 npm i react-files-preview
 ```
-## [Stackblitz - Check It Live](https://stackblitz.com/edit/react-flcdhq?file=src%2FApp.js,package.json)
+## [Stackblitz - Check It Live](https://stackblitz.com/edit/vitejs-vite-xjck27?file=src%2FApp.tsx)
 
 ## Usage
 
