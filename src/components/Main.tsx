@@ -256,9 +256,9 @@ export const Main: React.FC<Props> = ({
 						className={`${height && `overflow-auto ${height}`} ${fileData.length == 0 &&
 							`border-2 border-dashed border-gray-300 ${disabled ? "" : `hover:bg-stone-200`} `
 							} flex flex-row flex-wrap gap-4 p-6 bg-stone-100  shadow dark:bg-gray-800 `}
-						onDragOver={handleDragOver}
-						onDragLeave={handleDragLeave}
-						onDrop={handleDrop}
+						onDragOver={disabled ? undefined : handleDragOver}
+						onDragLeave={disabled ? undefined : handleDragLeave}
+						onDrop={disabled ? undefined : handleDrop}
 						data-testid="dropzone"
 					>
 						{fileData.length > 0 ? (
