@@ -13,13 +13,17 @@ A file view component for react.
 
 ## Installation 
 
-
+### npm
 ```js 
 npm i react-files-preview
 ```
+### yarn
+```js 
+yarn add react-files-preview
+```
 ## [Stackblitz - Check It Live](https://stackblitz.com/edit/vitejs-vite-xjck27?file=src%2FApp.tsx)
 
-## Usage
+## Basic Usage
 
 ```js
 import { ReactFilesPreview } from 'react-files-preview'
@@ -35,6 +39,22 @@ function App() {
 
 export default App
 ```
+
+## Usage with Tailwind CSS
+If your project uses Tailwind CSS, you don’t need to import the CSS file directly. Instead, add the following path to the content array in your tailwind.config.js file:
+```js
+module.exports = {
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/react-files-preview/dist/*.js', // Add this line
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
 ## Props
 
 | Name | Type  |  Default  | Description |
