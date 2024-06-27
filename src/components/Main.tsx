@@ -4,10 +4,10 @@ import ImageSlider from "./ImageSlider";
 import Header from "./Header";
 import { Props } from "./interface";
 import { FileContext } from "../context/FileContext";
+import 'react-photo-editor/dist/style.css';
 
 const ReactPhotoEditor = React.lazy(async () => {
 	const { ReactPhotoEditor } = await import("react-photo-editor");
-	await import('react-photo-editor/dist/style.css')
 	return { default: ReactPhotoEditor };
 });
 

@@ -2,7 +2,7 @@
 	"name": "react-files-preview",
 	"description": "A file view component for React apps with images preview, image editing, slider, download option and more.",
 	"private": false,
-	"version": "2.4.4",
+	"version": "2.4.5",
 	"author": "Usama Chouhan (musama619)",
 	"license": "MIT",
 	"type": "module",
@@ -84,7 +84,7 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.4.3",
 		"eslint-plugin-storybook": "^0.6.12",
-		"jsdom": "^22.1.0",
+		"jsdom": "^24.1.0",
 		"path": "^0.12.7",
 		"postcss": "^8.4.24",
 		"prettier": "^3.3.2",
@@ -100,6 +100,6 @@
 		"vitest": "^1.6.0"
 	},
 	"dependencies": {
-		"react-photo-editor": "^2.1.2"
+		"react-photo-editor": "^2.1.3"
 	}
 }
