@@ -12,6 +12,7 @@ const ReactPhotoEditor = React.lazy(async () => {
 });
 
 export const Main: React.FC<Props> = ({
+	id,
 	files,
 	url,
 	downloadFile,
@@ -40,6 +41,7 @@ export const Main: React.FC<Props> = ({
 	const fileState = useContext(FileContext).state.fileState;
 	const componentState = useContext(FileContext).state.componentState;
 	const imageEditorState = useContext(FileContext).state.imageEditorState;
+	const inputId = id ?? `fileInput-${Date.now()}`;
 
 	const { dispatch } = useContext(FileContext);
 
@@ -243,6 +245,7 @@ export const Main: React.FC<Props> = ({
 				<div className={`${width ?? `basis-11/12`} mx-auto`}>
 					{fileData.length > 0 && (
 						<Header
+							id={inputId}
 							fileData={fileData}
 							multiple={multiple}
 							disabled={disabled}
@@ -289,7 +292,7 @@ export const Main: React.FC<Props> = ({
 							})
 						) : (
 							<label
-								htmlFor="fileInput"
+								htmlFor={inputId}
 								className={`text-black dark:text-slate-100 ${disabled
 									? `mx-auto cursor-not-allowed  flex items-center`
 									: "mx-auto cursor-pointer  flex items-center"
@@ -297,7 +300,7 @@ export const Main: React.FC<Props> = ({
 							>
 								Drop files here, or click to browse files
 								<input
-									id="fileInput"
+									id={inputId}
 									disabled={disabled}
 									type="file"
 									onChange={(e) => {
