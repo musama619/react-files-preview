@@ -91,7 +91,7 @@ export const Main: React.FC<Props> = ({
 						fileExt = filteredName[0].ext;
 					}
 
-					const file = new File([blob], "file" + fileExt ?? ".img", {
+					const file = new File([blob], "file" + (fileExt ?? ".img"), {
 						type: blob.type,
 					});
 

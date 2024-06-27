@@ -18,7 +18,7 @@ const meta: Meta<typeof ReactFilesPreview> = {
 	],
 	argTypes: {
 		files: {
-			control: "input",
+			control: "file",
 			description: "Array of File object(s)",
 		},
 		downloadFile: {
