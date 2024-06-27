@@ -2,7 +2,7 @@
 	"name": "react-files-preview",
 	"description": "A file view component for React apps with images preview, image editing, slider, download option and more.",
 	"private": false,
-	"version": "2.4.2",
+	"version": "2.4.3",
 	"author": "Usama Chouhan (musama619)",
 	"license": "MIT",
 	"type": "module",
