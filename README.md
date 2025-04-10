@@ -1,81 +1,150 @@
+# react-files-preview
+
 ![react-files-preview](https://github.com/musama619/react-files-preview/blob/main/react-files-preview.png?raw=true)
 
-<div align='center'>
+<p align="center">
+  <a href="https://www.npmjs.com/package/react-files-preview">
+    <img src="https://img.shields.io/npm/v/react-files-preview.svg" alt="NPM Version" />
+  </a>
+  <a href="https://www.npmjs.com/package/react-files-preview">
+    <img src="https://img.shields.io/npm/dm/react-files-preview.svg" alt="NPM Downloads" />
+  </a>
+  <a href="https://github.com/musama619/react-files-preview/blob/main/LICENSE">
+    <img src="https://img.shields.io/npm/l/react-files-preview.svg" alt="License" />
+  </a>
+  <a href="https://github.com/musama619/react-files-preview/actions/workflows/CodeQL.yml">
+    <img src="https://github.com/musama619/react-files-preview/workflows/CodeQL/badge.svg" alt="CodeQL" />
+  </a>
+</p>
 
+A versatile React component to display and manage file previews, supporting various customization options.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f1c6d960-e969-4396-bdaa-33e245a72bf6/deploy-status)](https://app.netlify.com/sites/react-file-view/deploys)&nbsp;![codeql](https://github.com/musama619/react-files-preview/workflows/CodeQL/badge.svg)&nbsp;[![npm](https://img.shields.io/npm/v/react-files-preview)](https://www.npmjs.com/package/react-files-preview)
+## 📋 Table of Contents
 
+- [Features](#-features)
+- [Installation](#-installation)
+- [Basic Usage](#-basic-usage)
+- [Live Demo](#-live-demo)
+- [Configuration Options](#️-configuration-options)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-</div>
+## ✨ Features
 
-# react-files-preview
-A file view component for react.
+- 🖼️ **Visual File Representation:** Displays previews for various image file types.
+- ✏️ **Integrated Image Editing:** Allows users to edit images using the features of `react-photo-editor` (brightness, contrast, rotate, flip, draw, etc.).
+- 📤 **Drag and Drop Support:** Allows users to easily add files by dragging and dropping.
+- 🖱️ **Click to Browse:** Enables file selection through a standard file input dialog.
+- 🗑️ **Remove Files:** Option to display a remove icon for individual files.
+- ⬇️ **Download Files:** Functionality to enable downloading of displayed files.
+- 🔢 **Slider Count:** Shows the current slide number and total count for image sliders.
+- 📏 **File Size Display:** Option to show the size of each file.
+- ⚙️ **Customizable Styling:** Offers props for adjusting width, height, and rounded corners using Tailwind CSS classes.
+- 🚫 **Disable Input:** Option to disable file selection.
+- 📄 **Accept Specific Types:** Control which file types are accepted.
+- 🔢 **Maximum File Limits:** Set constraints on the number and size of files.
+- 🔄 **Controlled Component:** Accepts an array of `files` as a prop for controlled behavior.
+- 👂 **Event Callbacks:** Provides callbacks for `onChange`, `onRemove`, `onError`, `onClick`, and `onDrop`.
 
-## Installation 
+## 📦 Installation
 
-### npm
-```js 
-npm i react-files-preview
-```
-### yarn
-```js 
+```bash
+# Using npm
+npm install react-files-preview
+
+# Using yarn
 yarn add react-files-preview
+
 ```
-## [Stackblitz - Check It Live](https://stackblitz.com/edit/vitejs-vite-xjck27?file=src%2FApp.tsx)
 
-## Basic Usage
+## 🚀 Basic Usage
 
-```js
-import { ReactFilesPreview } from 'react-files-preview'
-import 'react-files-preview/dist/style.css'  /* import css file*/
+```jsx
+import React, { useState } from "react";
+import { ReactFilesPreview } from "./components/ReactFilesPreview";
 
 function App() {
+  const [files, setFiles] = useState<File[]>([]);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newFiles = Array.from(event.target.files || []);
+    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+    console.log("Selected files:", newFiles);
+    console.log("All files:", [...files, ...newFiles]);
+  };
+
+  const handleFileRemove = (removedFile: File) => {
+    setFiles((prevFiles) => prevFiles.filter((file) => file !== removedFile));
+    console.log("Removed file:", removedFile);
+  };
+
   return (
-    <>
-      <ReactFilesPreview />
-    </>
-  )
+    <div>
+      <ReactFilesPreview
+        files={files}
+        onChange={handleFileChange}
+        onRemove={handleFileRemove}
+        allowEditing
+        multiple
+      />
+    </div>
+  );
 }
 
-export default App
+export default App;
 ```
 
-## Usage with Tailwind CSS
-If your project uses Tailwind CSS, you don’t need to import the CSS file directly. Instead, add the following path to the content array in your tailwind.config.js file:
-```js
-module.exports = {
-  content: [
-    './src/**/*.{js,jsx,ts,tsx}',
-    './node_modules/react-files-preview/dist/*.js', // Add this line
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-```
+## 📱 Live Demo
+
+See it in action on [Stackblitz](https://stackblitz.com/edit/vitejs-vite-xjck27?file=src%2FApp.tsx)
 
 ## Props
 
-| Name | Type  |  Default  | Description |
-| ------------ | --------- | ------------ | --------- |
-| **`files`** |  File[] | [] | Pass array of file objects for default files   |
-|  **`url`** | string  | null  |  Set image by passing image URL |
-|  **`downloadFile`** | boolean  | true  | Enables file download |
-| **`removeFile`** | boolean  | true  | Show file remove icon on file hover  |
-|  **`showFileSize`** | boolean  | true  | Show file size under files  |
-|  **`showSliderCount`** | boolean  | true  | Show slides count under file slider  |
-|  **`disabled`** | boolean  | false  | If true, prevents user to add files by disabling the component  |
-|  **`multiple`** | boolean  | true |  Accepts one or more files |
-|  **`accept`** | string  |   | Comma-separated lists of file types. See [MIME Types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)  |
-| **`maxFileSize`**  | number  |   |  Maximum allowed file size in bytes *e.g. 1024  x 1024 x 5 == 5MB*  |
-|  **`maxFiles`** | number  |   | Maximum files allowed to be added   |
-|  **`width`** | string  | basis-11/12   | Tailwind CSS **flex-basis** class https://tailwindcss.com/docs/flex-basis   |
-| **`height`**  | string  |  | Tailwind CSS **height** class https://tailwindcss.com/docs/height  |
-| **`fileWidth`**  |  string  |  w-44 |  Tailwind CSS **width** class https://tailwindcss.com/docs/width |
-| **`fileHeight`**  | string  | h-32 |  Tailwind CSS **height** class https://tailwindcss.com/docs/height |
-|  **`getFile`** | func  |   |  Returns all current files  |
-| **`onChange`**  | func  |   | Returns selected file(s)  |
-| **`onRemove`**  | func  |   | Returns the removed file  |
-|  **`onError`** | func  |   | Returns error message as string  |
-|  **`onClick`** | func  |   | Returns file on click  |
+| Name                  | Type    | Default         | Description                                                                                                                                     |
+| --------------------- | ------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`files`**           | File[]  | []              | Pass array of file objects for default files                                                                                                    |
+| **`url`**             | string  | null            | Set image by passing image URL                                                                                                                  |
+| **`downloadFile`**    | boolean | true            | Enables file download                                                                                                                           |
+| **`removeFile`**      | boolean | true            | Show file remove icon on file hover                                                                                                             |
+| **`showFileSize`**    | boolean | true            | Show file size under files                                                                                                                      |
+| **`showSliderCount`** | boolean | true            | Show slides count under file slider                                                                                                             |
+| **`disabled`**        | boolean | false           | If true, prevents user to add files by disabling the component                                                                                  |
+| **`multiple`**        | boolean | true            | Accepts one or more files                                                                                                                       |
+| **`accept`**          | string  |                 | Comma-separated lists of file types. See [MIME Types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) |
+| **`maxFileSize`**     | number  |                 | Maximum allowed file size in bytes _e.g. 1024 x 1024 x 5 == 5MB_                                                                                |
+| **`maxFiles`**        | number  |                 | Maximum files allowed to be added                                                                                                               |
+| **`width`**           | string  | rfp-basis-11/12 | Tailwind CSS **flex-basis** class https://tailwindcss.com/docs/flex-basis                                                                       |
+| **`height`**          | string  |                 | Tailwind CSS **height** class https://tailwindcss.com/docs/height                                                                               |
+| **`fileWidth`**       | string  | rfp-w-44        | Tailwind CSS **width** class https://tailwindcss.com/docs/width                                                                                 |
+| **`fileHeight`**      | string  | rfp-h-32        | Tailwind CSS **height** class https://tailwindcss.com/docs/height                                                                               |
+| **`getFile`**         | func    |                 | Returns all current files                                                                                                                       |
+| **`onChange`**        | func    |                 | Returns selected file(s)                                                                                                                        |
+| **`onRemove`**        | func    |                 | Returns the removed file                                                                                                                        |
+| **`onError`**         | func    |                 | Returns error message as string                                                                                                                 |
+| **`onClick`**         | func    |                 | Returns file on click                                                                                                                           |
+
+## 🤝 Contributing
+
+Contributions to `react-files-preview` are welcome! If you have any issues, feature requests, or improvements, please open an issue or submit a pull request on the [GitHub repository](https://github.com/musama619/react-files-preview).
+
+### How to Contribute
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add some amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a pull request
+
+### Reporting Issues
+
+When reporting issues, please provide:
+
+- A clear description of the problem
+- Steps to reproduce
+- Expected vs actual behavior
+- Screenshots if applicable
+- Environment details (browser, OS, etc.)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/musama619/react-files-preview/blob/main/LICENSE) file for details.
