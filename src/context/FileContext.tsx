@@ -52,7 +52,7 @@ const imageFileTypes: string[] = [
 	"image/gif",
 	"image/tiff",
 ];
-export const fileReducer = (state: InitialState, action: any) => {
+export const fileReducer = (state: InitialState, action: FileAction) => {
 	const lastIndex = state.fileData.length - 1;
 
 	const updateFileState = (index: number) => {
@@ -138,8 +138,8 @@ export const FileContext = createContext<FileContext>({
 			downloadFile: true,
 			removeFile: true,
 			rounded: true,
-			fileHeight: "h-32",
-			fileWidth: "w-44",
+			fileHeight: "rfp-h-32",
+			fileWidth: "rfp-w-44",
 			disabled: false,
 			allowEditing: false,
 		},
@@ -149,7 +149,7 @@ export const FileContext = createContext<FileContext>({
 			file: null,
 		},
 	},
-	dispatch: () => { },
+	dispatch: () => {},
 });
 
 export const FileProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -170,8 +170,10 @@ export const FileProvider: React.FC<{ children: React.ReactNode }> = ({ children
 			downloadFile: true,
 			removeFile: true,
 			rounded: true,
-			fileHeight: "h-32",
-			fileWidth: "w-44",
+			fileHeight: "rfp-h-32",
+			fileWidth: "rfp-w-44",
+			disabled: false,
+			allowEditing: false,
 		},
 		imageEditorState: {
 			isEditing: false,
@@ -180,7 +182,5 @@ export const FileProvider: React.FC<{ children: React.ReactNode }> = ({ children
 		},
 	});
 
-	return (
-		<FileContext.Provider value={{ state, dispatch }}>{children}</FileContext.Provider>
-	);
+	return <FileContext.Provider value={{ state, dispatch }}>{children}</FileContext.Provider>;
 };

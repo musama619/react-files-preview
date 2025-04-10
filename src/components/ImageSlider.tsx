@@ -52,22 +52,24 @@ const ImageSlider = () => {
 			<div>
 				<div
 					id="slider"
-					className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-80 z-20"
+					className="rfp-fixed rfp-top-0 rfp-left-0 rfp-right-0 rfp-bottom-0 rfp-flex rfp-items-center rfp-justify-center rfp-bg-black rfp-bg-opacity-80 rfp-z-20"
 				>
 					<div
 						id="slider-header"
-						className="absolute top-0 left-0 right-0 flex justify-between items-center p-2 shadow-md shadow-gray-950 bg-black bg-opacity-80"
+						className="rfp-absolute rfp-top-0 rfp-left-0 rfp-right-0 rfp-flex rfp-justify-between rfp-items-center rfp-p-2 rfp-shadow-md rfp-shadow-gray-950 rfp-bg-black rfp-bg-opacity-80"
 					>
-						<span className="text-white flex-1 ml-14 max-sm:ml-1">{file.fileName}</span>
+						<span className="rfp-text-white rfp-flex-1 rfp-ml-14 rfp-max-sm:ml-1">
+							{file.fileName}
+						</span>
 						<button
-							className="text-white text-sm flex items-center mr-4  max-sm:mr-1 hover:bg-white hover:text-black rounded-lg pl-2 pr-2 pt-1 pb-1"
+							className="rfp-text-white rfp-text-sm rfp-flex rfp-items-center rfp-mr-4  rfp-max-sm:mr-1 hover:rfp-bg-white hover:rfp-text-black rfp-rounded-lg rfp-pl-2 rfp-pr-2 rfp-pt-1 rfp-pb-1"
 							onClick={toggleFullScreen}
 							aria-label="toggle-fullscreen"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="currentColor"
-								className="h-4 stroke-2"
+								className="rfp-h-4 rfp-stroke-2"
 								viewBox="0 0 16 16"
 							>
 								<path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z" />
@@ -79,12 +81,12 @@ const ImageSlider = () => {
 								target="_blank"
 								rel="noreferrer"
 								download={file?.fileName}
-								className="text-white text-sm flex items-center mr-4 max-sm:mr-1 hover:bg-white hover:text-black rounded-lg pl-2 pr-2 pt-1 pb-1"
+								className="rfp-text-white rfp-text-sm rfp-flex rfp-items-center rfp-mr-4 max-sm:rfp-mr-1 hover:rfp-bg-white hover:rfp-text-black rfp-rounded-lg rfp-pl-2 rfp-pr-2 rfp-pt-1 rfp-pb-1"
 							>
 								<svg
 									fill="none"
 									stroke="currentColor"
-									className="mr-1 h-4 stroke-2"
+									className="rfp-mr-1 rfp-h-4 rfp-stroke-2"
 									viewBox="0 0 24 24"
 									xmlns="http://www.w3.org/2000/svg"
 									aria-hidden="true"
@@ -99,7 +101,7 @@ const ImageSlider = () => {
 							</a>
 						)}
 						<button
-							className="text-white text-sm flex items-center mr-2 max-sm:mr-0 hover:bg-white hover:text-black rounded-lg pl-2 pr-2 pt-1 pb-1"
+							className="rfp-text-white rfp-text-sm rfp-flex rfp-items-center rfp-mr-2 max-sm:rfp-mr-0 hover:rfp-bg-white hover:rfp-text-black rfp-rounded-lg rfp-pl-2 rfp-pr-2 rfp-pt-1 rfp-pb-1"
 							onClick={hideZoom}
 						>
 							<svg
@@ -108,7 +110,7 @@ const ImageSlider = () => {
 								viewBox="0 0 24 24"
 								strokeWidth="1.5"
 								stroke="currentColor"
-								className="mr-1 w-4 h-4"
+								className="rfp-mr-1 rfp-w-4 rfp-h-4"
 							>
 								<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
 							</svg>
@@ -117,13 +119,13 @@ const ImageSlider = () => {
 					</div>
 					<button
 						id="slider-prev-button"
-						className="absolute top-1/2 left-1 ml-2 p-1 max-sm:top-3/4 transform -translate-y-1/2 z-20 text-white rounded-full hover:bg-white hover:text-black"
+						className="rfp-absolute rfp-top-1/2 rfp-left-1 rfp-ml-2 rfp-p-1 rfp-transform -rfp-translate-y-1/2 rfp-z-20 rfp-text-white rfp-rounded-full hover:rfp-bg-white hover:rfp-text-black rfp-max-sm:rfp-top-auto rfp-max-sm:rfp-bottom-4 rfp-max-sm:rfp-left-4"
 						onClick={prevFile}
 						data-testid="prev-file"
 					>
 						<svg
 							fill="none"
-							className="h-10 w-10 stroke-white transform rotate-180 stroke-2 hover:stroke-black"
+							className="rfp-h-10 rfp-w-10 rfp-stroke-white rfp-transform rfp-rotate-180 rfp-stroke-2 hover:rfp-stroke-black"
 							viewBox="0 0 24 24"
 							xmlns="http://www.w3.org/2000/svg"
 							aria-hidden="true"
@@ -138,18 +140,24 @@ const ImageSlider = () => {
 					<div
 						id="file-slider"
 						data-testid="image-slider"
-						className={`${componentState.rounded && `rounded-lg`
-							} relative w-[130vh] max-sm:w-96 max-md:w-[75vh] h-[78vh] max-sm:h-52 max-md:h-80   bg-slate-400 overflow-hidden transition-all delay-750 ease-in`}
+						className={`${
+							componentState.rounded && `rfp-rounded-lg`
+						} rfp-relative rfp-w-[90vw] rfp-max-w-[130vh] rfp-h-[80vh] rfp-max-h-[80vh] rfp-overflow-hidden rfp-transition-all rfp-delay-750 rfp-ease-in`}
 					>
 						{file.isImage ? (
 							file.fileSrc && (
-								<img className="object-fit w-full h-full " src={file.fileSrc} alt="Zoomed Image" />
+								<img
+									className="rfp-w-full rfp-h-full rfp-object-contain rfp-max-w-full rfp-max-h-full"
+									src={file.fileSrc}
+									alt="Zoomed Image"
+								/>
 							)
 						) : (
-							<span className="flex w-full h-full items-center justify-center text-4xl">
+							<span className="rfp-flex rfp-w-full rfp-h-full rfp-items-center rfp-justify-center rfp-text-4xl">
 								<span
-									className={`${previewStyle.length > 0 ? previewStyle[0].color : "bg-slate-400"
-										} rounded flex justify-center  w-48 h-48 items-center`}
+									className={`${
+										previewStyle.length > 0 ? previewStyle[0].color : "rfp-bg-slate-400"
+									} rfp-rounded rfp-flex rfp-justify-center rfp-w-48 rfp-h-48 rfp-items-center`}
 								>
 									{previewStyle.length > 0 ? (
 										previewStyle[0].icon
@@ -157,7 +165,7 @@ const ImageSlider = () => {
 										<svg
 											data-testid="default-icon"
 											xmlns="http://www.w3.org/2000/svg"
-											className="h-10 w-40 text-4xl"
+											className="rfp-h-10 rfp-w-40 rfp-text-4xl"
 											viewBox="0 0 16 16"
 										>
 											<path d="M7 4.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm-.861 1.542 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V7.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V7s1.54-1.274 1.639-1.208zM5 9a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z" />
@@ -170,13 +178,13 @@ const ImageSlider = () => {
 					</div>
 					<button
 						id="slider-next-button"
-						className="absolute top-1/2 mr-2 p-1 right-1 max-sm:top-3/4  transform -translate-y-1/2 text-white rounded-full hover:bg-white hover:text-black"
+						className="rfp-absolute rfp-top-1/2 rfp-mr-2 rfp-p-1 rfp-right-1 rfp-transform -rfp-translate-y-1/2 rfp-text-white rfp-rounded-full hover:rfp-bg-white hover:rfp-text-black rfp-max-sm:rfp-top-auto rfp-max-sm:rfp-bottom-4 rfp-max-sm:rfp-right-4"
 						onClick={nextFile}
 						data-testid="next-file"
 					>
 						<svg
 							fill="none"
-							className=" stroke-white h-10 w-10 stroke-2 hover:stroke-black"
+							className=" rfp-stroke-white rfp-h-10 rfp-w-10 rfp-stroke-2 hover:rfp-stroke-black"
 							viewBox="0 0 24 24"
 							xmlns="http://www.w3.org/2000/svg"
 							aria-hidden="true"

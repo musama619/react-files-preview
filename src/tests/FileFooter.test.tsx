@@ -11,8 +11,8 @@ describe("FileFooter component", () => {
         downloadFile: true,
         removeFile: true,
         rounded: true,
-        fileHeight: "h-32",
-        fileWidth: "w-44",
+        fileHeight: "rfp-h-32",
+        fileWidth: "rfp-w-44",
         disabled: false,
         allowEditing: false
     };

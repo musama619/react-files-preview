@@ -4,7 +4,6 @@ import ImageSlider from "./ImageSlider";
 import Header from "./Header";
 import { Props } from "./interface";
 import { FileContext } from "../context/FileContext";
-import 'react-photo-editor/dist/style.css';
 
 const ReactPhotoEditor = React.lazy(async () => {
 	const { ReactPhotoEditor } = await import("react-photo-editor");
@@ -35,7 +34,7 @@ export const Main: React.FC<Props> = ({
 	onError,
 	getFiles,
 	onClick,
-	onDrop
+	onDrop,
 }) => {
 	const fileData = useContext(FileContext).state.fileData;
 	const fileState = useContext(FileContext).state.fileState;
@@ -109,9 +108,20 @@ export const Main: React.FC<Props> = ({
 		fetchData();
 	}, []);
 
+	const filterDuplicateFiles = (newFiles: File[], existingFiles: File[]) => {
+		const existingMap = new Map<string, boolean>();
+		existingFiles.forEach((file) => {
+			existingMap.set(`${file.name}_${file.size}`, true);
+		});
+
+		return newFiles.filter((file) => !existingMap.has(`${file.name}_${file.size}`));
+	};
+
 	useEffect(() => {
 		if (files && files.length > 0) {
-			if (!checkErrors(files)) {
+			const uniqueFiles = filterDuplicateFiles(files, fileData);
+
+			if (uniqueFiles && !checkErrors(files)) {
 				dispatch({ type: "STORE_FILE_DATA", payload: { files: files } });
 			}
 		}
@@ -126,8 +136,8 @@ export const Main: React.FC<Props> = ({
 				showFileSize: showFileSize != undefined ? showFileSize : true,
 				showSliderCount: showSliderCount != undefined ? showSliderCount : true,
 				rounded: rounded != undefined ? rounded : true,
-				fileHeight: fileHeight ?? "h-32",
-				fileWidth: fileWidth ?? "w-44",
+				fileHeight: fileHeight ?? "rfp-h-32",
+				fileWidth: fileWidth ?? "rfp-w-44",
 				disabled: disabled ?? false,
 				allowEditing: allowEditing ?? false,
 			},
@@ -141,14 +151,15 @@ export const Main: React.FC<Props> = ({
 		fileWidth,
 		rounded,
 		disabled,
-		allowEditing
+		allowEditing,
 	]);
 
 	const handleImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const files = Array.from(e.target.files || []);
+		const newFiles = filterDuplicateFiles(files, fileData);
 
-		if (!checkErrors(files)) {
-			dispatch({ type: "APPEND_FILE_DATA", payload: { files: files } });
+		if (newFiles.length && !checkErrors(newFiles)) {
+			dispatch({ type: "APPEND_FILE_DATA", payload: { files: newFiles } });
 		}
 	};
 
@@ -183,12 +194,11 @@ export const Main: React.FC<Props> = ({
 	const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
 		event.preventDefault();
 		const files = Array.from(event.dataTransfer.files);
+		const newFiles = filterDuplicateFiles(files, fileData);
 
-		if (files && files.length > 0) {
-			if (!checkErrors(files)) {
-				dispatch({ type: "APPEND_FILE_DATA", payload: { files: files } });
-				onDrop && onDrop(event);
-			}
+		if (newFiles.length && !checkErrors(newFiles)) {
+			dispatch({ type: "APPEND_FILE_DATA", payload: { files: newFiles } });
+			onDrop && onDrop(event);
 		}
 	};
 
@@ -199,11 +209,11 @@ export const Main: React.FC<Props> = ({
 			dispatch({
 				type: "STORE_FILE_DATA",
 				payload: {
-					files: fileList
+					files: fileList,
 				},
 			});
 		}
-	}
+	};
 
 	const closeImageEditor = () => {
 		dispatch({
@@ -211,10 +221,10 @@ export const Main: React.FC<Props> = ({
 			payload: {
 				isEditing: false,
 				file: null,
-				index: null
+				index: null,
 			},
 		});
-	}
+	};
 
 	if (fileState.zoom) {
 		return (
@@ -224,8 +234,7 @@ export const Main: React.FC<Props> = ({
 		);
 	}
 
-
-	if (imageEditorState.isEditing && imageEditorState.file) {
+	if (imageEditorState.isEditing && imageEditorState.file && !disabled) {
 		return (
 			<Suspense fallback={<></>}>
 				<ReactPhotoEditor
@@ -240,9 +249,15 @@ export const Main: React.FC<Props> = ({
 	}
 
 	return (
-		<div className="w-full">
-			<div className="flex flex-row max-h-2">
-				<div className={`${width ?? `basis-11/12`} mx-auto`}>
+		<div
+			className={`rfp-w-full ${disabled ? "rfp-cursor-not-allowed" : "hover:rfp-cursor-pointer"}`}
+			onDragOver={disabled ? undefined : handleDragOver}
+			onDragLeave={disabled ? undefined : handleDragLeave}
+			onDrop={disabled ? undefined : handleDrop}
+			data-testid="dropzone"
+		>
+			<div className="rfp-flex rfp-flex-row rfp-max-h-2">
+				<div className={`${width ?? `rfp-basis-11/12`} rfp-mx-auto`}>
 					{fileData.length > 0 && (
 						<Header
 							id={inputId}
@@ -256,25 +271,42 @@ export const Main: React.FC<Props> = ({
 					)}
 
 					<div
-						className={`${height && `overflow-auto ${height}`} ${fileData.length == 0 &&
-							`border-2 border-dashed border-gray-300 ${disabled ? "" : `hover:bg-stone-200`} `
-							} flex flex-row flex-wrap gap-4 p-6 bg-stone-100  shadow dark:bg-gray-800 `}
-						onDragOver={disabled ? undefined : handleDragOver}
-						onDragLeave={disabled ? undefined : handleDragLeave}
-						onDrop={disabled ? undefined : handleDrop}
-						data-testid="dropzone"
+						className={`${height && `rfp-overflow-auto ${height}`} ${
+							fileData.length == 0 &&
+							`rfp-border-2 rfp-border-dashed rfp-border-gray-300 ${
+								disabled
+									? "rfp-cursor-not-allowed"
+									: "hover:rfp-bg-stone-200 dark:hover:rfp-bg-zinc-900"
+							}`
+						} rfp-flex rfp-flex-row rfp-flex-wrap rfp-gap-4 rfp-p-6 rfp-bg-stone-100  rfp-shadow dark:rfp-bg-zinc-800 `}
+						onClick={(e) => {
+							if (!disabled && fileData.length === 0) {
+								e.stopPropagation();
+								document.getElementById(inputId)?.click();
+							}
+						}}
 					>
 						{fileData.length > 0 ? (
 							fileData.map((file, idx) => {
 								return (
-									<div key={idx} className="relative pb-5 group" onClick={() => handleClick(file)}>
-										<div className="ml-9">
+									<div
+										key={idx}
+										className="rfp-relative rfp-pb-5 rfp-group"
+										onClick={(e) => {
+											e.stopPropagation();
+											handleClick(file);
+										}}
+									>
+										<div className="rfp-ml-9">
 											{componentState.removeFile ? (
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
 													data-testid="remove-file-button"
-													onClick={() => remove(file)}
-													className="absolute -top-2 right-0 z-10 text-black opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer h-5 w-5"
+													onClick={(e) => {
+														e.stopPropagation();
+														remove(file);
+													}}
+													className="rfp-absolute -rfp-top-2 rfp-right-0 rfp-z-10 dark:rfp-text-white rfp-text-black dark:hover:rfp-text-slate-200 rfp-opacity-0 group-hover:rfp-opacity-100 rfp-transition-opacity rfp-cursor-pointer rfp-h-5 rfp-w-5"
 													fill="currentColor"
 													viewBox="0 0 16 16"
 												>
@@ -284,7 +316,7 @@ export const Main: React.FC<Props> = ({
 												<></>
 											)}
 										</div>
-										<div className="clear-right">
+										<div className="rfp-clear-right">
 											<FilePreview file={file} index={idx} />
 										</div>
 									</div>
@@ -293,10 +325,12 @@ export const Main: React.FC<Props> = ({
 						) : (
 							<label
 								htmlFor={inputId}
-								className={`text-black dark:text-slate-100 ${disabled
-									? `mx-auto cursor-not-allowed  flex items-center`
-									: "mx-auto cursor-pointer  flex items-center"
-									}`}
+								className={`rfp-text-black dark:rfp-text-slate-100 ${
+									disabled
+										? `rfp-mx-auto rfp-cursor-not-allowed rfp-flex rfp-items-center`
+										: "rfp-mx-auto rfp-cursor-pointer rfp-flex rfp-items-center"
+								}`}
+								onClick={(e) => e.stopPropagation()}
 							>
 								Drop files here, or click to browse files
 								<input
