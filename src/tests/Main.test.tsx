@@ -28,12 +28,12 @@ describe("Main Component", () => {
 		fileHeight: "h-32",
 		fileWidth: "w-44",
 		disabled: false,
-		allowEditing: false
+		allowEditing: false,
 	};
 	const mockImageEditorState = {
 		isEditing: false,
 		file: null,
-		index: null
+		index: null,
 	};
 
 	const mockDispatch = vi.fn();
@@ -43,7 +43,7 @@ describe("Main Component", () => {
 			fileData: [],
 			fileState: mockFileState,
 			componentState: mockComponentState,
-			imageEditorState: mockImageEditorState
+			imageEditorState: mockImageEditorState,
 		},
 		dispatch: mockDispatch,
 	};
@@ -64,14 +64,14 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: mockDispatch,
 		};
 		render(
 			<FileContext.Provider value={mockFileContext}>
 				<Main {...mockProps} />
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
 		const filePreviews = screen.queryByTestId("file-preview");
@@ -84,14 +84,14 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: mockDispatch,
 		};
 		render(
 			<FileContext.Provider value={mockFileContext}>
 				<Main {...mockProps} />
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
 		const addMoreLabel = screen.getByText(/Add more/i);
@@ -104,7 +104,7 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: mockDispatch,
 		};
@@ -119,7 +119,7 @@ describe("Main Component", () => {
 					showSliderCount={true}
 					multiple={true}
 				/>
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
 		const removeFileButton = screen.queryByTestId("remove-file-button");
@@ -138,7 +138,7 @@ describe("Main Component", () => {
 					showSliderCount={true}
 					multiple={true}
 				/>
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
 		expect(screen.queryByText(/Drop files here, or click to browse files/i)).toBeInTheDocument();
@@ -150,14 +150,14 @@ describe("Main Component", () => {
 				fileData: mockFiles,
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: false },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: mockDispatch,
 		};
 		render(
 			<FileContext.Provider value={mockFileContext}>
 				<Main {...mockProps} />
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
 		expect(screen.queryByTestId("remove-file-button")).toBeNull();
@@ -171,7 +171,7 @@ describe("Main Component", () => {
 				fileData: [],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: false, zoom: false },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: mockDispatch,
 		};
@@ -189,7 +189,7 @@ describe("Main Component", () => {
 					maxFileSize={1000000000}
 					maxFiles={50}
 				/>
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
 		fireEvent.change(screen.getByLabelText(/Drop files here, or click to browse files/i), {
@@ -208,7 +208,7 @@ describe("Main Component", () => {
 				fileData: [],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: false, zoom: false },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: mockDispatch,
 		};
@@ -227,7 +227,7 @@ describe("Main Component", () => {
 					maxFiles={50}
 					onChange={onChange}
 				/>
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
 		fireEvent.change(screen.getByLabelText(/Drop files here, or click to browse files/i), {
@@ -244,7 +244,7 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: mockDispatch,
 		};
@@ -261,7 +261,7 @@ describe("Main Component", () => {
 					maxFiles={50}
 					onChange={onChange}
 				/>
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
 		fireEvent.change(screen.getByLabelText(/Add more/i), {
@@ -276,7 +276,7 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: { ...mockFileState, zoom: true, fileName: "test.txt" },
 				componentState: { ...mockComponentState, removeFile: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: vi.fn(),
 		};
@@ -293,7 +293,7 @@ describe("Main Component", () => {
 					maxFileSize={1000000000}
 					maxFiles={50}
 				/>
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
 		expect(screen.getByText(/test.txt/i)).toBeInTheDocument();
@@ -313,7 +313,7 @@ describe("Main Component", () => {
 					multiple={true}
 					getFiles={getFiles}
 				/>
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
 		expect(getFiles).toBeCalled();
@@ -325,7 +325,7 @@ describe("Main Component", () => {
 				fileData: [],
 				fileState: { ...mockFileState, zoom: false, fileName: "test.txt" },
 				componentState: { ...mockComponentState, removeFile: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: vi.fn(),
 		};
@@ -340,7 +340,7 @@ describe("Main Component", () => {
 					showSliderCount={true}
 					multiple={true}
 				/>
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 		const divElement = screen.getByTestId("dropzone");
 		const dragEventMock = {
@@ -365,7 +365,7 @@ describe("Main Component", () => {
 				fileData: [],
 				fileState: { ...mockFileState, zoom: false, fileName: "test.txt" },
 				componentState: { ...mockComponentState, removeFile: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: vi.fn(),
 		};
@@ -380,7 +380,7 @@ describe("Main Component", () => {
 					showSliderCount={true}
 					multiple={true}
 				/>
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 		const divElement = screen.getByTestId("dropzone");
 		const dragEventMock = {
@@ -412,7 +412,7 @@ describe("Main Component", () => {
 				fileData: files,
 				fileState: { ...mockFileState, zoom: false, fileName: "test.txt" },
 				componentState: { ...mockComponentState, removeFile: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: vi.fn(),
 		};
@@ -420,7 +420,7 @@ describe("Main Component", () => {
 			return render(
 				<FileContext.Provider value={mockFileContext}>
 					<Main files={files} onError={mockOnError} maxFiles={2} />
-				</FileContext.Provider>
+				</FileContext.Provider>,
 			);
 		};
 
@@ -443,7 +443,7 @@ describe("Main Component", () => {
 				fileData: [file1, file2],
 				fileState: { ...mockFileState, zoom: false, fileName: "test.txt" },
 				componentState: { ...mockComponentState, removeFile: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: vi.fn(),
 		};
@@ -451,7 +451,7 @@ describe("Main Component", () => {
 			return render(
 				<FileContext.Provider value={mockFileContext}>
 					<Main files={[file1, file2]} onError={mockOnError} maxFileSize={1000} />
-				</FileContext.Provider>
+				</FileContext.Provider>,
 			);
 		};
 
@@ -474,9 +474,9 @@ describe("Main Component", () => {
 					multiple={true}
 					disabled={true}
 				/>
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
-		expect(container.getElementsByClassName("cursor-not-allowed").length).toBe(1);
+		expect(container.getElementsByClassName("rfp-cursor-not-allowed").length).toBe(3);
 	});
 
 	it("should have disabled cursor class if files not empty and disabled is true", async () => {
@@ -485,17 +485,17 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true, disabled: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: mockDispatch,
 		};
 		const { container } = render(
 			<FileContext.Provider value={mockFileContext}>
 				<Main {...mockProps} />
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
-		expect(container.getElementsByClassName("cursor-not-allowed").length).toBe(1);
+		expect(container.getElementsByClassName("rfp-cursor-not-allowed").length).toBe(2);
 	});
 	it("should class onClick function", async () => {
 		const onClick = vi.fn();
@@ -504,17 +504,17 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true, disabled: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: mockDispatch,
 		};
 		const { container } = render(
 			<FileContext.Provider value={mockFileContext}>
 				<Main {...mockProps} onClick={onClick} />
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
-		fireEvent.click(container.getElementsByClassName("relative")[0]);
+		fireEvent.click(container.getElementsByClassName("rfp-relative")[0]);
 
 		expect(onClick).toHaveBeenCalledTimes(1);
 	});
@@ -525,14 +525,14 @@ describe("Main Component", () => {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
 				componentState: { ...mockComponentState, removeFile: true, disabled: true },
-				imageEditorState: mockImageEditorState
+				imageEditorState: mockImageEditorState,
 			},
 			dispatch: mockDispatch,
 		};
 		render(
 			<FileContext.Provider value={mockFileContext}>
 				<Main {...mockProps} onRemove={remove} />
-			</FileContext.Provider>
+			</FileContext.Provider>,
 		);
 
 		fireEvent.click(screen.getByTestId("remove-file-button"));
