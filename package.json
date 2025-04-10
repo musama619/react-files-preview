@@ -1,11 +1,15 @@
 {
 	"name": "react-files-preview",
-	"description": "A file view component for React apps with images preview, image editing, slider, download option and more.",
+	"description": "A React file preview component with built-in support for image editing, image carousel/slider, and download functionality, making it easy to display and manage files in your application",
 	"private": false,
-	"version": "2.4.5",
+	"version": "3.0.0",
 	"author": "Usama Chouhan (musama619)",
 	"license": "MIT",
 	"type": "module",
+	"homepage": "https://github.com/musama619/react-files-preview",
+	"bugs": {
+		"url": "https://github.com/musama619/react-files-preview/issues"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/musama619/react-files-preview.git"
