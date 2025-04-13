@@ -21,12 +21,12 @@ describe("Main Component", () => {
 
 	const mockComponentState = {
 		showFileSize: true,
-		showSliderCount: true,
+		sliderIndicatorType: "dots" as "dots" | "count",
 		downloadFile: true,
 		removeFile: true,
 		rounded: true,
-		fileHeight: "h-32",
-		fileWidth: "w-44",
+        fileHeight: "8rem",
+        fileWidth: "11rem",
 		disabled: false,
 		allowEditing: false,
 	};
@@ -53,7 +53,7 @@ describe("Main Component", () => {
 		downloadFile: true,
 		removeFile: true,
 		showFileSize: true,
-		showSliderCount: true,
+		sliderIndicatorType: "dots" as "dots" | "count",
 		multiple: true,
 		disabled: true,
 	};
@@ -63,14 +63,18 @@ describe("Main Component", () => {
 			state: {
 				fileData: [new File(["test content"], "test.txt", { type: "text/plain" })],
 				fileState: mockFileState,
-				componentState: { ...mockComponentState, removeFile: true },
+				componentState: {
+					...mockComponentState,
+					removeFile: true,
+					sliderIndicatorType: "dots" as "dots" | "count",
+				},
 				imageEditorState: mockImageEditorState,
 			},
 			dispatch: mockDispatch,
 		};
 		render(
 			<FileContext.Provider value={mockFileContext}>
-				<Main {...mockProps} />
+				<Main {...mockProps} sliderIndicatorType="dots" />
 			</FileContext.Provider>,
 		);
 
@@ -116,7 +120,7 @@ describe("Main Component", () => {
 					downloadFile={true}
 					removeFile={true}
 					showFileSize={true}
-					showSliderCount={true}
+					sliderIndicatorType={"dots"}
 					multiple={true}
 				/>
 			</FileContext.Provider>,
@@ -135,7 +139,7 @@ describe("Main Component", () => {
 					downloadFile={true}
 					removeFile={true}
 					showFileSize={true}
-					showSliderCount={true}
+					sliderIndicatorType={"dots"}
 					multiple={true}
 				/>
 			</FileContext.Provider>,
@@ -184,7 +188,7 @@ describe("Main Component", () => {
 					downloadFile={true}
 					removeFile={true}
 					showFileSize={true}
-					showSliderCount={true}
+					sliderIndicatorType={"dots"}
 					multiple={true}
 					maxFileSize={1000000000}
 					maxFiles={50}
@@ -221,7 +225,7 @@ describe("Main Component", () => {
 					downloadFile={true}
 					removeFile={true}
 					showFileSize={true}
-					showSliderCount={true}
+					sliderIndicatorType={"dots"}
 					multiple={true}
 					maxFileSize={1000000000}
 					maxFiles={50}
@@ -255,7 +259,7 @@ describe("Main Component", () => {
 					downloadFile={true}
 					removeFile={true}
 					showFileSize={true}
-					showSliderCount={true}
+					sliderIndicatorType={"dots"}
 					multiple={true}
 					maxFileSize={1000000000}
 					maxFiles={50}
@@ -288,7 +292,7 @@ describe("Main Component", () => {
 					downloadFile={true}
 					removeFile={true}
 					showFileSize={true}
-					showSliderCount={true}
+					sliderIndicatorType={'dots'}
 					multiple={true}
 					maxFileSize={1000000000}
 					maxFiles={50}
@@ -309,7 +313,7 @@ describe("Main Component", () => {
 					downloadFile={true}
 					removeFile={true}
 					showFileSize={true}
-					showSliderCount={true}
+					sliderIndicatorType={'dots'}
 					multiple={true}
 					getFiles={getFiles}
 				/>
@@ -337,7 +341,7 @@ describe("Main Component", () => {
 					downloadFile={true}
 					removeFile={true}
 					showFileSize={true}
-					showSliderCount={true}
+					sliderIndicatorType={'dots'}
 					multiple={true}
 				/>
 			</FileContext.Provider>,
@@ -377,7 +381,7 @@ describe("Main Component", () => {
 					downloadFile={true}
 					removeFile={true}
 					showFileSize={true}
-					showSliderCount={true}
+					sliderIndicatorType={'dots'}
 					multiple={true}
 				/>
 			</FileContext.Provider>,
@@ -470,7 +474,7 @@ describe("Main Component", () => {
 					downloadFile={true}
 					removeFile={true}
 					showFileSize={true}
-					showSliderCount={true}
+					sliderIndicatorType={'dots'}
 					multiple={true}
 					disabled={true}
 				/>

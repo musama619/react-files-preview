@@ -34,10 +34,11 @@ A versatile React component to display and manage file previews, supporting vari
 - 🖼️ **Visual File Representation:** Displays previews for various image file types.
 - ✏️ **Integrated Image Editing:** Allows users to edit images using the features of `react-photo-editor` (brightness, contrast, rotate, flip, draw, etc.).
 - 📤 **Drag and Drop Support:** Allows users to easily add files by dragging and dropping.
+- 👆 **Interactive Image Slider**: Navigate through images with intuitive swiping gestures using mouse or touch.
 - 🖱️ **Click to Browse:** Enables file selection through a standard file input dialog.
 - 🗑️ **Remove Files:** Option to display a remove icon for individual files.
 - ⬇️ **Download Files:** Functionality to enable downloading of displayed files.
-- 🔢 **Slider Count:** Shows the current slide number and total count for image sliders.
+- 🔢 **Slider Indicator:** Shows the dots or current slide number and total count for image sliders.
 - 📏 **File Size Display:** Option to show the size of each file.
 - ⚙️ **Customizable Styling:** Offers props for adjusting width, height, and rounded corners using Tailwind CSS classes.
 - 🚫 **Disable Input:** Option to disable file selection.
@@ -100,28 +101,28 @@ See it in action on [Stackblitz](https://stackblitz.com/edit/vitejs-vite-xjck27?
 
 ## Props
 
-| Name                  | Type    | Default         | Description                                                                                                                                     |
-| --------------------- | ------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`files`**           | File[]  | []              | Pass array of file objects for default files                                                                                                    |
-| **`url`**             | string  | null            | Set image by passing image URL                                                                                                                  |
-| **`downloadFile`**    | boolean | true            | Enables file download                                                                                                                           |
-| **`removeFile`**      | boolean | true            | Show file remove icon on file hover                                                                                                             |
-| **`showFileSize`**    | boolean | true            | Show file size under files                                                                                                                      |
-| **`showSliderCount`** | boolean | true            | Show slides count under file slider                                                                                                             |
-| **`disabled`**        | boolean | false           | If true, prevents user to add files by disabling the component                                                                                  |
-| **`multiple`**        | boolean | true            | Accepts one or more files                                                                                                                       |
-| **`accept`**          | string  |                 | Comma-separated lists of file types. See [MIME Types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) |
-| **`maxFileSize`**     | number  |                 | Maximum allowed file size in bytes _e.g. 1024 x 1024 x 5 == 5MB_                                                                                |
-| **`maxFiles`**        | number  |                 | Maximum files allowed to be added                                                                                                               |
-| **`width`**           | string  | rfp-basis-11/12 | Tailwind CSS **flex-basis** class https://tailwindcss.com/docs/flex-basis                                                                       |
-| **`height`**          | string  |                 | Tailwind CSS **height** class https://tailwindcss.com/docs/height                                                                               |
-| **`fileWidth`**       | string  | rfp-w-44        | Tailwind CSS **width** class https://tailwindcss.com/docs/width                                                                                 |
-| **`fileHeight`**      | string  | rfp-h-32        | Tailwind CSS **height** class https://tailwindcss.com/docs/height                                                                               |
-| **`getFile`**         | func    |                 | Returns all current files                                                                                                                       |
-| **`onChange`**        | func    |                 | Returns selected file(s)                                                                                                                        |
-| **`onRemove`**        | func    |                 | Returns the removed file                                                                                                                        |
-| **`onError`**         | func    |                 | Returns error message as string                                                                                                                 |
-| **`onClick`**         | func    |                 | Returns file on click                                                                                                                           |
+| Name                  | Type    | Default        | Description                                                                                                                                     |
+| --------------------- | ------- | ---------------| ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`files`**           | File[]  | []             | Pass array of file objects for default files                                                                                                    |
+| **`url`**             | string  | null           | Set image by passing image URL                                                                                                                  |
+| **`downloadFile`**    | boolean | true           | Enables file download                                                                                                                           |
+| **`removeFile`**      | boolean | true           | Show file remove icon on file hover                                                                                                             |
+| **`showFileSize`**    | boolean | true           | Show file size under files                                                                                                                      |
+| **`sliderIndicatorType`**  | string  | "dots"    | Slide indicator types `"dots"` \| `"count"` \| `"none"` | `"dots"`                                                                                 |
+| **`disabled`**        | boolean | false          | If true, prevents user to add files by disabling the component                                                                                  |
+| **`multiple`**        | boolean | true           | Accepts one or more files                                                                                                                       |
+| **`accept`**          | string  |                | Comma-separated lists of file types. See [MIME Types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) |
+| **`maxFileSize`**     | number  |                | Maximum allowed file size in bytes _e.g. 1024 x 1024 x 5 == 5MB_                                                                                |
+| **`maxFiles`**        | number  |                | Maximum files allowed to be added                                                                                                               |
+| **`width`**           | string  | rfp-basis-11/12| Tailwind CSS **flex-basis** class https://tailwindcss.com/docs/flex-basis                                                                       |
+| **`height`**          | string  |                | Tailwind CSS **height** class https://tailwindcss.com/docs/height                                                                               |
+| **`fileWidth`**       | string  | 11rem          | CSS **width** class                                                                                                                             |
+| **`fileHeight`**      | string  | 8rem           | CSS **height** class                                                                                                                            |
+| **`getFile`**         | func    |                | Returns all current files                                                                                                                       |
+| **`onChange`**        | func    |                | Returns selected file(s)                                                                                                                        |
+| **`onRemove`**        | func    |                | Returns the removed file                                                                                                                        |
+| **`onError`**         | func    |                | Returns error message as string                                                                                                                 |
+| **`onClick`**         | func    |                | Returns file on click                                                                                                                           |
 
 ## 🤝 Contributing
 

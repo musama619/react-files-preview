@@ -12,7 +12,7 @@ interface FileState {
 
 interface ComponentState {
 	showFileSize: boolean;
-	showSliderCount: boolean;
+	sliderIndicatorType: "dots" | "count" | "none";
 	downloadFile: boolean;
 	removeFile: boolean;
 	rounded: boolean;
@@ -134,12 +134,12 @@ export const FileContext = createContext<FileContext>({
 		},
 		componentState: {
 			showFileSize: true,
-			showSliderCount: true,
+			sliderIndicatorType: "dots",
 			downloadFile: true,
 			removeFile: true,
 			rounded: true,
-			fileHeight: "rfp-h-32",
-			fileWidth: "rfp-w-44",
+			fileHeight: "8rem",
+			fileWidth: "11rem",
 			disabled: false,
 			allowEditing: false,
 		},
@@ -166,12 +166,12 @@ export const FileProvider: React.FC<{ children: React.ReactNode }> = ({ children
 		},
 		componentState: {
 			showFileSize: true,
-			showSliderCount: true,
+			sliderIndicatorType: "dots",
 			downloadFile: true,
 			removeFile: true,
 			rounded: true,
-			fileHeight: "rfp-h-32",
-			fileWidth: "rfp-w-44",
+			fileHeight: "8rem",
+			fileWidth: "11rem",
 			disabled: false,
 			allowEditing: false,
 		},

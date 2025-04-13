@@ -1,4 +1,4 @@
-import React, { Suspense, useContext, useEffect } from "react";
+import React, { Suspense, useCallback, useContext, useEffect } from "react";
 import FilePreview from "./FilePreview";
 import ImageSlider from "./ImageSlider";
 import Header from "./Header";
@@ -17,7 +17,7 @@ export const Main: React.FC<Props> = ({
 	downloadFile,
 	removeFile,
 	showFileSize,
-	showSliderCount,
+	sliderIndicatorType,
 	allowEditing,
 	multiple,
 	accept,
@@ -44,7 +44,7 @@ export const Main: React.FC<Props> = ({
 
 	const { dispatch } = useContext(FileContext);
 
-	const checkErrors = (files: File[]) => {
+	const checkErrors = useCallback((files: File[]) => {
 		let hasError = false;
 		if (maxFiles && (fileData.length + files.length > maxFiles || files.length > maxFiles)) {
 			hasError = true;
@@ -67,7 +67,7 @@ export const Main: React.FC<Props> = ({
 		}
 
 		return hasError;
-	};
+	}, [fileData.length, maxFileSize, maxFiles, onError]);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -106,7 +106,7 @@ export const Main: React.FC<Props> = ({
 			}
 		}
 		fetchData();
-	}, []);
+	}, [dispatch, onError, url]);
 
 	const filterDuplicateFiles = (newFiles: File[], existingFiles: File[]) => {
 		const existingMap = new Map<string, boolean>();
@@ -125,7 +125,7 @@ export const Main: React.FC<Props> = ({
 				dispatch({ type: "STORE_FILE_DATA", payload: { files: files } });
 			}
 		}
-	}, [files]);
+	}, [checkErrors, dispatch, fileData, files]);
 
 	useEffect(() => {
 		dispatch({
@@ -134,25 +134,15 @@ export const Main: React.FC<Props> = ({
 				downloadFile: downloadFile != undefined ? downloadFile : true,
 				removeFile: removeFile != undefined ? removeFile : true,
 				showFileSize: showFileSize != undefined ? showFileSize : true,
-				showSliderCount: showSliderCount != undefined ? showSliderCount : true,
+				sliderIndicatorType: sliderIndicatorType != undefined ? sliderIndicatorType : "dots",
 				rounded: rounded != undefined ? rounded : true,
-				fileHeight: fileHeight ?? "rfp-h-32",
-				fileWidth: fileWidth ?? "rfp-w-44",
+				fileHeight: fileHeight ?? "8rem",
+				fileWidth: fileWidth ?? "11rem",
 				disabled: disabled ?? false,
 				allowEditing: allowEditing ?? false,
 			},
 		});
-	}, [
-		downloadFile,
-		removeFile,
-		showFileSize,
-		showSliderCount,
-		fileHeight,
-		fileWidth,
-		rounded,
-		disabled,
-		allowEditing,
-	]);
+	}, [downloadFile, removeFile, showFileSize, sliderIndicatorType, fileHeight, fileWidth, rounded, disabled, allowEditing, dispatch]);
 
 	const handleImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const files = Array.from(e.target.files || []);
@@ -180,7 +170,7 @@ export const Main: React.FC<Props> = ({
 		if (getFiles) {
 			getFiles(fileData);
 		}
-	}, [fileData]);
+	}, [fileData, getFiles]);
 
 	const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
 		event.preventDefault();
@@ -278,7 +268,7 @@ export const Main: React.FC<Props> = ({
 									? "rfp-cursor-not-allowed"
 									: "hover:rfp-bg-stone-200 dark:hover:rfp-bg-zinc-900"
 							}`
-						} rfp-flex rfp-flex-row rfp-flex-wrap rfp-gap-4 rfp-p-6 rfp-bg-stone-100  rfp-shadow dark:rfp-bg-zinc-800 `}
+						} rfp-flex rfp-flex-row rfp-flex-wrap rfp-justify-start rfp-gap-4 rfp-p-6 rfp-bg-stone-100  rfp-shadow dark:rfp-bg-zinc-800 `}
 						onClick={(e) => {
 							if (!disabled && fileData.length === 0) {
 								e.stopPropagation();

@@ -36,9 +36,13 @@ export interface Props {
 	showFileSize?: boolean;
 
 	/**
-	 * Show the count of files under image slider.
+	 * Type of indicator shown below the image slider.
+	 * - "dots": Displays dot indicators for each slide.
+	 * - "count": Displays current slide number out of total (e.g., "1 of 5").
+	 * - "none": No indicators are shown.
 	 */
-	showSliderCount?: boolean;
+	sliderIndicatorType?: "dots" | "count" | "none";
+
 
 	/**
 	 * Enable image editing.

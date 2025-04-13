@@ -50,13 +50,21 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 						<img
 							data-testid="image-preview"
 							src={fileSrc}
-							className={`${componentState.fileHeight} ${componentState.fileWidth} rfp-object-contain rfp-scale-[0.9]`}
+							className={`rfp-object-contain rfp-scale-[0.9]`}
+							style={{
+								height: componentState.fileHeight,
+								width: componentState.fileWidth,
+							}}
 						></img>
 					)
 				) : (
 					<div
 						data-testid="file-icon-preview"
-						className={`${componentState.fileHeight} ${componentState.fileWidth} rfp-flex rfp-flex-col rfp-justify-center rfp-content-center rfp-items-center`}
+						className={`rfp-flex rfp-flex-col rfp-justify-center rfp-content-center rfp-items-center`}
+						style={{
+							height: componentState.fileHeight,
+							width: componentState.fileWidth,
+						}}
 					>
 						<span
 							className={`${previewStyle.length > 0 ? previewStyle[0].color : "rfp-bg-slate-400"} 

@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import { FileContext } from "../context/FileContext";
 import ImageSlider from "../components/ImageSlider";
 import { vi, expect, describe, it } from "vitest";
@@ -16,12 +16,12 @@ describe("ImageSlider", () => {
 
 	const mockComponentState = {
 		showFileSize: true,
-		showSliderCount: true,
+		sliderIndicatorType: "dots" as "dots" | "count",
 		downloadFile: true,
 		removeFile: true,
 		rounded: true,
-		fileHeight: "h-32",
-		fileWidth: "w-44",
+        fileHeight: "8rem",
+        fileWidth: "11rem",
 		disabled: false,
 		allowEditing: false
 	};
@@ -98,30 +98,60 @@ describe("ImageSlider", () => {
 		});
 	});
 
-	it("calls dispatch with the correct action type when nextFile is called", () => {
+	// it("calls dispatch with the correct action type when nextFile is called", () => {
+	// 	const { getByTestId } = render(
+	// 		<FileContext.Provider value={mockFileContext}>
+	// 			<ImageSlider />
+	// 		</FileContext.Provider>
+	// 	);
+
+	// 	const nextButton = getByTestId("next-file");
+	// 	fireEvent.click(nextButton);
+
+	// 	expect(mockDispatch).toHaveBeenCalledWith({ type: "GET_NEXT_FILE" });
+	// });
+
+	// it("calls dispatch with the correct action type when prevFile is called", () => {
+	// 	const { getByTestId } = render(
+	// 		<FileContext.Provider value={mockFileContext}>
+	// 			<ImageSlider />
+	// 		</FileContext.Provider>
+	// 	);
+
+	// 	const prevButton = getByTestId("prev-file");
+	// 	fireEvent.click(prevButton);
+
+	// 	expect(mockDispatch).toHaveBeenCalledWith({ type: "GET_PREV_FILE" });
+	// });
+
+	it("calls dispatch with the correct action type when nextFile is called", async () => {
 		const { getByTestId } = render(
 			<FileContext.Provider value={mockFileContext}>
 				<ImageSlider />
 			</FileContext.Provider>
 		);
-
+	
 		const nextButton = getByTestId("next-file");
 		fireEvent.click(nextButton);
-
-		expect(mockDispatch).toHaveBeenCalledWith({ type: "GET_NEXT_FILE" });
+	
+		await waitFor(() => {
+			expect(mockDispatch).toHaveBeenCalledWith({ type: "GET_NEXT_FILE" });
+		});
 	});
-
-	it("calls dispatch with the correct action type when prevFile is called", () => {
+	
+	it("calls dispatch with the correct action type when prevFile is called", async () => {
 		const { getByTestId } = render(
 			<FileContext.Provider value={mockFileContext}>
 				<ImageSlider />
 			</FileContext.Provider>
 		);
-
+	
 		const prevButton = getByTestId("prev-file");
 		fireEvent.click(prevButton);
-
-		expect(mockDispatch).toHaveBeenCalledWith({ type: "GET_PREV_FILE" });
+	
+		await waitFor(() => {
+			expect(mockDispatch).toHaveBeenCalledWith({ type: "GET_PREV_FILE" });
+		});
 	});
 
 	it("should render default preview icon", async () => {

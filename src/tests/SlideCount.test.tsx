@@ -8,12 +8,12 @@ describe("SlideCount component", () => {
 
     const mockComponentState = {
         showFileSize: true,
-        showSliderCount: true,
+		sliderIndicatorType: "dots" as "dots" | "count",
         downloadFile: true,
         removeFile: true,
         rounded: true,
-        fileHeight: "h-32",
-        fileWidth: "w-44",
+        fileHeight: "8rem",
+        fileWidth: "11rem",
         disabled: false,
         allowEditing: false
     };
