@@ -8,6 +8,7 @@ interface FileState {
 	fileName: string | null;
 	type: string | null;
 	size: number;
+	isVideo: boolean;
 }
 
 interface ComponentState {
@@ -45,6 +46,16 @@ export type FileAction =
 	| { type: "GET_NEXT_FILE" }
 	| { type: "GET_PREV_FILE" };
 
+const videoFileTypes: string[] = [
+	"video/mp4",
+	"video/webm",
+	"video/ogg",
+	"video/avi",
+	"video/mov",
+	"video/wmv",
+	"video/flv",
+	"video/mkv",
+];
 const imageFileTypes: string[] = [
 	"image/jpeg",
 	"image/jpg",
@@ -62,6 +73,7 @@ export const fileReducer = (state: InitialState, action: FileAction) => {
 			fileSrc: URL.createObjectURL(file),
 			index,
 			isImage: imageFileTypes.includes(file.type),
+			isVideo: videoFileTypes.includes(file.type),
 			fileName: file.name,
 			type: file.type,
 			size: file.size,
@@ -128,6 +140,7 @@ export const FileContext = createContext<FileContext>({
 			fileSrc: null,
 			index: 0,
 			isImage: false,
+			isVideo: false,
 			fileName: null,
 			type: null,
 			size: 0,
@@ -160,6 +173,7 @@ export const FileProvider: React.FC<{ children: React.ReactNode }> = ({ children
 			fileSrc: null,
 			index: 0,
 			isImage: false,
+			isVideo: false,
 			fileName: null,
 			type: null,
 			size: 0,

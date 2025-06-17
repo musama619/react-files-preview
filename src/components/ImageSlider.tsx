@@ -32,6 +32,7 @@ const ImageSlider = () => {
 				fileSrc: null,
 				index: 0,
 				isImage: false,
+				isVideo: false,
 				fileName: null,
 				type: null,
 				size: 0,
@@ -290,6 +291,20 @@ const ImageSlider = () => {
 										draggable="false"
 									/>
 								)
+							) : file.isVideo ? (
+								file.fileSrc && (
+									<video
+										className="rfp-w-full rfp-h-full rfp-object-contain rfp-max-w-full rfp-max-h-full"
+										src={file.fileSrc}
+										controls
+										preload="metadata"
+										style={{
+											outline: "none",
+										}}
+									>
+										Your browser does not support the video tag.
+									</video>
+								)
 							) : (
 								<span className="rfp-flex rfp-w-full rfp-h-full rfp-items-center rfp-justify-center rfp-text-4xl">
 									<span
@@ -337,8 +352,7 @@ const ImageSlider = () => {
 							></path>
 						</svg>
 					</button>
-					{componentState.sliderIndicatorType == 'count' ? <SlideCount /> : <SlideDots />}
-					
+					{componentState.sliderIndicatorType == "count" ? <SlideCount /> : <SlideDots />}
 				</div>
 			</div>
 		);

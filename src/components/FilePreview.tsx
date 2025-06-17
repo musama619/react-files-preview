@@ -5,6 +5,16 @@ import { filePreviewStyle } from "./FilePreviewStyle";
 import { FileContext } from "../context/FileContext";
 
 const imageFileTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif", "image/tiff"];
+const videoFileTypes = [
+	"video/mp4",
+	"video/webm",
+	"video/ogg",
+	"video/avi",
+	"video/mov",
+	"video/wmv",
+	"video/flv",
+	"video/mkv",
+];
 
 const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 	const [fileSrc, setFileSrc] = useState<string | null>(null);
@@ -29,6 +39,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 				fileSrc: URL.createObjectURL(file),
 				index: index,
 				isImage: imageFileTypes.includes(file.type),
+				isVideo: videoFileTypes.includes(file.type), // Add this line
 				fileName: file.name,
 				type: file.type,
 				size: file.size,
@@ -56,6 +67,20 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, index }) => {
 								width: componentState.fileWidth,
 							}}
 						></img>
+					)
+				) : videoFileTypes.includes(file.type) ? (
+					fileSrc && (
+						<video
+							data-testid="video-preview"
+							src={fileSrc}
+							className={`rfp-object-contain rfp-scale-[0.9] ${componentState.rounded && "rfp-rounded-lg"}`}
+							style={{
+								height: componentState.fileHeight,
+								width: componentState.fileWidth,
+							}}
+							muted
+							preload="metadata"
+						/>
 					)
 				) : (
 					<div

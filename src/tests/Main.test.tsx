@@ -14,6 +14,7 @@ describe("Main Component", () => {
 		fileSrc: "image.jpg",
 		index: 0,
 		isImage: true,
+		isVideo: false,
 		fileName: "image.jpg",
 		type: "image/jpeg",
 		size: 1000,
